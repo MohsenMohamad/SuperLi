@@ -1,0 +1,5 @@
+{\rtf1\fbidis\ansi\ansicpg1255\deff0\nouicompat\deflang1037{\fonttbl{\f0\fnil\fcharset177 Arial;}{\f1\fnil\fcharset0 Arial;}}
+{\*\generator Riched20 10.0.17134}\viewkind4\uc1 
+\pard\rtlpar\sa200\sl276\slmult1\qr\f0\rtlch\fs20 208013375\par
+313263550\f1\ltrch\lang1033\par
+}
