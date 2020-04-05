@@ -1,27 +1,37 @@
 package BL;
 
+import javafx.util.Pair;
+
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class Worker {
 
     private String name;
     private int id;
-    private int bank_address;
-    private WorkingType type;
-    private ConcurrentHashMap<String, Boolean> job_map;  // may change the ds
-    private ConcurrentHashMap<String, Boolean> constraints;
-    private ConcurrentHashMap<String, String> time_available;
-    private WorkerDeal contract;
 
-    public Worker(String name, int id, int bank_address, ConcurrentHashMap<String, Boolean> job_map, ConcurrentHashMap<String, Boolean> constraints, ConcurrentHashMap<String, String> time_available, WorkerDeal contract) {
+    public List<WorkingType> getType() {
+        return type;
+    }
+
+    public Map<Pair<Day, ShiftTime>, Boolean> getSchedule() {
+        return schedule;
+    }
+
+    private List<WorkingType> type;   // may become a list
+    private Map<Pair<Day , ShiftTime>, Boolean> schedule;
+    private WorkerDeal contract;
+    private List<Shift> worker_shifts;
+
+    public Worker(String name, int id, List<WorkingType> type, Map<Pair<Day, ShiftTime>, Boolean> schedule, WorkerDeal contract) {
         this.name = name;
         this.id = id;
-        this.bank_address = bank_address;
-        this.job_map = job_map;
-        this.constraints = constraints;
-        this.time_available = time_available;
+        this.type = type;
+        this.schedule = schedule;
         this.contract = contract;
+        this.worker_shifts = new LinkedList<>();
     }
 
     public String getName() {
@@ -32,21 +42,35 @@ public class Worker {
         return id;
     }
 
-    public int getBank_address() {
-        return bank_address;
+    public boolean isAvailable(Pair<Day,ShiftTime> shift)
+    {
+        return schedule.get(shift);
     }
 
-    public ConcurrentHashMap<String, Boolean> getJob_map() {
-        return job_map;
+    public void work(Shift shift)
+    {
+        schedule.replace(shift.getShift_time(),false);
+        worker_shifts.add(shift);
     }
 
-    public ConcurrentHashMap<String, Boolean> getConstraints() {
-        return constraints;
+    // add a method to free a shift
+
+
+    public List<Shift> getWorker_shifts() {
+        return worker_shifts;
     }
 
-    public ConcurrentHashMap<String, String> getTime_available() {
-        return time_available;
+    public List<Pair<Day , ShiftTime>> availableHours()
+    {
+        List<Pair<Day,ShiftTime>> available_hours = new LinkedList<>();
+        for(Pair<Day , ShiftTime> p : schedule.keySet())
+        {
+            if(schedule.get(p))
+                available_hours.add(p);
+        }
+        return available_hours;
     }
+
 
     public WorkerDeal getContract() {
         return contract;

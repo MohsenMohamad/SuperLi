@@ -4,9 +4,11 @@ import java.util.List;
 
 public class WorkerDeal {
 
+    private int worker_id;      // added foreign key
     private String start_date;
+    private int bank_address;
     private int salary;
-    private List<String> work_conditions;
+    private List<String> work_conditions;    // ask what is a work condition ?
 
 
     public WorkerDeal(String start_date, int salary, List<String> work_conditions) {
@@ -25,5 +27,9 @@ public class WorkerDeal {
 
     public List<String> getWork_conditions() {
         return work_conditions;
+    }
+
+    public int getWorker_id() {
+        return worker_id;
     }
 }

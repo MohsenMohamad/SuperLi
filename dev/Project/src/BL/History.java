@@ -5,10 +5,18 @@ import java.util.List;
 
 public class History {
 
+    private static History history_instance = null;
     private List<Shift> shifts;
 
 
-    public History()
+    public static History getInstance(){
+        if(history_instance == null){
+            history_instance = new History();
+        }
+        return history_instance;
+    }
+
+    private History()
     {
         shifts = new LinkedList<>();
     }
@@ -17,7 +25,7 @@ public class History {
     {
         for(Shift s: shifts)
         {
-            if(shift.getDate() == s.getDate() && shift.getShift_time() == s.getShift_time())
+            if(shift.getShift_time() == s.getShift_time())
             {
                 return false;
             }

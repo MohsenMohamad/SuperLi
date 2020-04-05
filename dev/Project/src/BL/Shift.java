@@ -1,20 +1,29 @@
 package BL;
 
+import javafx.util.Pair;
+
 import java.util.List;
+
+
+enum Day {
+    Sunday,
+    Monday , Tuesday , Wednesday , Thursday , Friday , Saturday
+}
+
+enum ShiftTime {
+    Morning,
+    Evening
+}
 
 public class Shift
 {
 
     private Worker boss;
-    private String date;
-    private String shift_time;
+    private Pair<Day,ShiftTime> shift_time;
     private List<Worker> work_team;
 
-    public String getDate() {
-        return date;
-    }
 
-    public String getShift_time() {
+    public Pair<Day,ShiftTime> getShift_time() {
         return shift_time;
     }
 
@@ -22,9 +31,8 @@ public class Shift
         return work_team;
     }
 
-    public Shift(Worker boss, String date, String shift_time, List<Worker> work_team) {
+    public Shift(Worker boss, Pair<Day,ShiftTime> shift_time, List<Worker> work_team) {
         this.boss = boss;
-        this.date = date;
         this.shift_time = shift_time;
         this.work_team = work_team;
     }
