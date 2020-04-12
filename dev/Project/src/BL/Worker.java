@@ -1,36 +1,29 @@
 package BL;
 
 import javafx.util.Pair;
-
-import java.util.HashMap;
-import BL.Shift.Day;
+import java.util.*;
 import BL.Shift.ShiftTime;
 import BL.WorkPolicy.WorkingType;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 
 public class Worker {
 
+    private static int count = 0;
+    private int id=0;
     private String name;
-    private int id;
-
-    public List<WorkPolicy.WorkingType> getType() {
+    public List<WorkingType> getType() {
         return type;
     }
-
-    public Map<Pair<Day, ShiftTime>, Boolean> getSchedule() {
+    public Map<Pair<Date, ShiftTime>, Boolean> getSchedule() {
         return schedule;
     }
-
     private List<WorkingType> type;   // may become a list
-    private Map<Pair<Day , ShiftTime>, Boolean> schedule;
+    private Map<Pair<Date , ShiftTime>, Boolean> schedule;
     private WorkerDeal contract;
     private List<Shift> worker_shifts;
 
-    public Worker(String name, int id, List<WorkingType> type, Map<Pair<Day, ShiftTime>, Boolean> schedule, WorkerDeal contract) {
+    public Worker(String name,List<WorkingType> type, Map<Pair<Date, ShiftTime>, Boolean> schedule, WorkerDeal contract) {
         this.name = name;
-        this.id = id;
+        this.id = count++;
         this.type = type;
         this.schedule = schedule;
         this.contract = contract;
@@ -45,14 +38,14 @@ public class Worker {
         return id;
     }
 
-    public boolean isAvailable(Pair<Day,ShiftTime> shift)
+    public boolean isAvailable(Date date ,ShiftTime shiftTime)
     {
-        return schedule.get(shift);
+        return schedule.get(new Pair<>(date , shiftTime));
     }
 
     public void work(Shift shift)
     {
-        schedule.replace(shift.getShift_time(),false);
+        schedule.replace(new Pair<>(shift.getShiftDate(),shift.getShiftTime()),false);
         worker_shifts.add(shift);
     }
 
@@ -63,7 +56,7 @@ public class Worker {
         return worker_shifts;
     }
 
-    public List<Pair<Day , ShiftTime>> availableHours()
+/*    public List<Pair<Day , ShiftTime>> availableHours()
     {
         List<Pair<Day,ShiftTime>> available_hours = new LinkedList<>();
         for(Pair<Day , ShiftTime> p : schedule.keySet())
@@ -73,6 +66,8 @@ public class Worker {
         }
         return available_hours;
     }
+
+ */
 
     @Override
     public String toString()

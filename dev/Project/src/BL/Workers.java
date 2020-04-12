@@ -1,14 +1,9 @@
 package BL;
 
-import javafx.util.Pair;
-import BL.Shift.Day;
 import BL.Shift.ShiftTime;
 import BL.WorkPolicy.WorkingType;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 // not-thread safe singleton design pattern
@@ -36,10 +31,10 @@ public class Workers {
         return true;
     }
 
-    public List<Worker> getAvailableWorkers(Day day, ShiftTime time, WorkingType job) {
+    public List<Worker> getAvailableWorkers(Date date, ShiftTime time, WorkingType job) {
         List<Worker> available_workers = new LinkedList<>();
         for (Worker w : workers_map.values()) {
-            if (w.getType().contains(job) && w.isAvailable(new Pair<>(day, time))) {
+            if (w.getType().contains(job) && w.isAvailable(date, time)) {
                 available_workers.add(w);
             }
         }
@@ -56,5 +51,16 @@ public class Workers {
 
     public Map<Integer,Worker> getAllWorkers() {
         return workers_map;
+    }
+
+    @Override
+    public String toString()
+    {
+        String workers_string="";
+        for (Worker worker : Workers.getInstance().getAllWorkers().values()) {
+            workers_string = workers_string+worker.toString()+'\n';
+        }
+        workers_string = workers_string.substring(0,workers_string.length()-1);
+        return workers_string;
     }
 }

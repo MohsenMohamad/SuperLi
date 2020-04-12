@@ -26,7 +26,7 @@ public class History {
     {
         for(Shift s: shifts)
         {
-            if(shift.getShift_time() == s.getShift_time())
+            if(s.getShiftDate().equals(shift.getShiftDate()) &&  s.getShiftTime() == shift.getShiftTime())
             {
                 return false;
             }
