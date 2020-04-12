@@ -6,6 +6,7 @@ import java.util.List;
 public class History {
 
     private static History history_instance = null;
+
     private List<Shift> shifts;
 
 
@@ -35,4 +36,7 @@ public class History {
         return true;
     }
 
+    public List<Shift> getShifts() {
+        return shifts;
+    }
 }

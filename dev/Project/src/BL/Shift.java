@@ -5,18 +5,18 @@ import javafx.util.Pair;
 import java.util.List;
 
 
-enum Day {
-    Sunday,
-    Monday , Tuesday , Wednesday , Thursday , Friday , Saturday
-}
-
-enum ShiftTime {
-    Morning,
-    Evening
-}
 
 public class Shift
 {
+    public enum Day {
+        Sunday,
+        Monday , Tuesday , Wednesday , Thursday , Friday , Saturday
+    }
+
+    public enum ShiftTime {
+        Morning,
+        Evening
+    }
 
     private Worker boss;
     private Pair<Day,ShiftTime> shift_time;

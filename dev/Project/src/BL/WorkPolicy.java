@@ -9,15 +9,16 @@ import java.util.Map;
 // also add work conditions and work constraints as enums ?
 
 
-    enum WorkingType {
-        Cashier,
-        Delivery,
-        Cleaning,
-    }
+
 
 
 public class WorkPolicy {
 
+    public enum WorkingType {
+        Cashier,
+        Delivery,
+        Cleaning,
+    }
     private List<Pair<WorkingType,WorkingType>> policy; // if the map contains these two then the worker can get this job
 
     public boolean canWork(WorkingType w1 , WorkingType w2)

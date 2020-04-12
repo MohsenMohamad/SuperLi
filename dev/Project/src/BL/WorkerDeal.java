@@ -17,6 +17,20 @@ public class WorkerDeal {
         this.work_conditions = work_conditions;
     }
 
+
+    public String toString()
+    {
+        String deal = "worker id : "+worker_id+'\n';
+        deal = deal + "start date : "+start_date+'\n';
+        deal = deal + "bank address : "+bank_address+'\n';
+        deal = deal+ "salary : "+salary+'\n';
+        if(work_conditions!=null)
+        {
+            deal = deal + "working conditions : "+work_conditions.toString()+'\n';
+        }
+        return deal;
+    }
+
     public String getStart_date() {
         return start_date;
     }

@@ -3,6 +3,9 @@ package BL;
 import javafx.util.Pair;
 
 import java.util.HashMap;
+import BL.Shift.Day;
+import BL.Shift.ShiftTime;
+import BL.WorkPolicy.WorkingType;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +15,7 @@ public class Worker {
     private String name;
     private int id;
 
-    public List<WorkingType> getType() {
+    public List<WorkPolicy.WorkingType> getType() {
         return type;
     }
 
@@ -71,6 +74,11 @@ public class Worker {
         return available_hours;
     }
 
+    @Override
+    public String toString()
+    {
+        return new String(id+" , "+name + " : " + type.toString());
+    }
 
     public WorkerDeal getContract() {
         return contract;
