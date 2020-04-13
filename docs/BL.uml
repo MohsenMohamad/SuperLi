@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>BL</OriginalElement>
+  <nodes>
+    <node x="87.5" y="103.0">BL.WorkPolicy.WorkingType</node>
+    <node x="232.0178571428571" y="553.0">BL.Worker</node>
+    <node x="146.50000000000003" y="270.0">BL.WorkerDeal</node>
+    <node x="0.0" y="0.0">BL.WorkPolicy</node>
+    <node x="354.5" y="270.0">BL.Shift</node>
+    <node x="270.0178571428571" y="808.0">BL.Workers</node>
+    <node x="558.4813311688312" y="114.0">BL.Shift.ShiftTime</node>
+    <node x="540.0178571428571" y="608.0">BL.History</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="BL.WorkPolicy.WorkingType" target="BL.WorkPolicy">
+      <point x="-41.666666666666686" y="-48.5" />
+      <point x="108.33333333333331" y="78.0" />
+      <point x="50.0" y="78.0" />
+      <point x="-100.0" y="26.5" />
+    </edge>
+    <edge source="BL.History" target="BL.Shift">
+      <point x="-43.75" y="-47.5" />
+      <point x="583.7678571428571" y="513.0" />
+      <point x="587.0714285714286" y="513.0" />
+      <point x="84.57142857142856" y="91.5" />
+    </edge>
+    <edge source="BL.Worker" target="BL.Shift">
+      <point x="-26.18181818181816" y="-102.5" />
+      <point x="349.836038961039" y="473.0" />
+      <point x="375.6428571428571" y="473.0" />
+      <point x="-126.85714285714286" y="91.5" />
+    </edge>
+    <edge source="BL.Worker" target="BL.Shift.ShiftTime">
+      <point x="130.90909090909088" y="-102.5" />
+      <point x="506.926948051948" y="533.0" />
+      <point x="672.3035714285714" y="533.0" />
+      <point x="672.3035714285714" y="230.0" />
+      <point x="641.7313311688312" y="230.0" />
+      <point x="27.75" y="37.5" />
+    </edge>
+    <edge source="BL.Workers" target="BL.Shift.ShiftTime">
+      <point x="79.5" y="-47.5" />
+      <point x="455.5178571428571" y="783.0" />
+      <point x="737.399025974026" y="783.0" />
+      <point x="737.399025974026" y="220.0" />
+      <point x="660.2313311688312" y="220.0" />
+      <point x="46.25000000000003" y="37.5" />
+    </edge>
+    <edge source="BL.Shift" target="BL.WorkPolicy.WorkingType">
+      <point x="-118.39999999999995" y="-91.5" />
+      <point x="384.1" y="250.0" />
+      <point x="175.0" y="250.0" />
+      <point x="25.0" y="48.5" />
+    </edge>
+    <edge source="BL.Shift" target="BL.Worker">
+      <point x="42.28571428571428" y="91.5" />
+      <point x="544.7857142857142" y="513.0" />
+      <point x="454.56331168831167" y="513.0" />
+      <point x="78.54545454545456" y="-102.5" />
+    </edge>
+    <edge source="BL.Shift.ShiftTime" target="BL.Shift">
+      <point x="-9.25" y="37.5" />
+      <point x="604.7313311688312" y="250.0" />
+      <point x="620.9" y="250.0" />
+      <point x="118.4" y="-91.5" />
+    </edge>
+    <edge source="BL.Shift" target="BL.Shift.ShiftTime">
+      <point x="5.6843418860808015E-14" y="-91.5" />
+      <point x="502.50000000000006" y="240.0" />
+      <point x="567.7313311688312" y="240.0" />
+      <point x="-46.25" y="37.5" />
+    </edge>
+    <edge source="BL.WorkPolicy" target="BL.WorkPolicy.WorkingType">
+      <point x="99.99999999999997" y="26.5" />
+      <point x="249.99999999999997" y="78.0" />
+      <point x="191.66666666666663" y="78.0" />
+      <point x="41.66666666666663" y="-48.5" />
+    </edge>
+    <edge source="BL.Workers" target="BL.Worker">
+      <point x="-26.5" y="-47.5" />
+      <point x="349.5178571428571" y="783.0" />
+      <point x="304.0178571428571" y="783.0" />
+      <point x="-72.0" y="102.5" />
+    </edge>
+    <edge source="BL.Worker" target="BL.WorkPolicy.WorkingType">
+      <point x="-104.72727272727272" y="-102.5" />
+      <point x="271.29058441558436" y="523.0" />
+      <point x="136.0" y="523.0" />
+      <point x="136.0" y="250.0" />
+      <point x="150.0" y="250.0" />
+      <point x="0.0" y="48.5" />
+    </edge>
+    <edge source="BL.Workers" target="BL.WorkPolicy.WorkingType">
+      <point x="-79.5" y="-47.5" />
+      <point x="296.5178571428571" y="783.0" />
+      <point x="114.0" y="783.0" />
+      <point x="114.0" y="250.0" />
+      <point x="100.0" y="250.0" />
+      <point x="-50.0" y="48.5" />
+    </edge>
+    <edge source="BL.Worker" target="BL.WorkerDeal">
+      <point x="-52.363636363636346" y="-102.5" />
+      <point x="323.65422077922074" y="503.0" />
+      <point x="287.5" y="503.0" />
+      <point x="47.0" y="91.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="326.0" y="267.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
