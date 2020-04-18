@@ -1,4 +1,4 @@
 package BusinessLayer;
 
-public class Discount {
+public abstract class Discount {
 }

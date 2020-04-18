@@ -1,4 +1,4 @@
 package BusinessLayer;
 
-public class CategoryDiscount {
+public class CategoryDiscount extends Discount {
 }
