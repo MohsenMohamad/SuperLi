@@ -14,6 +14,11 @@ public class Item {
         defective = false;
     }
 
+    public Item(int id){
+        this.id = id;
+        defective = false;
+    }
+
     public void setDefective(boolean isDefective) {
         defective = isDefective;
     }

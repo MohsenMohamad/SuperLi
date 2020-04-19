@@ -10,6 +10,7 @@ public class ActionsMenu {
 
     public static void printActionsMenu() {
         Scanner myScanner = new Scanner(System.in);
+        label:
         while (true) {
             System.out.println("Please choose an action : \n" +
                     "1.Change item amount \n" +
@@ -22,46 +23,63 @@ public class ActionsMenu {
                     "8.Enter new price\n"+
                     "9.Exit");
             String input = myScanner.nextLine();
-            if (input.equals("1")){
-                System.out.println("Please enter item name");
-                String name = myScanner.nextLine();
-                System.out.println(service.getItemAmountsByName(name));
-                System.out.println("Please enter new amounts");
-                String amounts = myScanner.nextLine();
-                System.out.println(service.setNewAmounts(name,amounts));
-            }
-            else if (input.equals("2")){
-                System.out.println("Please enter item name");
-                String name = myScanner.nextLine();
-                System.out.println(service.getItemAmountsByName(name));
-                System.out.println("Please enter amount to move");
-                String amount = myScanner.nextLine();
-                System.out.println(service.moveToShelf(name,amount));
-            }
-            else if (input.equals("3")){
+            switch (input) {
+                case "1": {
+                    System.out.println("Please enter item name");
+                    String name = myScanner.nextLine();
+                    System.out.println(service.getItemAmountsByName(name));
+                    System.out.println("Please enter new storage and shelf amounts");
+                    String amounts = myScanner.nextLine();
+                    System.out.println(service.setNewAmounts(name, amounts));
+                    break;
+                }
+                case "2": {
+                    System.out.println("Please enter item name");
+                    String name = myScanner.nextLine();
+                    System.out.println(service.getItemAmountsByName(name));
+                    System.out.println("Please enter amount to move");
+                    String amount = myScanner.nextLine();
+                    System.out.println(service.moveToShelf(name, amount));
+                    break;
+                }
+                case "3": {
+                    System.out.println("Please enter item name");
+                    String name = myScanner.nextLine();
+                    System.out.println(service.getItemAmountsByName(name));
+                    System.out.println("Please enter amount to subtract");
+                    String amount = myScanner.nextLine();
+                    System.out.println(service.subtract(name, amount));
+                    break;
+                }
+                case "4": {
+                    System.out.println("Please enter categories or 'all'");
+                    String names = myScanner.nextLine();
+                    System.out.println(service.getInventoryReport(names));
+                    break;
+                }
+                case "5":
 
-            }
-            else if (input.equals("4")){
+                    break;
+                case "6":
 
-            }
-            else if (input.equals("5")){
+                    break;
+                case "7":
 
-            }
-            else if (input.equals("6")){
+                    break;
+                case "8":
 
+                    break;
+                case "9":
+                    System.out.println("GOODBYE");
+                    break label;
+                default:
+                    System.out.println("Please enter a valid number from the menu");
+                    break;
             }
-            else if (input.equals("7")){
-
-            }
-            else if (input.equals("8")){
-
-            }
-            else if (input.equals("9")){
-                System.out.println("GOODBYE");
-                break;
-            }
-            else
-                System.out.println("Please enter a valid number from the menu");
         }
+    }
+
+    public static void printWarning(String name, int totalAmount, int minAmount) {
+        System.out.println("Warning : the item's '"+name+"' total amount is ("+totalAmount+") BELOW the minimum required ("+minAmount+")");
     }
 }

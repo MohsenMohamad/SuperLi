@@ -38,16 +38,25 @@ public class ItemRecord {
         return "storage amount : "+ storageAmount + "\nshelf amount : "+ shelfAmount +"\ntotal amount : "+totalAmount;
     }
 
-    public void setStorageAmount(int parseInt) {
-        storageAmount = parseInt;
+    public void setStorageAmount(int newAmount) {
+        storageAmount = newAmount;
     }
 
-    public void setShelfAmount(int parseInt) {
-        shelfAmount = parseInt;
+    public void setShelfAmount(int newAmount) {
+        shelfAmount = newAmount;
     }
 
-    public void setTotalAmount(int parseInt) {
-        totalAmount = parseInt;
+    public void setTotalAmount(int newAmount) {
+        while(totalAmount > newAmount){
+            items.removeLast();
+            totalAmount++;
+        }
+        while(totalAmount < newAmount){
+            items.addFirst(new Item(Controller.incrementAndGetItemID()));
+        }
+        if(totalAmount < minAmount){
+            Controller.getController().sendWarning(this);
+        }
     }
 
     public String moveToShelf(int parseInt) {
@@ -56,5 +65,46 @@ public class ItemRecord {
         storageAmount -= parseInt;
         shelfAmount += parseInt;
         return "New storage amount : "+ storageAmount + "\nNew shelf amount : "+ shelfAmount;
+    }
+
+    public String subtractFromShelf(int amount) {
+        if(amount > shelfAmount)
+            return "Not enough on shelf";
+        shelfAmount -= amount;
+        totalAmount -= amount;
+        while (amount > 0){
+            items.removeLast();
+            amount--;
+        }
+        if(totalAmount < minAmount){
+            Controller.getController().sendWarning(this);
+        }
+        return getAmounts();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getShelfAmount() {
+        return shelfAmount;
+    }
+
+    public int getStorageAmount() {
+        return storageAmount;
+    }
+
+    public String getPrices() {
+        if(prices.isEmpty())
+            return "";
+        return prices.getFirst().toString();
+    }
+
+    public int getMinAmount() {
+        return minAmount;
+    }
+
+    public int getTotalAmount() {
+        return totalAmount;
     }
 }
