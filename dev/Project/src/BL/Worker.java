@@ -7,15 +7,9 @@ import BL.WorkPolicy.WorkingType;
 
 public class Worker {
 
-    private static int count = 0;
+    public static int count = 0;
     private int id=0;
     private String name;
-    public List<WorkingType> getType() {
-        return type;
-    }
-    public Map<Pair<Date, ShiftTime>, Boolean> getSchedule() {
-        return schedule;
-    }
     private List<WorkingType> type;   // may become a list
     private Map<Pair<Date , ShiftTime>, Boolean> schedule;
     private WorkerDeal contract;
@@ -30,14 +24,6 @@ public class Worker {
         this.worker_shifts = new LinkedList<>();
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public int getId() {
-        return id;
-    }
-
     public boolean isAvailable(Date date ,ShiftTime shiftTime)
     {
         return schedule.get(new Pair<>(date , shiftTime));
@@ -50,7 +36,6 @@ public class Worker {
     }
 
     // add a method to free a shift
-
 
     public List<Shift> getWorker_shifts() {
         return worker_shifts;
@@ -74,7 +59,18 @@ public class Worker {
     {
         return new String(id+" , "+name + " : " + type.toString());
     }
-
+    public String getName() {
+        return name;
+    }
+    public int getId() {
+        return id;
+    }
+    public List<WorkingType> getType() {
+        return type;
+    }
+    public Map<Pair<Date, ShiftTime>, Boolean> getSchedule() {
+        return schedule;
+    }
     public WorkerDeal getContract() {
         return contract;
     }

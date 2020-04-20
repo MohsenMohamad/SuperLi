@@ -10,9 +10,10 @@ import java.util.Map;
 
 public class Shift {
 
-    public enum ShiftTime {
+    public enum ShiftTime{
         Morning,
         Evening
+
     }
 
     private static int count = 0;
@@ -51,7 +52,7 @@ public class Shift {
 
     @Override
     public String toString() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String shift_string = "shift id : " + shift_id + '\n';
         shift_string = shift_string + "shift date : " + dateFormat.format(shift_date) + '\n';
         dateFormat = new SimpleDateFormat("EEEE");

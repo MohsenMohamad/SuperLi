@@ -5,6 +5,8 @@ import BL.*;
 import BL.Shift.ShiftTime;
 import BL.WorkPolicy.WorkingType;
 import javafx.util.Pair;
+
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -42,20 +44,30 @@ public class Main {
     }
 
     private static void createWorkers() {
-        WorkerDeal shadi_contract = new WorkerDeal("today", 28,11, new LinkedList<>());
-        Worker shadi = new Worker("Shadi", createJob(), createSchedule(), shadi_contract);
 
-        WorkerDeal eran_contract = new WorkerDeal("Tomorrow", 30,22, new LinkedList<>());
-        Worker eran = new Worker("Eran", createJob(), createSchedule(), eran_contract);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try
+        {
+            WorkerDeal shadi_contract = new WorkerDeal(Worker.count,dateFormat.parse("30/03/2017"), 28,11, new LinkedList<>());
+            Worker shadi = new Worker("Shadi", createJob(), createSchedule(), shadi_contract);
+
+            WorkerDeal eran_contract = new WorkerDeal(Worker.count,dateFormat.parse("05/11/2016"), 30,22, new LinkedList<>());
+            Worker eran = new Worker("Eran", createJob(), createSchedule(), eran_contract);
 
 
-        WorkerDeal mohamad_contract = new WorkerDeal("Yesterday", 1000,33, new LinkedList<>());
-        Worker mohamad = new Worker("Mohamad", createJob(), createSchedule(), mohamad_contract);
+            WorkerDeal mohamad_contract = new WorkerDeal(Worker.count,dateFormat.parse("12/06/2018"), 1000,33, new LinkedList<>());
+            Worker mohamad = new Worker("Mohamad", createJob(), createSchedule(), mohamad_contract);
 
-        Workers workers = Workers.getInstance();
-        workers.addWorker(shadi);
-        workers.addWorker(eran);
-        workers.addWorker(mohamad);
+            Workers workers = Workers.getInstance();
+            workers.addWorker(shadi);
+            workers.addWorker(eran);
+            workers.addWorker(mohamad);
+        }
+        catch (ParseException pe)
+        {
+            pe.printStackTrace();
+        }
+
     }
 
     private static void createShifts() {
@@ -207,8 +219,28 @@ public class Main {
     // work on this
     private static void printSchedule(int worker_id) {
         Map<Pair<Date, ShiftTime>, Boolean> worker_schedule = Workers.getInstance().getAllWorkers().get(worker_id).getSchedule();
-        for (Pair<Date, ShiftTime> p : worker_schedule.keySet()) {
-            System.out.println(p.toString() + " : " + worker_schedule.get(p));
+        List<Pair<Date,ShiftTime>> schedules_date = new LinkedList<>(worker_schedule.keySet());
+        Collections.sort(schedules_date, new Comparator<Pair<Date, ShiftTime>>() {
+            @Override
+            public int compare(Pair<Date, ShiftTime> o1, Pair<Date, ShiftTime> o2) {
+
+                if(o1.getKey().before(o2.getKey()))
+                    return -1;
+
+                if(o1.getKey().equals(o2.getKey()))
+                {
+                    if(o1.getValue()==ShiftTime.Morning)
+                        return -1;
+                    return 1;
+                }
+                return 0;
+            }
+        });
+        for (Pair<Date, ShiftTime> p : schedules_date) {
+            Date d = p.getKey();
+            SimpleDateFormat date_format = new SimpleDateFormat("dd/MM/yyyy");
+            date_format.format(d);
+            System.out.println(new SimpleDateFormat("EEE").format(d)+" "+new SimpleDateFormat("dd/MM/yyyy").format(d)+" , "+p.getValue().toString()+ " : " + worker_schedule.get(p));
         }
     }
 
@@ -253,7 +285,7 @@ public class Main {
 
     private static void shiftView(int shift_id)
     {
-        Shift shift = History.getInstance().getShifts().get(shift_id-1);        //     check here the -1
+        Shift shift = History.getInstance().getShifts().get(shift_id);
         if (shift == null) {
             throw new IllegalArgumentException(); // random
         }
