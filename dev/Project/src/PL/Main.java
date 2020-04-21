@@ -22,6 +22,7 @@ public class Main {
         createWorkers();
         createShifts();
 
+
         while (!terminate) {
             printMenu();
             int choice = keyboard.nextInt();
@@ -142,20 +143,25 @@ public class Main {
 
         while(!go_back)
         {
-            System.out.println(Workers.getInstance().toString());
-            System.out.println("1) select a worker");
-            System.out.println("2) return");
+            System.out.println(ConsoleColors.BLUE_BOLD+Workers.getInstance().toString()+ConsoleColors.RESET+"\n");
+            System.out.println("1) Register a worker");
+            System.out.println("2) select a worker");
+            System.out.println("3) return\n");
 
             int choice = keyboard.nextInt();
 
             switch (choice) {
                 case 1:
+                    registerWorker();
+                    break;
+                case 2:
                     System.out.println("enter the worker id :");
                     int id = keyboard.nextInt();
+                    border();
                     workerView(id);
                     break;
 
-                case 2:
+                case 3:
                     go_back = true;
                     break;
 
@@ -177,10 +183,10 @@ public class Main {
         boolean go_back = false;
         while (!go_back) {
 
-            System.out.println("Worker name : " + w.getName());
+            System.out.println(ConsoleColors.BLUE_BOLD+"Worker name : " + w.getName());
             System.out.println("Worker id : " + w.getId());
-            System.out.println("jobs : " + w.getType().toString());
-            border();
+            System.out.println("jobs : " + w.getType().toString()+ConsoleColors.RESET+"\n");
+    //        border();
 
             System.out.println("1) print Schedule");
             System.out.println("2) print contract");
@@ -194,7 +200,7 @@ public class Main {
                     printSchedule(worker_id);
                     break;
                 case 2:
-                    System.out.println(w.getContract().toString());
+                    System.out.println(ConsoleColors.CYAN_BOLD+w.getContract().toString()+ConsoleColors.RESET);
                     break;
                 case 3:
                     printWorkingShifts(w);
@@ -212,7 +218,7 @@ public class Main {
         if (w.getWorker_shifts().isEmpty())
             System.out.println(w.getName() + " has no working shifts.");
         else for (Shift shift : w.getWorker_shifts()) {
-            System.out.println(shift.toString());
+            System.out.println(ConsoleColors.GREEN_BOLD+shift.toString()+ConsoleColors.RESET);
         }
     }
 
@@ -240,12 +246,12 @@ public class Main {
             Date d = p.getKey();
             SimpleDateFormat date_format = new SimpleDateFormat("dd/MM/yyyy");
             date_format.format(d);
-            System.out.println(new SimpleDateFormat("EEE").format(d)+" "+new SimpleDateFormat("dd/MM/yyyy").format(d)+" , "+p.getValue().toString()+ " : " + worker_schedule.get(p));
+            System.out.println(ConsoleColors.PURPLE_BOLD+new SimpleDateFormat("EEE").format(d)+" "+new SimpleDateFormat("dd/MM/yyyy").format(d)+" , "+p.getValue().toString()+ " : " + worker_schedule.get(p)+ConsoleColors.RESET);
         }
     }
 
     private static void border() {
-        System.out.println("--------------------------------");
+        System.out.println(ConsoleColors.RED_BOLD+"--------------------------------"+ConsoleColors.RESET);
     }
 
     private static void shiftsView() {
@@ -258,7 +264,7 @@ public class Main {
         while (!go_back) {
 
             for (Shift shift : History.getInstance().getShifts()) {
-                System.out.println(shift.toString());
+                System.out.println(ConsoleColors.GREEN_BOLD+shift.toString()+ConsoleColors.RESET);
                 border();
             }
 
@@ -270,6 +276,7 @@ public class Main {
                 case 1:
                     System.out.println("enter the shift id :");
                     int id = keyboard.nextInt();
+                    border();
                     shiftView(id);
                     break;
                 case 2:
@@ -290,7 +297,7 @@ public class Main {
             throw new IllegalArgumentException(); // random
         }
 
-        System.out.println(shift.toString());
+        System.out.println(ConsoleColors.GREEN_BOLD+shift.toString()+ConsoleColors.RESET);
 
         boolean go_back = false;
         while (!go_back) {
@@ -302,7 +309,7 @@ public class Main {
 
             switch (first_choice) {
                 case 1:
-                    System.out.println(Workers.getInstance().getAvailableWorkers(shift.getShiftDate() , shift.getShiftTime() , WorkingType.Cleaning).toString());
+                    System.out.println(ConsoleColors.BLUE_BOLD+Workers.getInstance().getAvailableWorkers(shift.getShiftDate() , shift.getShiftTime() , WorkingType.Cleaning).toString()+ConsoleColors.RESET);
                     System.out.println("1) add a worker to this shift");
                     System.out.println("2) return");
                     int second_choice = keyboard.nextInt();
@@ -342,7 +349,7 @@ public class Main {
             try
             {
                 date = date_format.parse(date_string);
-                System.out.println("you choose "+date_string + " which will be "+new SimpleDateFormat("EEEE").format(date));
+                System.out.println("Your shift date will be : "+ConsoleColors.RED_BOLD+new SimpleDateFormat("EEEE").format(date)+" "+date_string+ConsoleColors.RESET);
                 System.out.println("Type M for Morning , Type E for Evening");
                 ShiftTime shiftTime = null;
                 String choice = keyboard.next();
@@ -356,7 +363,7 @@ public class Main {
                     shiftTime = ShiftTime.Evening;
                 }
 
-                System.out.println(Workers.getInstance().toString());
+                System.out.println(ConsoleColors.BLUE_BOLD+Workers.getInstance().toString()+ConsoleColors.RESET);
                 System.out.println("enter the id of the worker who you wish to appoint as a boss");
                 int boss_id = keyboard.nextInt();
                 Worker boss = Workers.getInstance().getWorker(boss_id);
@@ -379,6 +386,12 @@ public class Main {
         }
 
 
+
+    }
+
+    private static void registerWorker()
+    {
+        
 
     }
 }
