@@ -39,7 +39,7 @@ public class InitializeData {
 
             WorkerDeal iris_contract = new WorkerDeal(Worker.count, dateFormat.parse("17/02/2010"), 1000, "c", new LinkedList<>());
             Worker iris = new Worker("Iris", createJob(), createSchedule(), iris_contract);
-            
+
 
             Workers workers = Workers.getInstance();
             workers.addWorker(john);
