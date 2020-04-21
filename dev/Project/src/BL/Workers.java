@@ -42,6 +42,18 @@ public class Workers {
         return available_workers;
     }
 
+    public List<Worker> getAvailableWorkers(Date date, ShiftTime time)
+    {
+        List<Worker> available_workers = new LinkedList<>();
+        for (Worker w : workers_map.values()) {
+            if (w.isAvailable(date, time)) {
+                available_workers.add(w);
+            }
+        }
+
+        return available_workers;
+    }
+
     public Worker getWorker(int worker_id)
     {
         if(!workers_map.containsKey(worker_id))

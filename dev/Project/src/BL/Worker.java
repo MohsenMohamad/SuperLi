@@ -1,21 +1,26 @@
 package BL;
 
 import javafx.util.Pair;
+
+import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.util.*;
+
 import BL.Shift.ShiftTime;
 import BL.WorkPolicy.WorkingType;
 
 public class Worker {
 
     public static int count = 0;
-    private int id=0;
+    private int id = 0;
     private String name;
     private List<WorkingType> type;   // may become a list
-    private Map<Pair<Date , ShiftTime>, Boolean> schedule;
+    private Map<Pair<DayOfWeek, ShiftTime>, Boolean> schedule;
     private WorkerDeal contract;
     private List<Shift> worker_shifts;
 
-    public Worker(String name,List<WorkingType> type, Map<Pair<Date, ShiftTime>, Boolean> schedule, WorkerDeal contract) {
+    public Worker(String name, List<WorkingType> type, Map<Pair<DayOfWeek, ShiftTime>, Boolean> schedule, WorkerDeal contract) {
+
         this.name = name;
         this.id = count++;
         this.type = type;
@@ -24,15 +29,35 @@ public class Worker {
         this.worker_shifts = new LinkedList<>();
     }
 
-    public boolean isAvailable(Date date ,ShiftTime shiftTime)
-    {
-        return schedule.get(new Pair<>(date , shiftTime));
+    public boolean isAvailable(Date date, ShiftTime shiftTime) {
+
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+
+        Pair<DayOfWeek,ShiftTime> pair = new Pair<>(DayOfWeek.of(dayOfWeek),shiftTime);
+        if(schedule.get(pair))
+        {
+            for(Shift shift : worker_shifts)
+            {
+                if(shift.getShiftDate() == date && shift.getShiftTime() == shiftTime)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        return false;
     }
 
-    public void work(Shift shift)
-    {
-        schedule.replace(new Pair<>(shift.getShiftDate(),shift.getShiftTime()),false);
-        worker_shifts.add(shift);
+    public boolean work(Shift shift) {
+        if (isAvailable(shift.getShiftDate(), shift.getShiftTime())) {
+            worker_shifts.add(shift);
+            return true;
+        }
+
+        return false;
     }
 
     // add a method to free a shift
@@ -55,22 +80,26 @@ public class Worker {
  */
 
     @Override
-    public String toString()
-    {
-        return new String(id+" , "+name + " : " + type.toString());
+    public String toString() {
+        return new String(id + " , " + name + " : " + type.toString());
     }
+
     public String getName() {
         return name;
     }
+
     public int getId() {
         return id;
     }
+
     public List<WorkingType> getType() {
         return type;
     }
-    public Map<Pair<Date, ShiftTime>, Boolean> getSchedule() {
+
+    public Map<Pair<DayOfWeek, ShiftTime>, Boolean> getSchedule() {
         return schedule;
     }
+
     public WorkerDeal getContract() {
         return contract;
     }
