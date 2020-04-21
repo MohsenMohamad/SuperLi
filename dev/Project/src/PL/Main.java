@@ -6,7 +6,6 @@ import BL.Shift.ShiftTime;
 import BL.WorkPolicy.WorkingType;
 import javafx.util.Pair;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
@@ -15,18 +14,19 @@ import java.util.*;
 public class Main {
 
     static Scanner keyboard = new Scanner(System.in);
-    public static Random random = new Random();
+    static InitializeData init_data = new InitializeData();
 
     public static void main(String[] argv) {
 
         boolean terminate = false;
-        createWorkers();
-        createShifts();
+
+        init_data.createWorkers();
+        init_data.createShifts();
 
 
         while (!terminate) {
             printMenu();
-            int choice = keyboard.nextInt();
+            int choice = getChoice(1,3);
 
             switch (choice) {
                 case 1:
@@ -45,82 +45,6 @@ public class Main {
 
     }
 
-    private static void createWorkers() {
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            WorkerDeal shadi_contract = new WorkerDeal(Worker.count, dateFormat.parse("30/03/2017"), 28, "a", new LinkedList<>());
-            Worker shadi = new Worker("Shadi", createJob(), createSchedule(), shadi_contract);
-
-            WorkerDeal eran_contract = new WorkerDeal(Worker.count, dateFormat.parse("05/11/2016"), 30, "b", new LinkedList<>());
-            Worker eran = new Worker("Eran", createJob(), createSchedule(), eran_contract);
-
-
-            WorkerDeal mohamad_contract = new WorkerDeal(Worker.count, dateFormat.parse("12/06/2018"), 1000, "c", new LinkedList<>());
-            Worker mohamad = new Worker("Mohamad", createJob(), createSchedule(), mohamad_contract);
-
-            Workers workers = Workers.getInstance();
-            workers.addWorker(shadi);
-            workers.addWorker(eran);
-            workers.addWorker(mohamad);
-        } catch (ParseException pe) {
-            pe.printStackTrace();
-        }
-
-    }
-
-    private static void createShifts() {
-        History history = History.getInstance();
-        SimpleDateFormat date_format = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            Shift sundayMorning_shift = new Shift(date_format.parse("13/04/2020"), ShiftTime.Morning, Workers.getInstance().getWorker(1), new HashMap<>());
-            Shift mondayEvening_shift = new Shift(date_format.parse("14/04/2020"), ShiftTime.Evening, Workers.getInstance().getWorker(2), new HashMap<>());
-            history.addShift(sundayMorning_shift);
-            history.addShift(mondayEvening_shift);
-        } catch (ParseException pe) {
-            pe.printStackTrace();
-        }
-
-    }
-
-    private static Map<Pair<DayOfWeek, ShiftTime>, Boolean> createSchedule() {
-
-        Map<Pair<DayOfWeek, ShiftTime>, Boolean> schedule = new HashMap<>();
-
-
-        List<Pair<DayOfWeek, ShiftTime>> shifts = new LinkedList<>();
-        shifts.add(new Pair<>(DayOfWeek.SUNDAY, ShiftTime.Morning));
-        shifts.add(new Pair<>(DayOfWeek.SUNDAY, ShiftTime.Evening));
-        shifts.add(new Pair<>(DayOfWeek.MONDAY, ShiftTime.Morning));
-        shifts.add(new Pair<>(DayOfWeek.MONDAY, ShiftTime.Evening));
-        shifts.add(new Pair<>(DayOfWeek.TUESDAY, ShiftTime.Morning));
-        shifts.add(new Pair<>(DayOfWeek.TUESDAY, ShiftTime.Evening));
-        shifts.add(new Pair<>(DayOfWeek.WEDNESDAY, ShiftTime.Morning));
-        shifts.add(new Pair<>(DayOfWeek.WEDNESDAY, ShiftTime.Evening));
-        shifts.add(new Pair<>(DayOfWeek.THURSDAY, ShiftTime.Morning));
-        shifts.add(new Pair<>(DayOfWeek.THURSDAY, ShiftTime.Evening));
-        shifts.add(new Pair<>(DayOfWeek.FRIDAY, ShiftTime.Morning));
-        shifts.add(new Pair<>(DayOfWeek.FRIDAY, ShiftTime.Evening));
-        shifts.add(new Pair<>(DayOfWeek.SATURDAY, ShiftTime.Morning));
-        shifts.add(new Pair<>(DayOfWeek.SATURDAY, ShiftTime.Evening));
-
-        for (Pair<DayOfWeek, ShiftTime> pair : shifts) {
-            schedule.put(pair, random.nextBoolean());
-        }
-        return schedule;
-    }
-
-    private static List<WorkingType> createJob() {
-        List<WorkingType> jobs = new LinkedList<>();
-        jobs.add(WorkingType.Cashier);
-        jobs.add(WorkingType.Cleaning);
-        jobs.add(WorkingType.Delivery);
-
-        Collections.shuffle(jobs);
-
-        return jobs.subList(0, random.nextInt(2) + 1);
-    }
-
     private static void printMenu() {
         System.out.println("1) view workers");
         System.out.println("2) view shifts");
@@ -137,35 +61,33 @@ public class Main {
             System.out.println("2) select a worker");
             System.out.println("3) return\n");
 
-            int choice = keyboard.nextInt();
+            int choice = getChoice(1, 3);
 
             switch (choice) {
                 case 1:
                     registerWorker();
                     break;
                 case 2:
-                    if( Workers.getInstance().getAllWorkers().isEmpty())
-                    {
+                    if (Workers.getInstance().getAllWorkers().isEmpty()) {
                         System.out.println("Error : there are no workers!");
                         break;
                     }
                     System.out.println("enter the worker id :");
                     int id = keyboard.nextInt();
                     border();
-                    if(!Workers.getInstance().getAllWorkers().containsKey(id))
-                    {
-                        System.out.println("Error : invalid id");
+                    if (!Workers.getInstance().getAllWorkers().containsKey(id)) {
+                        System.out.println(ConsoleColors.RED_BOLD+"Error : invalid id"+ConsoleColors.RESET);
                     }
-                    workerView(id);
+                    else workerView(id);
                     break;
 
                 case 3:
                     go_back = true;
                     break;
 
+
             }
 
-            //border();
         }
 
 
@@ -180,14 +102,13 @@ public class Main {
             System.out.println(ConsoleColors.BLUE_BOLD + "Worker name : " + w.getName());
             System.out.println("Worker id : " + w.getId());
             System.out.println("jobs : " + w.getType().toString() + ConsoleColors.RESET + "\n");
-            //        border();
 
             System.out.println("1) print Schedule");
             System.out.println("2) print contract");
             System.out.println("3) print working shifts");
             System.out.println("4) return");
 
-            int choice = keyboard.nextInt();
+            int choice = getChoice(1, 4);
 
             switch (choice) {
                 case 1:
@@ -224,7 +145,7 @@ public class Main {
             @Override
             public int compare(Pair<DayOfWeek, ShiftTime> o1, Pair<DayOfWeek, ShiftTime> o2) {
 
-                if (o1.getKey().getValue() < o2.getKey().getValue())
+                if ((o1.getKey().getValue()-1)%6 < (o2.getKey().getValue()-1)%6)
                     return -1;
 
                 if (o1.getKey().equals(o2.getKey())) {
@@ -257,7 +178,7 @@ public class Main {
             System.out.println("1) select a shift");
             System.out.println("2) create a shift");
             System.out.println("3) return");
-            int choice = keyboard.nextInt();
+            int choice = getChoice(1, 3);
             switch (choice) {
                 case 1:
                     if (History.getInstance().getShifts().isEmpty()) {
@@ -267,8 +188,11 @@ public class Main {
                     System.out.println("enter the shift id :");
                     int id = keyboard.nextInt();
                     border();
-                    // check if the shift exists
-                    shiftView(id);
+                    if(!History.getInstance().isAvailable(id))
+                    {
+                        System.out.println(ConsoleColors.RED_BOLD+"Error : invalid shift_id!"+ConsoleColors.RESET);
+                    }
+                    else shiftView(id);
                     break;
                 case 2:
                     createShift();
@@ -295,17 +219,22 @@ public class Main {
             System.out.println("1) print available workers for this shift");
             System.out.println("2) return");
 
-            int first_choice = keyboard.nextInt();
+            int first_choice = getChoice(1, 2);
 
             switch (first_choice) {
                 case 1:
-
-                    System.out.println(ConsoleColors.BLUE_BOLD + Workers.getInstance().getAvailableWorkers(shift.getShiftDate(), shift.getShiftTime()).toString() + ConsoleColors.RESET);
+                    List<Worker> available_workers = Workers.getInstance().getAvailableWorkers(shift.getShiftDate(), shift.getShiftTime());
+                    System.out.println(ConsoleColors.BLUE_BOLD + available_workers.toString() + ConsoleColors.RESET);
                     System.out.println("1) add a worker to this shift");
                     System.out.println("2) return");
-                    int second_choice = keyboard.nextInt();
+                    int second_choice = getChoice(1, 2);
                     if (second_choice == 2)
                         break;
+                    else if (available_workers.isEmpty())
+                    {
+                        System.out.println(ConsoleColors.RED_BOLD + "Error : there are no workers to choose from!" + ConsoleColors.RESET);
+
+                    }
                     else {
                         System.out.println("enter the id of the worker you want to add");
                         int worker_id = keyboard.nextInt();
@@ -395,7 +324,7 @@ public class Main {
         System.out.println("Enter constraints : ");
         keyboard.next();
         System.out.println("Worker salary :");
-        int salary = keyboard.nextInt();
+        double salary = keyboard.nextDouble();
         System.out.println("Worker bank address :");
         String address = keyboard.next();
         SimpleDateFormat date_format = new SimpleDateFormat("dd/MM/yyyy");
@@ -406,9 +335,19 @@ public class Main {
         } catch (ParseException pe) {
             pe.printStackTrace();
         }
-        Worker worker = new Worker(worker_name, worker_jobs, createSchedule(), deal);
+        Worker worker = new Worker(worker_name, worker_jobs, init_data.createSchedule(), deal);
         Workers.getInstance().addWorker(worker);
 
     }
 
+    private static int getChoice(int lower_bound, int upper_bound) {
+        for (; ; ) {
+            int keyboard_input = keyboard.nextInt();
+
+            if (keyboard_input < lower_bound || keyboard_input > upper_bound) {
+                System.out.println(ConsoleColors.RED_BOLD + "Error : number out of bounds!" + ConsoleColors.RESET);
+            } else return keyboard_input;
+        }
+    }
 }
+

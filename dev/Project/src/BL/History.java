@@ -40,5 +40,16 @@ public class History {
         return shifts;
     }
 
+    public Boolean isAvailable(int shift_id)
+    {
+        for(Shift shift : shifts)
+        {
+            if(shift.getShiftId() == shift_id)
+                return true;
+        }
+
+        return false;
+    }
+
 
 }
