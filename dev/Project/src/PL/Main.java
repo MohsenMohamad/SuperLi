@@ -49,14 +49,14 @@ public class Main {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         try {
-            WorkerDeal shadi_contract = new WorkerDeal(Worker.count, dateFormat.parse("30/03/2017"), 28, 11, new LinkedList<>());
+            WorkerDeal shadi_contract = new WorkerDeal(Worker.count, dateFormat.parse("30/03/2017"), 28, "a", new LinkedList<>());
             Worker shadi = new Worker("Shadi", createJob(), createSchedule(), shadi_contract);
 
-            WorkerDeal eran_contract = new WorkerDeal(Worker.count, dateFormat.parse("05/11/2016"), 30, 22, new LinkedList<>());
+            WorkerDeal eran_contract = new WorkerDeal(Worker.count, dateFormat.parse("05/11/2016"), 30, "b", new LinkedList<>());
             Worker eran = new Worker("Eran", createJob(), createSchedule(), eran_contract);
 
 
-            WorkerDeal mohamad_contract = new WorkerDeal(Worker.count, dateFormat.parse("12/06/2018"), 1000, 33, new LinkedList<>());
+            WorkerDeal mohamad_contract = new WorkerDeal(Worker.count, dateFormat.parse("12/06/2018"), 1000, "c", new LinkedList<>());
             Worker mohamad = new Worker("Mohamad", createJob(), createSchedule(), mohamad_contract);
 
             Workers workers = Workers.getInstance();
@@ -127,8 +127,6 @@ public class Main {
         System.out.println("3) exit");
     }
 
-    // options
-
     private static void workersView() {
 
         boolean go_back = false;
@@ -146,9 +144,18 @@ public class Main {
                     registerWorker();
                     break;
                 case 2:
+                    if( Workers.getInstance().getAllWorkers().isEmpty())
+                    {
+                        System.out.println("Error : there are no workers!");
+                        break;
+                    }
                     System.out.println("enter the worker id :");
                     int id = keyboard.nextInt();
                     border();
+                    if(!Workers.getInstance().getAllWorkers().containsKey(id))
+                    {
+                        System.out.println("Error : invalid id");
+                    }
                     workerView(id);
                     break;
 
@@ -166,9 +173,6 @@ public class Main {
 
     private static void workerView(int worker_id) {
         Worker w = Workers.getInstance().getWorker(worker_id);
-        if (w == null) {
-            throw new IllegalArgumentException(); // random
-        }
 
         boolean go_back = false;
         while (!go_back) {
@@ -232,11 +236,6 @@ public class Main {
             }
         });
         for (Pair<DayOfWeek, ShiftTime> p : schedules_date) {
-    /*        DayOfWeek d = p.getKey();
-            SimpleDateFormat date_format = new SimpleDateFormat("EEE");
-            date_format.format(d);
-
-     */
             System.out.println(ConsoleColors.PURPLE_BOLD + p.getKey() + " , " + p.getValue().toString() + " : " + worker_schedule.get(p) + ConsoleColors.RESET);
         }
     }
@@ -246,10 +245,6 @@ public class Main {
     }
 
     private static void shiftsView() {
-        if (History.getInstance().getShifts().isEmpty()) {
-            System.out.println("There are no shifts at the moment.");
-            return;
-        }
 
         boolean go_back = false;
         while (!go_back) {
@@ -265,9 +260,14 @@ public class Main {
             int choice = keyboard.nextInt();
             switch (choice) {
                 case 1:
+                    if (History.getInstance().getShifts().isEmpty()) {
+                        System.out.println("There are no shifts at the moment.");
+                        break;
+                    }
                     System.out.println("enter the shift id :");
                     int id = keyboard.nextInt();
                     border();
+                    // check if the shift exists
                     shiftView(id);
                     break;
                 case 2:
@@ -397,12 +397,12 @@ public class Main {
         System.out.println("Worker salary :");
         int salary = keyboard.nextInt();
         System.out.println("Worker bank address :");
-        int address = keyboard.nextInt();
+        String address = keyboard.next();
         SimpleDateFormat date_format = new SimpleDateFormat("dd/MM/yyyy");
         Date current_date = new Date();
         WorkerDeal deal = null;
         try {
-            deal = new WorkerDeal(11, (date_format.parse(date_format.format(current_date))), address, salary, new LinkedList<String>());
+            deal = new WorkerDeal(11, (date_format.parse(date_format.format(current_date))), salary, address, new LinkedList<String>());
         } catch (ParseException pe) {
             pe.printStackTrace();
         }

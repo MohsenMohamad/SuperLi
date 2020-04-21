@@ -8,12 +8,12 @@ public class WorkerDeal {
 
     private int worker_id;
     private Date start_date;
-    private int bank_address;
-    private int salary;
+    private String bank_address;
+    private double salary;
     private List<String> work_conditions;    // ask what is a work condition ?
 
 
-    public WorkerDeal(int worker_id , Date start_date, int salary, int bank_address, List<String> work_conditions) {
+    public WorkerDeal(int worker_id , Date start_date, double salary, String bank_address, List<String> work_conditions) {
         this.start_date = start_date;
         this.salary = salary;
         this.work_conditions = work_conditions;
@@ -40,7 +40,7 @@ public class WorkerDeal {
         return start_date;
     }
 
-    public int getSalary() {
+    public double getSalary() {
         return salary;
     }
 
