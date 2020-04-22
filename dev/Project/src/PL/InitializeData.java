@@ -92,15 +92,28 @@ public class InitializeData {
         for (Pair<DayOfWeek, Shift.ShiftTime> pair : shifts) {
             schedule.put(pair, true);
         }
+        for(int i = 0; i < 4; i++) {
+            int randome = (int) (Math.random()*shifts.size());
+            Pair rand = shifts.get(randome);
+            schedule.replace(rand, false);
+        }
         return schedule;
     }
 
     public List<WorkPolicy.WorkingType> createJob() {
         List<WorkPolicy.WorkingType> jobs = new LinkedList<>();
-        jobs.add(WorkPolicy.WorkingType.Cashier);
-        jobs.add(WorkPolicy.WorkingType.Cleaning);
-        jobs.add(WorkPolicy.WorkingType.Delivery);
-
+        double rand = Math.random();
+        if(rand < 0.6){
+            jobs.add(WorkPolicy.WorkingType.Cashier);
+        }
+        rand = Math.random();
+        if(rand < 0.6){
+            jobs.add(WorkPolicy.WorkingType.Cleaning);
+        }
+        rand = Math.random();
+        if(rand < 0.6){
+            jobs.add(WorkPolicy.WorkingType.Delivery);
+        }
         return jobs;
     }
 }

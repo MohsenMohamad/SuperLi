@@ -34,7 +34,7 @@ public class CreateActions {
                     shiftTime = Shift.ShiftTime.Evening;
                 }
 
-                System.out.println(ConsoleColors.BLUE_BOLD + Workers.getInstance().toString() + ConsoleColors.RESET);
+                System.out.println(ConsoleColors.BLUE_BOLD + Workers.getInstance().AvilableWorkerstoString(date,shiftTime) + ConsoleColors.RESET);
                 System.out.println("enter the id of the worker who you wish to appoint as a boss");
                 int boss_id = keyboard.nextInt();
                 Worker boss = Workers.getInstance().getWorker(boss_id);

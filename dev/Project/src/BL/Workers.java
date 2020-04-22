@@ -75,4 +75,15 @@ public class Workers {
         workers_string = workers_string.substring(0,workers_string.length()-1);
         return workers_string;
     }
+    public String AvilableWorkerstoString(Date date, ShiftTime shiftTime)
+    {
+        String workers_string="";
+        for (Worker worker : Workers.getInstance().getAllWorkers().values()) {
+            if(worker.isAvailable(date,shiftTime)){
+                workers_string = workers_string+worker.toString()+'\n';
+            }
+        }
+        workers_string = workers_string.substring(0,workers_string.length()-1);
+        return workers_string;
+    }
 }

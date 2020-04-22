@@ -32,7 +32,10 @@ public class Worker {
 
         Calendar c = Calendar.getInstance();
         c.setTime(date);
-        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK) - 1;
+        if(dayOfWeek == 0){
+            dayOfWeek = 7;
+        }//to make sure that the day index is correct
 
         Pair<DayOfWeek,ShiftTime> pair = new Pair<>(DayOfWeek.of(dayOfWeek),shiftTime);
         if(schedule.get(pair))
