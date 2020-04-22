@@ -20,6 +20,7 @@ class HistoryWorkersTest {
     Workers workers;
     Worker worker1;
     Shift TestShift;
+    Worker worker2;
 
     @BeforeEach
     public void setUp() throws ParseException {
@@ -68,7 +69,11 @@ class HistoryWorkersTest {
         }
 
         worker1 = new Worker(208432474,"worker1",jobs,schedule,worker_contract);
+        WorkerDeal worker2_contract = new WorkerDeal(111111111, dateFormat.parse("30/03/2017"), 28, "a", new LinkedList<>());
+        worker2 = new Worker(111111111,"John", jobs, schedule, worker2_contract);
+
     }
+
 
     @Test
     public void testAddWorker1() throws ParseException {
@@ -84,50 +89,37 @@ class HistoryWorkersTest {
     }
 
     @Test
-    public void testAddWorker2() throws ParseException{
-        boolean k=workers.addWorker(worker1);
-        assertFalse(workers.addWorker(worker1));//test2
+    public void testAddWorker2() {
+        assertTrue(workers.addWorker(worker2));
+        assertFalse(workers.addWorker(worker1));//test5
     }
 
     @Test
-    public void testAddWorker3() throws ParseException {
-        workers.addWorker(worker1);
-        SimpleDateFormat date_format = new SimpleDateFormat("dd/MM/yyyy");
-        Shift shift2 = new Shift(date_format.parse("16/04/2020"), Shift.ShiftTime.Morning , worker1 , new HashMap<>());
-        List<Worker> tempList = workers.getAvailableWorkers(shift2.getShiftDate(),shift2.getShiftTime(), WorkPolicy.WorkingType.Cashier);
-
-        Worker worker2 = workers.getWorker(208432474);
-        boolean z = worker1.equals(worker2);
-
-        assertTrue(tempList.contains(worker1));//test3
-    }
-
-    @Test
-    public void testAddWorker4() throws ParseException{
+    public void testAddWorker3() throws ParseException{
         workers.addWorker(worker1);
         SimpleDateFormat date_format = new SimpleDateFormat("dd/MM/yyyy");
         Shift shift1 = new Shift(date_format.parse("13/04/2020"), Shift.ShiftTime.Morning , worker1 , new HashMap<>());
         worker1.work(shift1);
         List<Worker> tempList = workers.getAvailableWorkers(shift1.getShiftDate(),shift1.getShiftTime());
-        assertFalse(tempList.contains(worker1));//test4
+        assertFalse(tempList.contains(worker1));//test6
     }
 
     @Test
     public void testAddShift1(){
         List<Shift> tempList = history.getShifts();
-        assertFalse(tempList.contains(TestShift));//test5
+        assertFalse(tempList.contains(TestShift));//test7
     }
 
     @Test
     public void testAddShift2(){
-        assertTrue(history.addShift(TestShift));//test6
+        assertTrue(history.addShift(TestShift));//test8
     }
 
 
     @Test
     public void testAddShift3(){
         history.addShift(TestShift);
-        assertFalse(history.addShift(TestShift));//test7
+        assertFalse(history.addShift(TestShift));//test9
 
     }
 }
