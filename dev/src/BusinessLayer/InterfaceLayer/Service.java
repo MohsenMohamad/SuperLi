@@ -3,6 +3,8 @@ package BusinessLayer.InterfaceLayer;
 import BusinessLayer.Controller;
 import PresentationLayer.ActionsMenu;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class Service {
@@ -38,6 +40,59 @@ public class Service {
     public String subtract(String name, String amount) {
         return controller.subtract(name,amount);
     }
+
+    public String setDefectedItem(String  name, String id){
+        try {
+            int ID = Integer.parseInt(id);
+            return controller.setDefectedItem(name, ID);
+        }
+        catch (Exception e){
+            return "Item's ID must be a number";
+        }
+    }
+
+    public String addNewItemDiscount(String itemName, String percentage, String begDate, String enDate) {
+        Date beginDate, endDate;
+        int perc;
+        try{
+            beginDate = new SimpleDateFormat("dd/MM/yyyy").parse(begDate);
+            endDate = new SimpleDateFormat("dd/MM/yyyy").parse(enDate);
+            perc = Integer.parseInt(percentage);
+        }
+        catch (Exception e){
+            return "Please enter valid arguments";
+        }
+        return controller.addItemDiscount(itemName, perc, beginDate, endDate);
+    }
+
+
+    public String addNewCategoryDiscount(String categoryName, String percentage, String beginDate, String endDate) {
+        Date begDate, enDate;
+        int perc;
+        try{
+            begDate = new SimpleDateFormat("dd/MM/yyyy").parse(beginDate);
+            enDate = new SimpleDateFormat("dd/MM/yyyy").parse(endDate);
+            perc = Integer.parseInt(percentage);
+        }
+        catch (Exception e){
+            return "Please enter valid arguments";
+        }
+        return controller.addItemDiscount(categoryName, perc, begDate, enDate);
+    }
+
+    public String setNewPrice(String name, String price){
+        try {
+            int newPrice = Integer.parseInt(price);
+            if(newPrice<=0){
+                return "Price must greater than 0";
+            }
+            return controller.setNewPrice(name, newPrice);
+        }
+        catch (Exception e){
+            return "Item's price must be a number";
+        }
+    }
+
 
     public String getInventoryReport(String names) {
         String[] categories = names.split("\\s+");

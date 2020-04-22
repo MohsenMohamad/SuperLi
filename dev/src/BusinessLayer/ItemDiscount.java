@@ -7,7 +7,7 @@ public class ItemDiscount extends Discount {
 
     private ItemRecord itemRecord;
 
-    public ItemDiscount(SimpleDateFormat start, SimpleDateFormat end, int perc, ItemRecord itemRecord) {
+    public ItemDiscount( ItemRecord itemRecord, Date start, Date end, int perc) {
         super(start, end, perc);
         this.itemRecord = itemRecord;
     }
@@ -28,8 +28,9 @@ public class ItemDiscount extends Discount {
             Date now = new Date();
             Date start = new Date(String.valueOf(getStartDate()));
             Date end = new Date(String.valueOf(getEndDate()));
-            if(start.after(now) && now.before(end) )
+            if(start.after(now) && now.before(end) ) {
                 return true;
+            }
         }
         return false;
     }

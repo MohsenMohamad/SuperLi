@@ -7,7 +7,7 @@ public class CategoryDiscount extends Discount {
 
     private Category category;
 
-    public CategoryDiscount(Category cat, SimpleDateFormat start, SimpleDateFormat end, int perc) {
+    public CategoryDiscount(Category cat, Date start, Date end, int perc) {
         super(start,end,perc);
         category = cat;
     }

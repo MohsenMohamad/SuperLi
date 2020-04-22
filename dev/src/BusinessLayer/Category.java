@@ -3,7 +3,16 @@ package BusinessLayer;
 import java.util.LinkedList;
 
 public class Category {
+    enum CategoryRole {MainCategory, SubCategory, SubSubCategory}
+    private CategoryRole role;
+    private String name;
+    private LinkedList<ItemRecord> itemRecords;
 
+    public Category(CategoryRole role, String name){
+        this.role = role;
+        this.name = name;
+        itemRecords = new LinkedList<>();
+    }
     public String getName() {
         return name;
     }
@@ -34,17 +43,6 @@ public class Category {
 
     public CategoryRole getRole() {
         return role;
-    }
-
-    enum CategoryRole {MainCategory, SubCategory, SubSubCategory}
-    private CategoryRole role;
-    private String name;
-    private LinkedList<ItemRecord> itemRecords;
-
-    public Category(CategoryRole role, String name){
-        this.role = role;
-        this.name = name;
-        itemRecords = new LinkedList<>();
     }
 
     public void addItem(ItemRecord itemRecord) {

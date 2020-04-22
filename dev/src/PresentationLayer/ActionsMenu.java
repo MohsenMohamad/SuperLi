@@ -2,6 +2,7 @@ package PresentationLayer;
 
 import BusinessLayer.InterfaceLayer.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 public class ActionsMenu {
@@ -27,10 +28,13 @@ public class ActionsMenu {
                 case "1": {
                     System.out.println("Please enter item name");
                     String name = myScanner.nextLine();
-                    System.out.println(service.getItemAmountsByName(name));
-                    System.out.println("Please enter new storage and shelf amounts");
-                    String amounts = myScanner.nextLine();
-                    System.out.println(service.setNewAmounts(name, amounts));
+                    String amount = service.getItemAmountsByName(name);
+                    System.out.println(amount);
+                    if(!amount.equals("No such item in inventory")) {
+                        System.out.println("Please enter new storage and shelf amounts");
+                        String amounts = myScanner.nextLine();
+                        System.out.println(service.setNewAmounts(name, amounts));
+                    }
                     break;
                 }
                 case "2": {
@@ -57,18 +61,60 @@ public class ActionsMenu {
                     System.out.println(service.getInventoryReport(names));
                     break;
                 }
-                case "5":
+                case "5": {
+                    System.out.println("Please enter defected item's name");
+                    String name = myScanner.nextLine();
+                    System.out.println("Please enter defected item's ID");
+                    String id = myScanner.nextLine();
+                    System.out.println(service.setDefectedItem(name, id));
+                    break;
+                }
+
+                case "6": {
 
                     break;
-                case "6":
+                }
+                case "7": {
+                    System.out.println("1. Item discount \n" + "2. Category discount\n");
+                    String discountType = myScanner.nextLine();
+                    if (discountType.equals("1")) {                   //case item discount
+                        System.out.println("Enter item name:");
+                        String itemName = myScanner.nextLine();
+                        System.out.println("Enter discount percentage:");
+                        String percentage = myScanner.nextLine();
+                        System.out.println("Enter beginning date in the following format(dd/MM/yyyy)");
+                        String begDate = myScanner.nextLine();
+                        System.out.println("Enter end date in the following format(dd/MM/yyyy)");
+                        String endDate = myScanner.nextLine();
 
-                    break;
-                case "7":
+                        System.out.println(service.addNewItemDiscount(itemName, percentage, begDate, endDate));
+                    } else if (discountType.equals("2")) {                      //case category discount
+                        System.out.println("Enter category name:");
+                        String categoryName = myScanner.nextLine();
+                        System.out.println("Enter discount percentage:");
+                        String percentage = myScanner.nextLine();
+                        System.out.println("Enter beginning date in the following format(dd/MM/yyyy)");
+                        String begDate = myScanner.nextLine();
+                        System.out.println("Enter end date in the following format(dd/MM/yyyy)");
+                        String endDate = myScanner.nextLine();
 
+                        System.out.println(service.addNewCategoryDiscount(categoryName, percentage, begDate, endDate));
+                    }
+                    else {
+                        System.out.println("Please enter valid discount type");
+                    }
                     break;
-                case "8":
+                }
 
+                case "8": {
+                    System.out.println("Please enter item name:");
+                    String name = myScanner.nextLine();
+                    System.out.println("Enter new price:");
+                    String price = myScanner.nextLine();
+                    System.out.println(service.setNewPrice(name, price));
                     break;
+                }
+
                 case "9":
                     System.out.println("GOODBYE");
                     break label;

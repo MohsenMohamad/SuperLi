@@ -49,10 +49,11 @@ public class ItemRecord {
     public void setTotalAmount(int newAmount) {
         while(totalAmount > newAmount){
             items.removeLast();
-            totalAmount++;
+            totalAmount--;
         }
         while(totalAmount < newAmount){
             items.addFirst(new Item(Controller.incrementAndGetItemID()));
+            totalAmount++;
         }
         if(totalAmount < minAmount){
             Controller.getController().sendWarning(this);
@@ -60,16 +61,18 @@ public class ItemRecord {
     }
 
     public String moveToShelf(int parseInt) {
-        if(storageAmount < parseInt)
+        if(storageAmount < parseInt) {
             return "Not enough in storage";
+        }
         storageAmount -= parseInt;
         shelfAmount += parseInt;
         return "New storage amount : "+ storageAmount + "\nNew shelf amount : "+ shelfAmount;
     }
 
     public String subtractFromShelf(int amount) {
-        if(amount > shelfAmount)
+        if(amount > shelfAmount) {
             return "Not enough on shelf";
+        }
         shelfAmount -= amount;
         totalAmount -= amount;
         while (amount > 0){
@@ -95,9 +98,14 @@ public class ItemRecord {
     }
 
     public String getPrices() {
-        if(prices.isEmpty())
+        if(prices.isEmpty()) {
             return "";
+        }
         return prices.getFirst().toString();
+    }
+
+    public Price getCurrPrice(){
+        return prices.getFirst();
     }
 
     public int getMinAmount() {
@@ -106,5 +114,9 @@ public class ItemRecord {
 
     public int getTotalAmount() {
         return totalAmount;
+    }
+
+    public LinkedList<Item> getItems() {
+        return items;
     }
 }

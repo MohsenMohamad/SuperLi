@@ -19,6 +19,10 @@ public class Item {
         defective = false;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public void setDefective(boolean isDefective) {
         defective = isDefective;
     }
