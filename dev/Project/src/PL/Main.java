@@ -170,7 +170,15 @@ public class Main {
                         System.out.println("enter the id of the worker you want to add");
                         int worker_id = keyboard.nextInt();
                         Worker w = Workers.getInstance().getWorker(worker_id);
-                        shift.addToWorkingTeam(w, w.getType().get(0));
+                        System.out.println("which job will "+ w.getName()+" do?");
+                        int index =1;
+                        for(WorkingType type : w.getType())
+                        {
+                            System.out.println(ConsoleColors.YELLOW_BOLD+index+") "+type+ConsoleColors.RESET);
+                            index++;
+                        }
+                        int type_index = getChoice(1,w.getType().size())-1;
+                        shift.addToWorkingTeam(w, w.getType().get(type_index));
                     }
                     break;
                 case 2:
@@ -186,7 +194,6 @@ public class Main {
     private static int getChoice(int lower_bound, int upper_bound) {
         for (; ; ) {
             int keyboard_input = keyboard.nextInt();
-
             if (keyboard_input < lower_bound || keyboard_input > upper_bound) {
                 System.out.println(ConsoleColors.RED_BOLD + "Error : number out of bounds!" + ConsoleColors.RESET);
             } else return keyboard_input;

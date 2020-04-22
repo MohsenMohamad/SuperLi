@@ -70,15 +70,11 @@ public class CreateActions {
         String worker_name = keyboard.next();
         List<WorkPolicy.WorkingType> jobs = Arrays.asList(WorkPolicy.WorkingType.values());
         boolean stop = false;
-        System.out.println("Worker types : ");
-        int job_id = 1;
-        for (WorkPolicy.WorkingType type : jobs) {
-            System.out.println(ConsoleColors.RED + job_id + ") " + type + ConsoleColors.RESET);
-            job_id++;
-        }
-
+        System.out.println("Working types : ");
+        Printer.printAllWorkingTypes();
         List<WorkPolicy.WorkingType> worker_jobs = new LinkedList<>();
         while (!stop) {
+            System.out.println("Choose one of the working types :");
             int workingType_id = keyboard.nextInt();
             worker_jobs.add(jobs.get(workingType_id - 1));
             System.out.println("choose another ? y/n");

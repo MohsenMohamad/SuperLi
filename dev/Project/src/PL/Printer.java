@@ -13,7 +13,7 @@ public class Printer {
         int number =1;
         for(WorkPolicy.WorkingType workingType : WorkPolicy.WorkingType.values())
         {
-            System.out.println(number+") "+workingType.toString());
+            System.out.println(ConsoleColors.YELLOW_BOLD+number+") "+workingType.toString()+ConsoleColors.RESET);
             number++;
         }
     }
