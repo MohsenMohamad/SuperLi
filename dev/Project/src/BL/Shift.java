@@ -27,7 +27,6 @@ public class Shift {
         return work_team;
     }
 
-    // should we remove the argument work_team from the constructor ?
     public Shift(Date shift_date, ShiftTime shift_time, Worker boss, Map<WorkingType, List<Worker>> work_team) {
         this.shift_date = shift_date;
         this.boss = boss;

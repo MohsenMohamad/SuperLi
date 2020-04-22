@@ -58,10 +58,16 @@ public class CreateActions {
     }
 
     public void registerWorker() {
-        System.out.println("Worker name: ");
-        String worker_name = keyboard.next();
+
         System.out.println("Worker id: ");
         int worker_id = keyboard.nextInt();
+        if(Workers.getInstance().getWorker(worker_id)!=null)
+        {
+            System.out.println(ConsoleColors.RED_BOLD+"Error : There is a user with the same id in the data base!"+ConsoleColors.RESET);
+            return;
+        }
+        System.out.println("Worker name: ");
+        String worker_name = keyboard.next();
         List<WorkPolicy.WorkingType> jobs = Arrays.asList(WorkPolicy.WorkingType.values());
         boolean stop = false;
         System.out.println("Worker types : ");
