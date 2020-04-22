@@ -11,7 +11,6 @@ import BL.WorkPolicy.WorkingType;
 
 public class Worker {
 
-    public static int count = 0;
     private int id = 0;
     private String name;
     private List<WorkingType> type;   // may become a list
@@ -22,7 +21,6 @@ public class Worker {
     public Worker(int id,String name, List<WorkingType> type, Map<Pair<DayOfWeek, ShiftTime>, Boolean> schedule, WorkerDeal contract) {
 
         this.name = name;
-        this.id = count++;
         this.id =id;
         this.type = type;
         this.schedule = schedule;

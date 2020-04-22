@@ -31,7 +31,7 @@ class ShiftWorkerTest {
 
         WorkerDeal worker_contract=null;
         try {
-            worker_contract = new WorkerDeal(Worker.count, dateFormat.parse("30/03/2017"), 28, "123" , new LinkedList<>());
+            worker_contract = new WorkerDeal(worker1.getId(), dateFormat.parse("30/03/2017"), 28, "123" , new LinkedList<>());
         }
         catch(ParseException pe)
         {

@@ -34,7 +34,7 @@ class HistoryWorkersTest {
 
         WorkerDeal worker_contract=null;
         try {
-            worker_contract = new WorkerDeal(Worker.count, dateFormat.parse("30/03/2017"), 28, "123" , new LinkedList<>());
+            worker_contract = new WorkerDeal(208432474, dateFormat.parse("30/03/2017"), 28, "123" , new LinkedList<>());
         }
         catch(ParseException pe)
         {
@@ -85,7 +85,7 @@ class HistoryWorkersTest {
 
     @Test
     public void testAddWorker2() throws ParseException{
-        workers.addWorker(worker1);
+        boolean k=workers.addWorker(worker1);
         assertFalse(workers.addWorker(worker1));//test2
     }
 
@@ -93,8 +93,12 @@ class HistoryWorkersTest {
     public void testAddWorker3() throws ParseException {
         workers.addWorker(worker1);
         SimpleDateFormat date_format = new SimpleDateFormat("dd/MM/yyyy");
-        Shift shift1 = new Shift(date_format.parse("13/04/2020"), Shift.ShiftTime.Morning , worker1 , new HashMap<>());
-        List<Worker> tempList = workers.getAvailableWorkers(shift1.getShiftDate(),shift1.getShiftTime());
+        Shift shift2 = new Shift(date_format.parse("16/04/2020"), Shift.ShiftTime.Morning , worker1 , new HashMap<>());
+        List<Worker> tempList = workers.getAvailableWorkers(shift2.getShiftDate(),shift2.getShiftTime(), WorkPolicy.WorkingType.Cashier);
+
+        Worker worker2 = workers.getWorker(208432474);
+        boolean z = worker1.equals(worker2);
+
         assertTrue(tempList.contains(worker1));//test3
     }
 

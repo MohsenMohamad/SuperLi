@@ -91,7 +91,7 @@ public class Main {
 
             Printer.PrintWorkerView(worker_id);
 
-            int choice = getChoice(1, 4);
+            int choice = getChoice(1, 5);
 
             switch (choice) {
                 case 1:
