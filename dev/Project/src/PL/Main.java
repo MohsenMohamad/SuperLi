@@ -106,7 +106,8 @@ public class Main {
             System.out.println("1) print Schedule");
             System.out.println("2) print contract");
             System.out.println("3) print working shifts");
-            System.out.println("4) return");
+            System.out.println("4) edit worker info");
+            System.out.println("5) return");
 
             int choice = getChoice(1, 4);
 
@@ -121,6 +122,9 @@ public class Main {
                     printWorkingShifts(w);
                     break;
                 case 4:
+                    new CreateActions().editWorker(worker_id);
+                    break;
+                case 5:
                     go_back = true;
                     break;
             }

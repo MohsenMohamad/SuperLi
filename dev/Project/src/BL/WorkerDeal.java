@@ -51,4 +51,14 @@ public class WorkerDeal {
     public int getWorker_id() {
         return worker_id;
     }
+
+    public void setBankAddress(String address)
+    {
+        this.bank_address = address;
+    }
+
+    public void setSalary(double salary)
+    {
+        this.salary = salary;
+    }
 }

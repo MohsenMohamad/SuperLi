@@ -99,4 +99,84 @@ public class CreateActions {
         Workers.getInstance().addWorker(worker);
 
     }
+
+    public void editWorker(int worker_id) {
+        Worker worker = Workers.getInstance().getWorker(worker_id);
+        WorkPolicy.WorkingType[] current_types = WorkPolicy.WorkingType.values();
+        boolean go_back = false;
+        while (!go_back) {
+            System.out.println("1) Edit worker name");
+            System.out.println("2) Edit worker id");
+            System.out.println("3) Edit worker jobs");
+            System.out.println("4) Edit worker bank address");
+            System.out.println("5) Edit worker salary");
+            System.out.println("6) Return");
+
+            int choice = getChoice(1, 6);
+            switch (choice) {
+                case 1:
+                    System.out.println("Type the new name :");
+                    String edited_name = keyboard.next();
+                    Workers.getInstance().getWorker(worker_id).setName(edited_name);
+                    break;
+                case 2:
+                    System.out.println("Type the new id :");
+                    int edited_id = keyboard.nextInt();
+                    Workers.getInstance().getWorker(worker_id).setID(edited_id);
+                    break;
+                case 3:
+                    System.out.println("choose the type you want to add/remove :");
+                    System.out.println("to add type the number to remove type -number...");
+                    Printer.printAllWorkingTypes();
+                    int type_choice = getChoice(-1 * WorkPolicy.WorkingType.values().length, WorkPolicy.WorkingType.values().length);
+                    if (type_choice > 0) {
+                        WorkPolicy.WorkingType workingType = WorkPolicy.WorkingType.values()[Math.abs(type_choice) - 1];
+                        if (worker.getType().contains(workingType))
+                            System.out.println("the worker is already signed for this job!");
+                        else
+                            worker.getType().add(workingType);
+
+                    } else if (type_choice < 0) {
+                        WorkPolicy.WorkingType workingType = WorkPolicy.WorkingType.values()[Math.abs(type_choice) - 1];
+                        if (!worker.getType().contains(workingType))
+
+                            System.out.println("the worker is not signed for this job");
+
+                        else
+                            worker.getType().remove(workingType);
+                    }
+
+                    else
+                        System.out.println("Error : number out of bounds!");
+
+                    break;
+                case 4:
+                    System.out.println("Type the new bank address :");
+                    String edited_address = keyboard.next();
+                    Workers.getInstance().getWorker(worker_id).getContract().setBankAddress(edited_address);
+                    break;
+                case 5:
+                    System.out.println("Type the new salary :");
+                    double edited_salary = keyboard.nextDouble();
+                    Workers.getInstance().getWorker(worker_id).getContract().setSalary(edited_salary);
+                    break;
+                case 6:
+                    go_back = true;
+                    break;
+
+
+            }
+        }
+
+    }
+
+    private static int getChoice(int lower_bound, int upper_bound) {
+        for (; ; ) {
+            int keyboard_input = keyboard.nextInt();
+
+            if (keyboard_input < lower_bound || keyboard_input > upper_bound) {
+                System.out.println(ConsoleColors.RED_BOLD + "Error : number out of bounds!" + ConsoleColors.RESET);
+            } else return keyboard_input;
+        }
+    }
 }

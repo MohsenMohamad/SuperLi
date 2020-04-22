@@ -104,4 +104,14 @@ public class Worker {
     public WorkerDeal getContract() {
         return contract;
     }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public void setID(int id)
+    {
+        this.id = id;
+    }
 }
