@@ -19,10 +19,11 @@ public class Worker {
     private WorkerDeal contract;
     private List<Shift> worker_shifts;
 
-    public Worker(String name, List<WorkingType> type, Map<Pair<DayOfWeek, ShiftTime>, Boolean> schedule, WorkerDeal contract) {
+    public Worker(int id,String name, List<WorkingType> type, Map<Pair<DayOfWeek, ShiftTime>, Boolean> schedule, WorkerDeal contract) {
 
         this.name = name;
         this.id = count++;
+        this.id =id;
         this.type = type;
         this.schedule = schedule;
         this.contract = contract;

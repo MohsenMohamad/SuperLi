@@ -21,24 +21,24 @@ public class InitializeData {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         try {
             WorkerDeal john_contract = new WorkerDeal(Worker.count, dateFormat.parse("30/03/2017"), 28, "a", new LinkedList<>());
-            Worker john = new Worker("John", createJob(), createSchedule(), john_contract);
+            Worker john = new Worker(111111111,"John", createJob(), createSchedule(), john_contract);
 
             WorkerDeal steve_contract = new WorkerDeal(Worker.count, dateFormat.parse("05/11/2016"), 30, "b", new LinkedList<>());
-            Worker steve = new Worker("Steve", createJob(), createSchedule(), steve_contract);
+            Worker steve = new Worker(222222222,"Steve", createJob(), createSchedule(), steve_contract);
 
 
             WorkerDeal james_contract = new WorkerDeal(Worker.count, dateFormat.parse("12/06/2018"), 1000, "c", new LinkedList<>());
-            Worker james = new Worker("James", createJob(), createSchedule(), james_contract);
+            Worker james = new Worker(333333333,"James", createJob(), createSchedule(), james_contract);
 
             WorkerDeal moshe_contract = new WorkerDeal(Worker.count, dateFormat.parse("22/11/2015"), 1000, "c", new LinkedList<>());
-            Worker moshe = new Worker("Moshe", createJob(), createSchedule(), moshe_contract);
+            Worker moshe = new Worker(444444444,"Moshe", createJob(), createSchedule(), moshe_contract);
 
 
             WorkerDeal asd_contract = new WorkerDeal(Worker.count, dateFormat.parse("01/01/2012"), 1000, "c", new LinkedList<>());
-            Worker asd = new Worker("Asd", createJob(), createSchedule(), asd_contract);
+            Worker asd = new Worker(555555555,"Asd", createJob(), createSchedule(), asd_contract);
 
             WorkerDeal iris_contract = new WorkerDeal(Worker.count, dateFormat.parse("17/02/2010"), 1000, "c", new LinkedList<>());
-            Worker iris = new Worker("Iris", createJob(), createSchedule(), iris_contract);
+            Worker iris = new Worker(666666666,"Iris", createJob(), createSchedule(), iris_contract);
 
 
             Workers workers = Workers.getInstance();

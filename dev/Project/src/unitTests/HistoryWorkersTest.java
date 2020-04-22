@@ -67,7 +67,7 @@ class HistoryWorkersTest {
                 schedule.put(pair, false);
         }
 
-        worker1 = new Worker("worker1",jobs,schedule,worker_contract);
+        worker1 = new Worker(208432474,"worker1",jobs,schedule,worker_contract);
     }
 
     @Test
