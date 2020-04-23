@@ -3,6 +3,7 @@ package BusinessLayer;
 import BusinessLayer.InterfaceLayer.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -13,12 +14,14 @@ public class Controller {
     private HashMap<String,ItemRecord> itemRecords;
     private HashMap<String,Category> categories;
     private LinkedList<Discount> discounts;
+    private LinkedList<SimplePair> defects;
     private static int itemId;
 
     private Controller(){
         itemRecords = new HashMap<>();
         categories = new HashMap<>();
         discounts = new LinkedList<>();
+        defects = new LinkedList<>();
         itemId = 0;
     }
 
@@ -31,23 +34,23 @@ public class Controller {
 
     public void initializeItems() {
         ItemRecord itemRecord1 = new ItemRecord("milk Tnova 3%",3,1,3,4,1,"tnova");
-        itemRecord1.addItem(new Item(itemId++, new SimpleDateFormat("20200419")));
-        itemRecord1.addItem(new Item(itemId++, new SimpleDateFormat("20200419")));
-        itemRecord1.addItem(new Item(itemId++, new SimpleDateFormat("20200420")));
-        itemRecord1.addItem(new Item(itemId++, new SimpleDateFormat("20200420")));
+        itemRecord1.addItem(new Item(itemId++, new java.sql.Date(2020-1900,4-1,19)));
+        itemRecord1.addItem(new Item(itemId++, new java.sql.Date(2020-1900,4-1,19)));
+        itemRecord1.addItem(new Item(itemId++, new java.sql.Date(2020-1900,4-1,20)));
+        itemRecord1.addItem(new Item(itemId++, new java.sql.Date(2020-1900,4-1,20)));
         itemRecords.put("milk Tnova 3%",itemRecord1);
 
         ItemRecord itemRecord2 = new ItemRecord("white bread",3,2,3,5,2,"dganit");
-        itemRecord2.addItem(new Item(itemId++, new SimpleDateFormat("20200519")));
-        itemRecord2.addItem(new Item(itemId++, new SimpleDateFormat("20200519")));
-        itemRecord2.addItem(new Item(itemId++, new SimpleDateFormat("20200520")));
-        itemRecord2.addItem(new Item(itemId++, new SimpleDateFormat("20200520")));
-        itemRecord2.addItem(new Item(itemId++, new SimpleDateFormat("20200520")));
+        itemRecord2.addItem(new Item(itemId++, new java.sql.Date(2020-1900,5-1,19)));
+        itemRecord2.addItem(new Item(itemId++, new java.sql.Date(2020-1900,5-1,19)));
+        itemRecord2.addItem(new Item(itemId++, new java.sql.Date(2020-1900,5-1,20)));
+        itemRecord2.addItem(new Item(itemId++, new java.sql.Date(2020-1900,5-1,20)));
+        itemRecord2.addItem(new Item(itemId++, new java.sql.Date(2020-1900,5-1,20)));
         itemRecords.put("white bread",itemRecord2);
 
         ItemRecord itemRecord3 = new ItemRecord("coffee Elite",2,0,2,2,3,"elite");
-        itemRecord2.addItem(new Item(itemId++, new SimpleDateFormat("20200820")));
-        itemRecord2.addItem(new Item(itemId++, new SimpleDateFormat("20200820")));
+        itemRecord2.addItem(new Item(itemId++, new java.sql.Date(2020-1900,8-1,20)));
+        itemRecord2.addItem(new Item(itemId++, new java.sql.Date(2020-1900,8-1,20)));
         itemRecords.put("coffee Elite",itemRecord3);
 
         itemRecord1.addPrice(new Price(80,120));
@@ -100,11 +103,17 @@ public class Controller {
     }
 
     public void initializeDiscounts() {
-        CategoryDiscount cd1 = new CategoryDiscount(categories.get("Drinks"),new java.sql.Date(2020-1900,4-1,20),new java.sql.Date(2020-1900,5-1,20),20);
-        CategoryDiscount cd2 = new CategoryDiscount(categories.get("Dairy"),new java.sql.Date(2020-1900,5-1,20),new java.sql.Date(2020-1900,5-1,20),30);
+        CategoryDiscount cd1 = new CategoryDiscount(categories.get("Drinks"),
+                new java.sql.Date(2020-1900,4-1,20),
+                new java.sql.Date(2020-1900,5-1,20),20);
+        CategoryDiscount cd2 = new CategoryDiscount(categories.get("Dairy"),
+                new java.sql.Date(2020-1900,5-1,20),
+                new java.sql.Date(2020-1900,5-1,20),30);
         discounts.add(cd1);
         discounts.add(cd2);
-        ItemDiscount id =new ItemDiscount(itemRecords.get("white bread"),new java.sql.Date(2020-1900,4-1,20),new java.sql.Date(2020-1900,5-1,20),15);
+        ItemDiscount id =new ItemDiscount(itemRecords.get("white bread"),
+                new java.sql.Date(2020-1900,4-1,20),
+                new java.sql.Date(2020-1900,5-1,20),15);
         discounts.add(id);
     }
 
@@ -160,6 +169,8 @@ public class Controller {
                 for (Item item: itemsList){
                     if(item.getId()==id){
                         item.setDefective(true);
+                        java.sql.Date currDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+                        defects.add(new SimplePair(currDate, item));
                         return  "Defected item was added";
                     }
                 }
@@ -266,6 +277,16 @@ public class Controller {
         String report = "";
         for (Category category:categories.values()) {
             report = report + getInventoryReport(category.getName())+ "\n";
+        }
+        return report;
+    }
+
+    public String printDefectedReport(java.sql.Date beginDate, java.sql.Date endDate){
+        String report = "";
+        for(SimplePair pair: defects){
+            if(pair.getDate().compareTo(beginDate)>=0 && pair.getDate().compareTo(endDate)<=0){
+                report = report + pair.getItem().toString() ;
+            }
         }
         return report;
     }

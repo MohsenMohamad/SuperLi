@@ -71,6 +71,11 @@ public class ActionsMenu {
                 }
 
                 case "6": {
+                    System.out.println("Enter report's beginning date in the following format(dd/MM/yyyy)");
+                    String begDate = myScanner.nextLine();
+                    System.out.println("Enter report's end date in the following format(dd/MM/yyyy)");
+                    String endDate = myScanner.nextLine();
+                    System.out.println(service.printDefectedReport(begDate, endDate));
 
                     break;
                 }

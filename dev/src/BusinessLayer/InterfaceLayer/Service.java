@@ -77,7 +77,7 @@ public class Service {
         catch (Exception e){
             return "Please enter valid arguments";
         }
-        return controller.addItemDiscount(categoryName, perc, beginDate, endDate);
+        return controller.addNewCategoryDiscount(categoryName, perc, beginDate, endDate);
     }
 
     public String setNewPrice(String name, String price){
@@ -91,6 +91,20 @@ public class Service {
         catch (Exception e){
             return "Item's price must be a number";
         }
+    }
+
+    public String printDefectedReport(String reportBegin, String reportEnd){
+        java.sql.Date beginDate, endDate;
+        try{
+            beginDate = new java.sql.Date(Integer.parseInt(reportBegin.substring(6))-1900,
+                    Integer.parseInt(reportBegin.substring(3,4))-1,Integer.parseInt(reportBegin.substring(0,1)));
+            endDate = new java.sql.Date(Integer.parseInt(reportEnd.substring(6))-1900,
+                    Integer.parseInt(reportEnd.substring(3,4))-1,Integer.parseInt(reportEnd.substring(0,1)));
+        }
+        catch (Exception e){
+            return "Please enter valid dates";
+        }
+        return controller.printDefectedReport(beginDate, endDate);
     }
 
 
