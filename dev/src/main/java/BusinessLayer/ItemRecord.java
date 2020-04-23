@@ -119,4 +119,6 @@ public class ItemRecord {
     public LinkedList<Item> getItems() {
         return items;
     }
+
+    public int getShelfNumber(){return shelfNumber;}
 }

@@ -49,8 +49,8 @@ public class Controller {
         itemRecords.put("white bread",itemRecord2);
 
         ItemRecord itemRecord3 = new ItemRecord("coffee Elite",2,0,2,2,3,"elite");
-        itemRecord2.addItem(new Item(itemId++, new java.sql.Date(2020-1900,8-1,20)));
-        itemRecord2.addItem(new Item(itemId++, new java.sql.Date(2020-1900,8-1,20)));
+        itemRecord3.addItem(new Item(itemId++, new java.sql.Date(2020-1900,8-1,20)));
+        itemRecord3.addItem(new Item(itemId++, new java.sql.Date(2020-1900,8-1,20)));
         itemRecords.put("coffee Elite",itemRecord3);
 
         itemRecord1.addPrice(new Price(80,120));
@@ -152,7 +152,7 @@ public class Controller {
                         itemRec.addPrice(discountedPrice);
                     }
                 discounts.add(d);
-                return "The discount was added succesfully";
+                return "The discount was added successfully";
             }
         }
         return "No such item";
@@ -169,7 +169,7 @@ public class Controller {
                 for (Item item: itemsList){
                     if(item.getId()==id){
                         item.setDefective(true);
-                        java.sql.Date currDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+                        java.sql.Date currDate = new java.sql.Date((new Date()).getTime());
                         defects.add(new SimplePair(currDate, item));
                         return  "Defected item was added";
                     }
@@ -180,12 +180,13 @@ public class Controller {
         return "No such item";
     }
 
-    public String setNewPrice(String name, int price){
+    public String setNewPrice(String name, int price , int retailPrice){
         for( ItemRecord ir: itemRecords.values()) {
             if (ir.getName().equals(name)) {         //checks if there is an item record with the given name
                 Price p = ir.getCurrPrice();
-                Price newPr = new Price(p.getRetailPrice() , price);
+                Price newPr = new Price(retailPrice , price);
                 ir.addPrice(newPr);
+                return "added successfully";
             }
         }
         return "No such item";
@@ -287,11 +288,70 @@ public class Controller {
             if(pair.getDate().compareTo(beginDate)>=0 && pair.getDate().compareTo(endDate)<=0){
                 report = report + pair.getItem().toString() ;
             }
+            for (ItemRecord ir: itemRecords.values()) {
+                if(ir.getItems().contains(pair.getItem())) {
+                    report = report + " shelf: " + ir.getShelfNumber() +" Item: "+ir.getName()+ "\n";
+                }
+            }
+        }
+        for (ItemRecord ir: itemRecords.values()) {
+            for (Item item: ir.getItems()) {
+                if(!item.isDefective()) {
+                    if (item.getExpirationDate().getTime() > beginDate.getTime() && item.getExpirationDate().getTime() < endDate.getTime()) {
+                        report = report + item.toString() + " shelf: " + ir.getShelfNumber() + " Item: " + ir.getName() + "\n";
+                    }
+                }
+            }
         }
         return report;
     }
 
     public void sendWarning(ItemRecord itemRecord) {
         Service.sendWarning(itemRecord.getName(),itemRecord.getTotalAmount(),itemRecord.getMinAmount());
+    }
+
+    public int getPrice(String itemRecord) {
+        return itemRecords.get(itemRecord).getCurrPrice().getStorePrice();
+    }
+
+    public boolean isDefective(String itemRecord, int itemId) {
+        for (Item item: itemRecords.get(itemRecord).getItems()) {
+            if(item.getId() == itemId)
+                return item.isDefective();
+
+        }
+        return false;
+    }
+
+    public int getItemDiscount(String name){
+        for (Discount d:discounts) {
+            if(d.validItemDiscount(name))
+                return d.getPercentage();
+        }
+        return 0;
+    }
+
+    public int getCategoryDiscount(String name) {
+        for (Discount d:discounts) {
+            if(d.validCategoryDiscount(name))
+                return d.getPercentage();
+        }
+        return 0;
+    }
+
+    public int getShelfAmount(String name) {
+        return itemRecords.get(name).getShelfAmount();
+    }
+
+    public int getStorageAmount(String name) {
+        return itemRecords.get(name).getStorageAmount();
+    }
+
+    public int getTotalAmount(String name) {
+        return itemRecords.get(name).getTotalAmount();
+    }
+
+    public void addItemRecord(ItemRecord itemRecord) {
+        itemRecords.put(itemRecord.getName(),itemRecord);
     }
 }

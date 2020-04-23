@@ -3,7 +3,7 @@ package BusinessLayer;
 import java.util.LinkedList;
 
 public class Category {
-    enum CategoryRole {MainCategory, SubCategory, SubSubCategory}
+    public enum CategoryRole {MainCategory, SubCategory, SubSubCategory}
     private CategoryRole role;
     private String name;
     private LinkedList<ItemRecord> itemRecords;

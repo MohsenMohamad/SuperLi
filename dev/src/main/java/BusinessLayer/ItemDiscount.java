@@ -1,6 +1,5 @@
 package BusinessLayer;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ItemDiscount extends Discount {

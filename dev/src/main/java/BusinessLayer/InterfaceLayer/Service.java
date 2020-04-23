@@ -54,10 +54,14 @@ public class Service {
     public String addNewItemDiscount(String itemName, String percentage, String begDate, String enDate) {
         java.sql.Date beginDate, endDate;
         int perc;
+        if(begDate.length()!=10 || enDate.length() != 10)
+            return "Please enter valid arguments";
         try{
-            beginDate = new java.sql.Date(Integer.parseInt(begDate.substring(6))-1900,Integer.parseInt(begDate.substring(3,4))-1,Integer.parseInt(begDate.substring(0,1)));
-            endDate = new java.sql.Date(Integer.parseInt(enDate.substring(6))-1900,Integer.parseInt(enDate.substring(3,4))-1,Integer.parseInt(enDate.substring(0,1)));
+            beginDate = new java.sql.Date(Integer.parseInt(begDate.substring(6))-1900,Integer.parseInt(begDate.substring(3,5))-1,Integer.parseInt(begDate.substring(0,2)));
+            endDate = new java.sql.Date(Integer.parseInt(enDate.substring(6))-1900,Integer.parseInt(enDate.substring(3,5))-1,Integer.parseInt(enDate.substring(0,2)));
             perc = Integer.parseInt(percentage);
+            if(perc < 1 || perc > 100)
+                return "Please enter valid arguments";
         }
         catch (Exception e){
             return "Please enter valid arguments";
@@ -69,10 +73,14 @@ public class Service {
     public String addNewCategoryDiscount(String categoryName, String percentage, String begDate, String enDate) {
         java.sql.Date beginDate, endDate;
         int perc;
+        if(begDate.length()!=10 || enDate.length() != 10)
+            return "Please enter valid arguments";
         try{
-            beginDate = new java.sql.Date(Integer.parseInt(begDate.substring(6))-1900,Integer.parseInt(begDate.substring(3,4))-1,Integer.parseInt(begDate.substring(0,1)));
-            endDate = new java.sql.Date(Integer.parseInt(enDate.substring(6))-1900,Integer.parseInt(enDate.substring(3,4))-1,Integer.parseInt(enDate.substring(0,1)));
+            beginDate = new java.sql.Date(Integer.parseInt(begDate.substring(6))-1900,Integer.parseInt(begDate.substring(3,5))-1,Integer.parseInt(begDate.substring(0,2)));
+            endDate = new java.sql.Date(Integer.parseInt(enDate.substring(6))-1900,Integer.parseInt(enDate.substring(3,5))-1,Integer.parseInt(enDate.substring(0,2)));
             perc = Integer.parseInt(percentage);
+            if(perc < 1 || perc > 100)
+                return "Please enter valid arguments";
         }
         catch (Exception e){
             return "Please enter valid arguments";
@@ -80,13 +88,17 @@ public class Service {
         return controller.addNewCategoryDiscount(categoryName, perc, beginDate, endDate);
     }
 
-    public String setNewPrice(String name, String price){
+    public String setNewPrice(String name, String price,String rPrice){
         try {
             int newPrice = Integer.parseInt(price);
             if(newPrice<=0){
                 return "Price must greater than 0";
             }
-            return controller.setNewPrice(name, newPrice);
+            int retailPrice = Integer.parseInt(rPrice);
+            if(retailPrice<=0){
+                return "Price must greater than 0";
+            }
+            return controller.setNewPrice(name, newPrice,retailPrice);
         }
         catch (Exception e){
             return "Item's price must be a number";
@@ -95,11 +107,11 @@ public class Service {
 
     public String printDefectedReport(String reportBegin, String reportEnd){
         java.sql.Date beginDate, endDate;
+        if(reportBegin.length()!=10 || reportEnd.length() != 10)
+            return "Please enter valid arguments";
         try{
-            beginDate = new java.sql.Date(Integer.parseInt(reportBegin.substring(6))-1900,
-                    Integer.parseInt(reportBegin.substring(3,4))-1,Integer.parseInt(reportBegin.substring(0,1)));
-            endDate = new java.sql.Date(Integer.parseInt(reportEnd.substring(6))-1900,
-                    Integer.parseInt(reportEnd.substring(3,4))-1,Integer.parseInt(reportEnd.substring(0,1)));
+            beginDate = new java.sql.Date(Integer.parseInt(reportBegin.substring(6))-1900,Integer.parseInt(reportBegin.substring(3,5))-1,Integer.parseInt(reportBegin.substring(0,2)));
+            endDate = new java.sql.Date(Integer.parseInt(reportEnd.substring(6))-1900,Integer.parseInt(reportEnd.substring(3,5))-1,Integer.parseInt(reportEnd.substring(0,2)));
         }
         catch (Exception e){
             return "Please enter valid dates";

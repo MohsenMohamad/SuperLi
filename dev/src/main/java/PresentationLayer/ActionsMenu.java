@@ -114,9 +114,11 @@ public class ActionsMenu {
                 case "8": {
                     System.out.println("Please enter item name:");
                     String name = myScanner.nextLine();
-                    System.out.println("Enter new price:");
+                    System.out.println("Enter new store price:");
                     String price = myScanner.nextLine();
-                    System.out.println(service.setNewPrice(name, price));
+                    System.out.println("Enter new retail price:");
+                    String rPrice = myScanner.nextLine();
+                    System.out.println(service.setNewPrice(name, price,rPrice));
                     break;
                 }
 

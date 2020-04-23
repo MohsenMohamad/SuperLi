@@ -1,7 +1,5 @@
 package BusinessLayer;
 
-import java.text.SimpleDateFormat;
-
 public class Item {
 
     private int id;
@@ -29,13 +27,17 @@ public class Item {
 
     public String toString(){
         String desc = "Item ID: " + id
-                + "Expiration date: " + expirationDate;
+                + " Expiration date: " + expirationDate;
         if (defective){
-            desc = desc + "The item is defected\n";
+            desc = desc + " The item is defected\n";
         }
         else {
-            desc = desc + "The item is not defected\n";
+            desc = desc + " The item is not defected\n";
         }
         return desc;
     }
+
+    public java.sql.Date getExpirationDate() {return expirationDate;}
+
+    public boolean isDefective(){return defective;}
 }
