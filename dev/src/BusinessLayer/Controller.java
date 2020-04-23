@@ -61,17 +61,33 @@ public class Controller {
         Category subCat1 = new Category(Category.CategoryRole.SubCategory,"Milk");
         Category subsubcat1 = new Category(Category.CategoryRole.SubSubCategory,"1 liter");
         addItemToCategory(itemRecords.get("milk Tnova 3%") ,category1);
+        addItemToCategory(itemRecords.get("milk Tnova 3%") ,subCat1);
+        addItemToCategory(itemRecords.get("milk Tnova 3%") ,subsubcat1);
+
         categories.put("Dairy",category1);
+        categories.put("Milk",subCat1);
+        categories.put("1 liter",subsubcat1);
 
         Category category2 = new Category(Category.CategoryRole.MainCategory,"Bread and pastry");
         Category subcat2 = new Category(Category.CategoryRole.SubCategory,"Bread");
         Category subsubcat2 = new Category(Category.CategoryRole.SubSubCategory,"750 gr");
         addItemToCategory(itemRecords.get("white bread") ,category2);
+        addItemToCategory(itemRecords.get("white bread") ,subcat2);
+        addItemToCategory(itemRecords.get("white bread") ,subsubcat2);
 
+        categories.put("Bread and pastry",category2);
+        categories.put("Bread",subcat2);
+        categories.put("750 gr",subsubcat2);
         Category category3 = new Category(Category.CategoryRole.MainCategory,"Drinks");
         Category subcat3 = new Category(Category.CategoryRole.SubCategory,"Coffee powder");
         Category subsubcat3 = new Category(Category.CategoryRole.SubSubCategory,"500 gr");
         addItemToCategory(itemRecords.get("coffee Elite") ,category3);
+        addItemToCategory(itemRecords.get("coffee Elite") ,subcat3);
+        addItemToCategory(itemRecords.get("coffee Elite") ,subsubcat3);
+
+        categories.put("Drinks",category3);
+        categories.put("Coffee powder",subcat3);
+        categories.put("500 gr",subsubcat3);
     }
 
     private void addItemToCategory(ItemRecord itemRecord, Category cat) {
@@ -84,10 +100,16 @@ public class Controller {
     }
 
     public void initializeDiscounts() {
+        CategoryDiscount cd1 = new CategoryDiscount(categories.get("Drinks"),new java.sql.Date(2020-1900,4-1,20),new java.sql.Date(2020-1900,5-1,20),20);
+        CategoryDiscount cd2 = new CategoryDiscount(categories.get("Dairy"),new java.sql.Date(2020-1900,5-1,20),new java.sql.Date(2020-1900,5-1,20),30);
+        discounts.add(cd1);
+        discounts.add(cd2);
+        ItemDiscount id =new ItemDiscount(itemRecords.get("white bread"),new java.sql.Date(2020-1900,4-1,20),new java.sql.Date(2020-1900,5-1,20),15);
+        discounts.add(id);
     }
 
-    public String addItemDiscount(String name, int percentage, Date beginDate, Date endDate){
-        if(!(percentage>=1 && percentage<=100)){
+    public String addItemDiscount(String name, int percentage, java.sql.Date beginDate, java.sql.Date endDate){
+       if(!(percentage>=1 && percentage<=100)){
             return "Discount percentage must be a number between 1-100";
         }
         for( ItemRecord ir: itemRecords.values()){
@@ -106,7 +128,7 @@ public class Controller {
     }
 
 
-    public String addNewCategoryDiscount(String categoryName, int percentage, Date beginDate, Date endDate){
+    public String addNewCategoryDiscount(String categoryName, int percentage, java.sql.Date beginDate, java.sql.Date endDate){
         if(!(percentage>=1 && percentage<=100)){
             return "Discount percentage must be a number between 1-100";
         }
@@ -219,22 +241,22 @@ public class Controller {
         String itemStr = record.getName() + " : shelf amount " + record.getShelfAmount() + " storage amount "+ record.getStorageAmount()+" ";
         String main = "main category ";
         String sub = "sub category ";
-        String subsub = "sub sub category" ;
+        String subsub = "sub sub category " ;
         for (Category category:categories.values()) {
 
             if(category.getItemRecords().contains(record)){
                 if(category.isMain())
-                    main = main + category.getName();
+                    main = main + category.getName()+" ";
                 else if(category.isSub())
-                    sub = sub + category.getName();
+                    sub = sub + category.getName()+" ";
                 else if(category.isSubSub())
-                    subsub = subsub + category.getName();
+                    subsub = subsub + category.getName()+" ";
             }
         }
-        itemStr += main+" "+sub+" "+subsub+" "+record.getPrices();
+        itemStr += main+" "+sub+" "+subsub+" "+record.getPrices()+" ";
         for (Discount discount: discounts) {
             if(discount.validItemDiscount(record.getName()))
-                itemStr += discount.withDiscount();
+                itemStr += discount.withDiscount()+" ";
         }
         return itemStr + "\n";
 
@@ -243,7 +265,7 @@ public class Controller {
     public String getAllInventoryReport() {
         String report = "";
         for (Category category:categories.values()) {
-            report = report + getInventoryReport(category.getName());
+            report = report + getInventoryReport(category.getName())+ "\n";
         }
         return report;
     }

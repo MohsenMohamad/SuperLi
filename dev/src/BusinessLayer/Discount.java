@@ -1,15 +1,14 @@
 package BusinessLayer;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public abstract class Discount {
 
-    private Date startDate;
-    private Date endDate;
+    private java.sql.Date startDate;
+    private java.sql.Date endDate;
     private int percentage;
 
-    public Discount(Date start, Date end, int perc){
+    public Discount(java.sql.Date start, java.sql.Date end, int perc){
         startDate = start;
         endDate = end;
         percentage = perc;
@@ -23,11 +22,11 @@ public abstract class Discount {
         return percentage;
     }
 
-    public Date getEndDate() {
+    public java.sql.Date getEndDate() {
         return endDate;
     }
 
-    public Date getStartDate() {
+    public java.sql.Date getStartDate() {
         return startDate;
     }
 

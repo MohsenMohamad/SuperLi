@@ -22,7 +22,10 @@ public class Category {
         for (ItemRecord record: itemRecords) {
             items = items + Controller.getController().itemForReport(record) + "\n";
         }
-        return items.substring(0,items.length()-2);
+        if(items.length() > 2)
+            return items.substring(0,items.length()-2);
+        else
+            return items;
     }
 
     public LinkedList<ItemRecord> getItemRecords() {

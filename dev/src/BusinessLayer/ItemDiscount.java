@@ -7,7 +7,7 @@ public class ItemDiscount extends Discount {
 
     private ItemRecord itemRecord;
 
-    public ItemDiscount( ItemRecord itemRecord, Date start, Date end, int perc) {
+    public ItemDiscount(ItemRecord itemRecord, java.sql.Date start, java.sql.Date end, int perc) {
         super(start, end, perc);
         this.itemRecord = itemRecord;
     }
@@ -25,10 +25,8 @@ public class ItemDiscount extends Discount {
     @Override
     public boolean validItemDiscount(String name) {
         if (name.equals(itemRecord.getName())) {
-            Date now = new Date();
-            Date start = new Date(String.valueOf(getStartDate()));
-            Date end = new Date(String.valueOf(getEndDate()));
-            if(start.after(now) && now.before(end) ) {
+            java.sql.Date now = new java.sql.Date(new Date().getTime());
+            if (getStartDate().getTime() < now.getTime() && now.getTime() < getEndDate().getTime()) {
                 return true;
             }
         }

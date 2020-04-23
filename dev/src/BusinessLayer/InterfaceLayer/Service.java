@@ -52,11 +52,11 @@ public class Service {
     }
 
     public String addNewItemDiscount(String itemName, String percentage, String begDate, String enDate) {
-        Date beginDate, endDate;
+        java.sql.Date beginDate, endDate;
         int perc;
         try{
-            beginDate = new SimpleDateFormat("dd/MM/yyyy").parse(begDate);
-            endDate = new SimpleDateFormat("dd/MM/yyyy").parse(enDate);
+            beginDate = new java.sql.Date(Integer.parseInt(begDate.substring(6))-1900,Integer.parseInt(begDate.substring(3,4))-1,Integer.parseInt(begDate.substring(0,1)));
+            endDate = new java.sql.Date(Integer.parseInt(enDate.substring(6))-1900,Integer.parseInt(enDate.substring(3,4))-1,Integer.parseInt(enDate.substring(0,1)));
             perc = Integer.parseInt(percentage);
         }
         catch (Exception e){
@@ -66,18 +66,18 @@ public class Service {
     }
 
 
-    public String addNewCategoryDiscount(String categoryName, String percentage, String beginDate, String endDate) {
-        Date begDate, enDate;
+    public String addNewCategoryDiscount(String categoryName, String percentage, String begDate, String enDate) {
+        java.sql.Date beginDate, endDate;
         int perc;
         try{
-            begDate = new SimpleDateFormat("dd/MM/yyyy").parse(beginDate);
-            enDate = new SimpleDateFormat("dd/MM/yyyy").parse(endDate);
+            beginDate = new java.sql.Date(Integer.parseInt(begDate.substring(6))-1900,Integer.parseInt(begDate.substring(3,4))-1,Integer.parseInt(begDate.substring(0,1)));
+            endDate = new java.sql.Date(Integer.parseInt(enDate.substring(6))-1900,Integer.parseInt(enDate.substring(3,4))-1,Integer.parseInt(enDate.substring(0,1)));
             perc = Integer.parseInt(percentage);
         }
         catch (Exception e){
             return "Please enter valid arguments";
         }
-        return controller.addItemDiscount(categoryName, perc, begDate, enDate);
+        return controller.addItemDiscount(categoryName, perc, beginDate, endDate);
     }
 
     public String setNewPrice(String name, String price){
