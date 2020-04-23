@@ -23,7 +23,7 @@ public class CreateActions {
 
             try {
                 date = date_format.parse(date_string);
-                System.out.println("Your shift date will be : " + ConsoleColors.RED_BOLD + new SimpleDateFormat("EEEE").format(date) + " " + date_string + ConsoleColors.RESET);
+                System.out.println("Your shift date will be : " + new SimpleDateFormat("EEEE").format(date) + " " + date_string);
                 System.out.println("Type M for Morning , Type E for Evening");
                 Shift.ShiftTime shiftTime = null;
                 String choice = keyboard.next();
@@ -34,7 +34,7 @@ public class CreateActions {
                     shiftTime = Shift.ShiftTime.Evening;
                 }
 
-                System.out.println(ConsoleColors.BLUE_BOLD + Workers.getInstance().AvilableWorkerstoString(date,shiftTime) + ConsoleColors.RESET);
+                System.out.println(Workers.getInstance().AvilableWorkerstoString(date,shiftTime));
                 System.out.println("enter the id of the worker who you wish to appoint as a boss");
                 int boss_id = keyboard.nextInt();
                 Worker boss = Workers.getInstance().getWorker(boss_id);
@@ -63,7 +63,7 @@ public class CreateActions {
         int worker_id = keyboard.nextInt();
         if(Workers.getInstance().getWorker(worker_id)!=null)
         {
-            System.out.println(ConsoleColors.RED_BOLD+"Error : There is a user with the same id in the data base!"+ConsoleColors.RESET);
+            System.out.println("Error : There is a user with the same id in the data base!");
             return;
         }
         System.out.println("Worker name: ");
@@ -177,7 +177,7 @@ public class CreateActions {
             int keyboard_input = keyboard.nextInt();
 
             if (keyboard_input < lower_bound || keyboard_input > upper_bound) {
-                System.out.println(ConsoleColors.RED_BOLD + "Error : number out of bounds!" + ConsoleColors.RESET);
+                System.out.println("Error : number out of bounds!");
             } else return keyboard_input;
         }
     }

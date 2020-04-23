@@ -13,7 +13,7 @@ public class Printer {
         int number =1;
         for(WorkPolicy.WorkingType workingType : WorkPolicy.WorkingType.values())
         {
-            System.out.println(ConsoleColors.YELLOW_BOLD+number+") "+workingType.toString()+ConsoleColors.RESET);
+            System.out.println(number+") "+workingType.toString());
             number++;
         }
     }
@@ -23,7 +23,7 @@ public class Printer {
         if (w.getWorker_shifts().isEmpty())
             System.out.println(w.getName() + " has no working shifts.");
         else for (Shift shift : w.getWorker_shifts()) {
-            System.out.println(ConsoleColors.GREEN_BOLD + shift.toString() + ConsoleColors.RESET);
+            System.out.println(shift.toString());
         }
     }
 
@@ -46,7 +46,7 @@ public class Printer {
             }
         });
         for (Pair<DayOfWeek, Shift.ShiftTime> p : schedules_date) {
-            System.out.println(ConsoleColors.PURPLE_BOLD + p.getKey() + " , " + p.getValue().toString() + " : " + worker_schedule.get(p) + ConsoleColors.RESET);
+            System.out.println(p.getKey() + " , " + p.getValue().toString() + " : " + worker_schedule.get(p));
         }
     }
 
@@ -58,7 +58,7 @@ public class Printer {
 
     public static void printWorkersView()
     {
-        System.out.println(ConsoleColors.BLUE_BOLD + Workers.getInstance().toString() + ConsoleColors.RESET + "\n");
+        System.out.println(Workers.getInstance().toString() + "\n");
         System.out.println("1) Register a worker");
         System.out.println("2) select a worker");
         System.out.println("3) return\n");
@@ -67,7 +67,7 @@ public class Printer {
     public static void printShiftsView()
     {
         for (Shift shift : History.getInstance().getShifts()) {
-            System.out.println(ConsoleColors.GREEN_BOLD + shift.toString() + ConsoleColors.RESET);
+            System.out.println(shift.toString());
             border();
         }
 
@@ -79,9 +79,9 @@ public class Printer {
     public static void PrintWorkerView(int worker_id)
     {
         Worker w = Workers.getInstance().getWorker(worker_id);
-        System.out.println(ConsoleColors.BLUE_BOLD + "Worker name : " + w.getName());
+        System.out.println("Worker name : " + w.getName());
         System.out.println("Worker id : " + w.getId());
-        System.out.println("jobs : " + w.getType().toString() + ConsoleColors.RESET + "\n");
+        System.out.println("jobs : " + w.getType().toString()+ "\n");
 
         System.out.println("1) print Schedule");
         System.out.println("2) print contract");
@@ -93,12 +93,12 @@ public class Printer {
     public static void printShiftView(int shift_id)
     {
         Shift shift = History.getInstance().getShifts().get(shift_id);
-        System.out.println(ConsoleColors.GREEN_BOLD + shift.toString() + ConsoleColors.RESET);
+        System.out.println(shift.toString());
         System.out.println("1) print available workers for this shift");
         System.out.println("2) return");
     }
 
     public static void border() {
-        System.out.println(ConsoleColors.RED_BOLD + "--------------------------------" + ConsoleColors.RESET);
+        System.out.println("--------------------------------");
     }
 }

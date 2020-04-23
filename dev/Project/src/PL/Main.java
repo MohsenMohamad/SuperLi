@@ -67,7 +67,7 @@ public class Main {
                     int id = keyboard.nextInt();
                     Printer.border();
                     if (!Workers.getInstance().getAllWorkers().containsKey(id)) {
-                        System.out.println(ConsoleColors.RED_BOLD + "Error : invalid id" + ConsoleColors.RESET);
+                        System.out.println("Error : invalid id");
                     } else workerView(id);
                     break;
 
@@ -98,7 +98,7 @@ public class Main {
                     Printer.printSchedule(worker_id);
                     break;
                 case 2:
-                    System.out.println(ConsoleColors.CYAN_BOLD + w.getContract().toString() + ConsoleColors.RESET);
+                    System.out.println(w.getContract().toString());
                     break;
                 case 3:
                     Printer.printWorkingShifts(w);
@@ -132,7 +132,7 @@ public class Main {
                     int id = keyboard.nextInt();
                     Printer.border();
                     if (!History.getInstance().isAvailable(id)) {
-                        System.out.println(ConsoleColors.RED_BOLD + "Error : invalid shift_id!" + ConsoleColors.RESET);
+                        System.out.println("Error : invalid shift_id!");
                     } else shiftView(id);
                     break;
                 case 2:
@@ -157,14 +157,14 @@ public class Main {
             switch (first_choice) {
                 case 1:
                     List<Worker> available_workers = Workers.getInstance().getAvailableWorkers(shift.getShiftDate(), shift.getShiftTime());
-                    System.out.println(ConsoleColors.BLUE_BOLD + available_workers.toString() + ConsoleColors.RESET);
+                    System.out.println(available_workers.toString());
                     System.out.println("1) add a worker to this shift");
                     System.out.println("2) return");
                     int second_choice = getChoice(1, 2);
                     if (second_choice == 2)
                         break;
                     else if (available_workers.isEmpty()) {
-                        System.out.println(ConsoleColors.RED_BOLD + "Error : there are no workers to choose from!" + ConsoleColors.RESET);
+                        System.out.println("Error : there are no workers to choose from!");
 
                     } else {
                         System.out.println("enter the id of the worker you want to add");
@@ -174,7 +174,7 @@ public class Main {
                         int index =1;
                         for(WorkingType type : w.getType())
                         {
-                            System.out.println(ConsoleColors.YELLOW_BOLD+index+") "+type+ConsoleColors.RESET);
+                            System.out.println(index+") "+type);
                             index++;
                         }
                         int type_index = getChoice(1,w.getType().size())-1;
@@ -195,7 +195,7 @@ public class Main {
         for (; ; ) {
             int keyboard_input = keyboard.nextInt();
             if (keyboard_input < lower_bound || keyboard_input > upper_bound) {
-                System.out.println(ConsoleColors.RED_BOLD + "Error : number out of bounds!" + ConsoleColors.RESET);
+                System.out.println("Error : number out of bounds!");
             } else return keyboard_input;
         }
     }
