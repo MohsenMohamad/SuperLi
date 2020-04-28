@@ -1,4 +1,4 @@
-package BL;
+package BusinessLayer.BLObjects;
 
 import java.util.LinkedList;
 import java.util.List;

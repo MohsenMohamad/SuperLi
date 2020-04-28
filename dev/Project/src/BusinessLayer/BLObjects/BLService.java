@@ -1,4 +1,4 @@
-package BusinessLayer;
+package BusinessLayer.BLObjects;
 
 import BusinessLayer.BLObjects.*;
 import BusinessLayer.DTOs.*;

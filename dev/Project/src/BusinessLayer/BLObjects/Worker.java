@@ -1,13 +1,12 @@
-package BL;
+package BusinessLayer.BLObjects;
 
 import javafx.util.Pair;
 
-import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.util.*;
 
-import BL.Shift.ShiftTime;
-import BL.WorkPolicy.WorkingType;
+import BusinessLayer.BLObjects.Shift.ShiftTime;
+import BusinessLayer.BLObjects.WorkPolicy.WorkingType;
 
 public class Worker {
 

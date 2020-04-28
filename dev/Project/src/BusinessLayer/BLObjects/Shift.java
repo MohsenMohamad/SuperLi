@@ -1,6 +1,6 @@
-package BL;
+package BusinessLayer.BLObjects;
 
-import BL.WorkPolicy.WorkingType;
+import BusinessLayer.BLObjects.WorkPolicy.WorkingType;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;

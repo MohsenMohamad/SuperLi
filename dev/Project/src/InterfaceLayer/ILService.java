@@ -1,6 +1,6 @@
 package InterfaceLayer;
 
-import BusinessLayer.BLService;
+import BusinessLayer.BLObjects.BLService;
 import BusinessLayer.DTOs.DTOAdress;
 import BusinessLayer.DTOs.DTODriver;
 import BusinessLayer.DTOs.DTOProduct;
