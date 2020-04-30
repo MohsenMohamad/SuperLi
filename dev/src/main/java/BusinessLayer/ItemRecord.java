@@ -13,6 +13,7 @@ public class ItemRecord {
     private String manufacture;
     private LinkedList<Item> items;
     private LinkedList<Price> prices; //first is current
+    private int itemId;
 
     public ItemRecord(String name, int minAmount, int storageAmount, int shelfAmount, int totalAmount, int shelfNumber, String manufacture) {
         this.name = name;
@@ -24,6 +25,7 @@ public class ItemRecord {
         this.manufacture = manufacture;
         items = new LinkedList<>();
         prices = new LinkedList<>();
+        itemId = 0;
     }
 
     public void addItem(Item item){
@@ -52,11 +54,11 @@ public class ItemRecord {
             totalAmount--;
         }
         while(totalAmount < newAmount){
-            items.addFirst(new Item(Controller.incrementAndGetItemID()));
+            items.addFirst(new Item(itemId++));
             totalAmount++;
         }
         if(totalAmount < minAmount){
-            Controller.getController().sendWarning(this);
+            //current_Store.getController().sendWarning(this);
         }
     }
 
@@ -80,7 +82,7 @@ public class ItemRecord {
             amount--;
         }
         if(totalAmount < minAmount){
-            Controller.getController().sendWarning(this);
+            //current_Store.getController().sendWarning(this);
         }
         return getAmounts();
     }
