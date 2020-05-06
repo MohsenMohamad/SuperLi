@@ -3,6 +3,7 @@ package BusinessLayer;
 import DataAccesslayer.*;
 import InterfaceLayer.InterfaceContract;
 import InterfaceLayer.InterfaceSupplier;
+import InterfaceLayer.SystemManager;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -10,6 +11,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class Store {
+
+    private static Store storeInstance;
 
     private String email_ID;
     private List<Supplier> list_of_Suplier;
@@ -24,8 +27,21 @@ public class Store {
     private LinkedList<SimplePair> defects;
     private int itemId; //was static
 
+    public static Store createInstance(String email) {
+        if (storeInstance != null) {
+            storeInstance = new Store(email);
+        }
+        return storeInstance;
+    }
 
-    public Store(String email) {
+    public static Store getInstance() {
+        if (storeInstance != null) {
+            return storeInstance;
+        }
+        return null;
+    }
+
+    private Store(String email) {
     Map=new Mapper();
     list_of_Suplier=new LinkedList<Supplier>();
     LinkedList<DALSupplier> Suppliers=Map.ReadAllSupplier();
@@ -174,7 +190,7 @@ public class Store {
             Map.WriteOrder(id_suplaier, NumOfOrder, LocalDate.now(),null,ItemsID_ItemsIDSupplier, ProductIDVendor_numberOfItems, TotalPrice.get(),"Waiting");
             return "Done";
         }
-        return "The supplier is not exists in the system";
+        return "The supplier does not exists in the system";
 
     } //todo check security
 
@@ -324,14 +340,14 @@ public class Store {
 
 
     public void initializeItems() {
-        ItemRecord itemRecord1 = new ItemRecord("milk Tnova 3%",3,1,3,4,1,"tnova");
+        ItemRecord itemRecord1 = new ItemRecord("milk Tnova 3%",1,3,1,3,4,1,"tnova");
         itemRecord1.addItem(new Item(itemId++, new java.sql.Date(2020-1900,4-1,19)));
         itemRecord1.addItem(new Item(itemId++, new java.sql.Date(2020-1900,4-1,19)));
         itemRecord1.addItem(new Item(itemId++, new java.sql.Date(2020-1900,4-1,20)));
         itemRecord1.addItem(new Item(itemId++, new java.sql.Date(2020-1900,4-1,20)));
         itemRecords.put("milk Tnova 3%",itemRecord1);
 
-        ItemRecord itemRecord2 = new ItemRecord("white bread",3,2,3,5,2,"dganit");
+        ItemRecord itemRecord2 = new ItemRecord("white bread",2,3,2,3,5,2,"dganit");
         itemRecord2.addItem(new Item(itemId++, new java.sql.Date(2020-1900,5-1,19)));
         itemRecord2.addItem(new Item(itemId++, new java.sql.Date(2020-1900,5-1,19)));
         itemRecord2.addItem(new Item(itemId++, new java.sql.Date(2020-1900,5-1,20)));
@@ -339,7 +355,7 @@ public class Store {
         itemRecord2.addItem(new Item(itemId++, new java.sql.Date(2020-1900,5-1,20)));
         itemRecords.put("white bread",itemRecord2);
 
-        ItemRecord itemRecord3 = new ItemRecord("coffee Elite",2,0,2,2,3,"elite");
+        ItemRecord itemRecord3 = new ItemRecord("coffee Elite",3,2,0,2,2,3,"elite");
         itemRecord3.addItem(new Item(itemId++, new java.sql.Date(2020-1900,8-1,20)));
         itemRecord3.addItem(new Item(itemId++, new java.sql.Date(2020-1900,8-1,20)));
         itemRecords.put("coffee Elite",itemRecord3);
@@ -597,8 +613,9 @@ public class Store {
         return report;
     }
 
-    public void sendWarning(ItemRecord itemRecord) { //TODO: make order with more than min amount
-        // .sendWarning(itemRecord.getName(),itemRecord.getTotalAmount(),itemRecord.getMinAmount());
+    public void sendWarning(ItemRecord itemRecord) {
+        SystemManager.sendWarning("Making new order of "+itemRecord.getName()+" after reaching total amount of : "+itemRecord.getTotalAmount()+" " +
+                " while min amount is : " +itemRecord.getMinAmount()+ "\n");
     }
 
     public int getPrice(String itemRecord) {
@@ -655,5 +672,9 @@ public class Store {
     //Just fot tests!
     public List<Supplier> getList_of_Suplier() {
         return this.list_of_Suplier;
+    }
+
+    public void createAutomaticOrder(int itemId, int amount) {
+        //TODO: make order with best supplier
     }
 }

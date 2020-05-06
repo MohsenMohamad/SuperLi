@@ -752,4 +752,8 @@ public class Menu {
          System.out.println(ans);
     }
 
+    public static void printWarning(String warning) {
+        System.out.println(warning);
+    }
+
 }

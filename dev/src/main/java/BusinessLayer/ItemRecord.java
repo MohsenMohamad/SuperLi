@@ -5,6 +5,7 @@ import java.util.LinkedList;
 public class ItemRecord {
 
     private String name;
+    private int id;
     private int minAmount;
     private int storageAmount;
     private int shelfAmount;
@@ -13,10 +14,10 @@ public class ItemRecord {
     private String manufacture;
     private LinkedList<Item> items;
     private LinkedList<Price> prices; //first is current
-    private int itemId;
 
-    public ItemRecord(String name, int minAmount, int storageAmount, int shelfAmount, int totalAmount, int shelfNumber, String manufacture) {
+    public ItemRecord(String name,int id, int minAmount, int storageAmount, int shelfAmount, int totalAmount, int shelfNumber, String manufacture) {
         this.name = name;
+        this.id = id;
         this.minAmount = minAmount;
         this.storageAmount = storageAmount;
         this.shelfAmount = shelfAmount;
@@ -25,7 +26,6 @@ public class ItemRecord {
         this.manufacture = manufacture;
         items = new LinkedList<>();
         prices = new LinkedList<>();
-        itemId = 0;
     }
 
     public void addItem(Item item){
@@ -54,11 +54,15 @@ public class ItemRecord {
             totalAmount--;
         }
         while(totalAmount < newAmount){
-            items.addFirst(new Item(itemId++));
+            items.addFirst(new Item());
             totalAmount++;
         }
         if(totalAmount < minAmount){
-            //current_Store.getController().sendWarning(this);
+            Store store = Store.getInstance();
+            if (store != null) {
+                store.sendWarning(this);
+                store.createAutomaticOrder(id,minAmount);
+            }
         }
     }
 
@@ -82,7 +86,11 @@ public class ItemRecord {
             amount--;
         }
         if(totalAmount < minAmount){
-            //current_Store.getController().sendWarning(this);
+            Store store = Store.getInstance();
+            if (store != null) {
+                store.sendWarning(this);
+                store.createAutomaticOrder(id,minAmount);
+            }
         }
         return getAmounts();
     }

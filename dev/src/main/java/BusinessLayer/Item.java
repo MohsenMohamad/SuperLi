@@ -2,6 +2,7 @@ package BusinessLayer;
 
 public class Item {
 
+    private static int nextId = 0;
     private int id;
     private java.sql.Date expirationDate;
     private boolean defective;
@@ -12,8 +13,8 @@ public class Item {
         defective = false;
     }
 
-    public Item(int id){
-        this.id = id;
+    public Item(){
+        this.id = nextId++;
         defective = false;
     }
 

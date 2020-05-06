@@ -3,7 +3,7 @@ package InterfaceLayer;
 import BusinessLayer.Store;
 import BusinessLayer.system;
 import BusinessLayer.User;
-import PresentationLayer.ActionsMenu;
+import PresentationLayer.Menu;
 
 import java.util.LinkedList;
 import java.util.Map;
@@ -96,7 +96,7 @@ public class SystemManager {
         String Done=systemcontroler.Login(email,password);
         if(Done.equals("Done")){
             logged_user=new User(email,password);
-            current_Store=new Store(email);
+            current_Store=Store.createInstance(email);
         }
         return Done;
     }
@@ -156,8 +156,8 @@ public class SystemManager {
         return current_Store!=null;
     }
 
-    public static void sendWarning(String name, int totalAmount, int minAmount) {
-        ActionsMenu.printWarning(name,totalAmount,minAmount);
+    public static void sendWarning(String warning) {
+        Menu.printWarning(warning);
     }
 
     public void initialize() {
