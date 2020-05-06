@@ -1,7 +1,7 @@
 package InterfaceLayer;
 
-import BusinessLogic.Contract;
-import BusinessLogic.Wrotequantities;
+import BusinessLayer.Contract;
+import BusinessLayer.Wrotequantities;
 import java.util.Map;
 
 public class InterfaceSupplier {

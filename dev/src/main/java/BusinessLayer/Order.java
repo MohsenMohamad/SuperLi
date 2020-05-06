@@ -7,6 +7,8 @@ public class Order {
 
     private int ID_Invitation;
     private int ID_Vendor;
+    private boolean auto;
+    private int Day;
     private LocalDate OrderDate;
     private LocalDate ArrivalTime;
     private Map<Integer, Integer> ItemsID_ItemsIDVendor;
@@ -14,9 +16,12 @@ public class Order {
     private double TotalPrice;
     private String Status;
 
-    public Order(int ID_Vendor, int Id, Map<Integer, Integer> itemsID_ItemsIDVendor, Map<Integer, Integer> itemsID_NumberOfItems, Double totalPrice){//List<DALContact> vendorContacts, List<DALContact> leadersContacts) {
+    public Order(int ID_Vendor, int Id, boolean auto, int day, Map<Integer, Integer> itemsID_ItemsIDVendor, Map<Integer, Integer> itemsID_NumberOfItems, Double totalPrice){//List<DALContact> vendorContacts, List<DALContact> leadersContacts) {
+
         this.ID_Vendor = ID_Vendor;
         this.ID_Invitation=Id;
+        auto=auto;
+        Day=day;
         OrderDate = LocalDate.now();
         ArrivalTime =null;
         ItemsID_ItemsIDVendor = itemsID_ItemsIDVendor;
@@ -65,5 +70,39 @@ public class Order {
 
     public void setArrivedatime(LocalDate now) {
         ArrivalTime=now;
+    }
+
+    public String CheckAbleToChangeOrder() {
+         //todo check the day
+          return "Able";
+    }
+
+    public void RemoveProduct(int product_id) {
+        ItemsID_ItemsIDVendor.forEach((Id,Id_Sup)->{
+            if(Id_Sup==product_id){
+                ItemsID_ItemsIDVendor.remove(Id);
+            }
+        });
+        ItemsID_NumberOfItems.forEach((Id,num)->{
+            if(Id==product_id){
+                ItemsID_NumberOfItems.remove(Id);
+            }
+        });
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        TotalPrice = totalPrice;
+    }
+
+    public void ChangeOrder(int id_order, int id_suplaier, int day, Map<Integer, Integer> productID_IDSupplier, Map<Integer, Integer> itemsIDVendor_numberOfItems) {
+    this.Day=day;
+    this.ID_Vendor=id_suplaier;
+        productID_IDSupplier.forEach((Id,Id_sup)->{
+            productID_IDSupplier.put(Id,Id_sup);
+    });
+    itemsIDVendor_numberOfItems.forEach((Id,num)->{
+        ItemsID_NumberOfItems.put(Id,num);
+    });
+
     }
 }

@@ -32,16 +32,17 @@ public class Menu {
                          "11. Edit supplier's arrangement\n" +
                          "12. Edit \"Write Quantities\" of supplier\n" +
                          "13. Delete supplier\n" +
-                         "14.Change item amount \n" +
-                         "15.Move from storage to shelf \n" +
-                         "16.Subtract from shelf \n" +
-                         "17.Print inventory report\n" +
-                         "18.Enter defected item\n" +
-                         "19.Print defective report\n" +
-                         "20.Enter new discount\n" +
-                         "21.Enter new price\n"+
-                         "22. Logout\n"+
-                         "23. Exit");
+                         "14. Change item amount \n" +
+                         "15. Move from storage to shelf \n" +
+                         "16. Subtract from shelf \n" +
+                         "17. Print inventory report\n" +
+                         "18. Enter defected item\n" +
+                         "19. Print defective report\n" +
+                         "20. Enter new discount\n" +
+                         "21. Enter new price\n"+
+                         "22. Update DetailsOrder\n"+
+                         "23. Logout\n"+
+                         "24. Exit");
                  Scanner myScanner = new Scanner(System.in);
                  int Ask = myScanner.nextInt();
                       switch (Ask) {
@@ -181,9 +182,11 @@ public class Menu {
                               break;
 
                           case 22:
+                                UpdateDetailsOrder();
+                          case 23:
                               Logout();
                               break;
-                          case 23:
+                          case 24:
                               System.out.println("GoodBye!");
                               con = false;
                               break;
@@ -196,30 +199,32 @@ public class Menu {
          }
 
 
-    private static void AddArguments() {
-         Sys.Register("Stor1@gmail.com","S1_superLi");
-         Sys.Register("Stor2@gmail.com","S2_superLi");
 
-         Sys.Login("Stor1@gmail.com","S1_superLi");
-         Map<Integer,Integer> contactAli1=new ConcurrentHashMap<Integer, Integer>();
-         contactAli1.put(2087564,0524536272);
-         contactAli1.put(2453214,0523756223);
-         Map<Integer,String> contactAli2=new ConcurrentHashMap<Integer, String>();
-         contactAli2.put(2087564,"yoni");
-         contactAli2.put(2453214,"roi");
-         Sys.AddSupplier("Ali",51345,"Mizrahi","007",873645,"EFT",contactAli2,contactAli1);
-         Map<Integer,Integer> contactIKEA1=new ConcurrentHashMap<Integer, Integer>();
-         contactIKEA1.put(208231,0522136272);
-         contactIKEA1.put(4283214,0523546253);
-         Map<Integer,String> contactIKEA2=new ConcurrentHashMap<Integer, String>();
-         contactIKEA2.put(208231,"Dov");
-         contactIKEA2.put(4283214,"Leni");
-             Sys.AddSupplier("IKEA",51321,"Ben-Leumi","027",432679,"EFT",contactIKEA2,contactIKEA1);
-         Map<Integer,Integer> contacttXiaomi1=new ConcurrentHashMap<Integer, Integer>();
+
+    private static void AddArguments() {
+        Sys.Register("Stor1@gmail.com","S1_superLi");
+        Sys.Register("Stor2@gmail.com","S2_superLi");
+
+        Sys.Login("Stor1@gmail.com","S1_superLi");
+        Map<Integer,Integer> contactAli1=new ConcurrentHashMap<Integer, Integer>();
+        contactAli1.put(2087564,0524536272);
+        contactAli1.put(2453214,0523756223);
+        Map<Integer,String> contactAli2=new ConcurrentHashMap<Integer, String>();
+        contactAli2.put(2087564,"yoni");
+        contactAli2.put(2453214,"roi");
+        Sys.AddSupplier("Ali",51345,"hprahim, 5, Tel Aviv","Mizrahi","007",873645,"EFT",contactAli2,contactAli1);
+        Map<Integer,Integer> contactIKEA1=new ConcurrentHashMap<Integer, Integer>();
+        contactIKEA1.put(208231,0522136272);
+        contactIKEA1.put(4283214,0523546253);
+        Map<Integer,String> contactIKEA2=new ConcurrentHashMap<Integer, String>();
+        contactIKEA2.put(208231,"Dov");
+        contactIKEA2.put(4283214,"Leni");
+        Sys.AddSupplier("IKEA",51321,"shalom, 17, Hulon","Ben-Leumi","027",432679,"EFT",contactIKEA2,contactIKEA1);
+        Map<Integer,Integer> contacttXiaomi1=new ConcurrentHashMap<Integer, Integer>();
         contacttXiaomi1.put(45337561,05221336272);
-         Map<Integer,String> contactXiaomi2=new ConcurrentHashMap<Integer, String>();
-         contactXiaomi2.put(45337561,"Or");
-         Sys.AddSupplier("Xiaomi",51328,"Leumi","3456",435678,"EFT",contactXiaomi2,contacttXiaomi1);
+        Map<Integer,String> contactXiaomi2=new ConcurrentHashMap<Integer, String>();
+        contactXiaomi2.put(45337561,"Or");
+        Sys.AddSupplier("Xiaomi",51328,"shibolet, 11, yafo","Leumi","3456",435678,"EFT",contactXiaomi2,contacttXiaomi1);
 
         Map<Integer,String> ProductAli1 =new ConcurrentHashMap<Integer, String>();
         ProductAli1.put(12313,"pajamas");
@@ -227,7 +232,8 @@ public class Menu {
         Map<Integer,Double> ProductAli2 =new ConcurrentHashMap<Integer,Double>();
         ProductAli2.put(12313,499.9);
         ProductAli2.put(2314567,69.9);
-        Sys.AddContract(51345,false,null,true,ProductAli1,ProductAli2);
+        Map<Integer,Integer>  ProductAli3=new ConcurrentHashMap<Integer, Integer>();
+        Sys.AddContract(51345,false,null,true,ProductAli3,ProductAli1,ProductAli2);
         Map<Integer,String> ProductIKEA1 =new ConcurrentHashMap<Integer, String>();
         ProductIKEA1.put(143,"table");
         ProductIKEA1.put(5432,"bed");
@@ -236,7 +242,8 @@ public class Menu {
         ProductIKEA2.put(143,499.9);
         ProductIKEA2.put(5432,1399.9);
         ProductIKEA2.put(22,139.9);
-        Sys.AddContract(51321,false,null,true,ProductIKEA1,ProductIKEA2);
+        Map<Integer,Integer>  ProductIKEA3=new ConcurrentHashMap<Integer, Integer>();
+        Sys.AddContract(51321,false,null,true,ProductIKEA3,ProductIKEA1,ProductIKEA2);
         Map<Integer,String> ProductXiaomi1 =new ConcurrentHashMap<Integer, String>();
         ProductAli1.put(142356,"smartPhone");
         ProductAli1.put(46288,"headphones");
@@ -245,7 +252,8 @@ public class Menu {
         ProductAli2.put(142356,2499.9);
         ProductAli2.put(46288,29.9);
         ProductAli2.put(4328,79.9);
-        Sys.AddContract(51328,false,null,true,ProductXiaomi1,ProductXiaomi2);
+        Map<Integer,Integer>  ProductXiaomi3=new ConcurrentHashMap<Integer, Integer>();
+        Sys.AddContract(51328,false,null,true,ProductXiaomi3,ProductXiaomi1,ProductXiaomi2);
 
         Map<Integer,Integer> WriteAli1=new ConcurrentHashMap<Integer, Integer>();
         WriteAli1.put(12313,200);
@@ -274,14 +282,14 @@ public class Menu {
         Map<Integer,Integer> contactAli11=new ConcurrentHashMap<Integer, Integer>();
         contactAli11.put(2087564,0524536272);
         contactAli11.put(2453214,0523756223);
-        Sys.AddSupplier("Ali",51345,"Mizrahi","007",873645,"EFT",contactAli22,contactAli11);
+        Sys.AddSupplier("Ali",51345,"hprahim, 5, Tel Aviv","Mizrahi","007",873645,"EFT",contactAli22,contactAli11);
         Map<Integer,String> contactIKEA22=new ConcurrentHashMap<Integer, String>();
         contactIKEA22.put(208231,"Dov");
         contactIKEA22.put(4283214,"Leni");
         Map<Integer,Integer> contactIKEA11=new ConcurrentHashMap<Integer, Integer>();
         contactIKEA11.put(208231,05221336272);
         contactIKEA11.put(4283214,0523546253);
-        Sys.AddSupplier("IKEA",51321,"Ben-Leumi","027",432679,"EFT",contactIKEA22,contactIKEA11);
+        Sys.AddSupplier("IKEA",51321,"shalom, 17, Hulon","Ben-Leumi","027",432679,"EFT",contactIKEA22,contactIKEA11);
 
         Sys.Login("Stor2@gmail.com","S2_superLi");
         Map<Integer,String> ProductAli11 =new ConcurrentHashMap<Integer, String>();
@@ -290,7 +298,8 @@ public class Menu {
         Map<Integer,Double> ProductAli22 =new ConcurrentHashMap<Integer,Double>();
         ProductAli22.put(1213,89.9);
         ProductAli22.put(43567,1399.9);
-        Sys.AddContract(51345,false,null,true,ProductAli11,ProductAli22);
+        Map<Integer,Integer>  ProductAli33=new ConcurrentHashMap<Integer, Integer>();
+        Sys.AddContract(51345,false,null,true,ProductAli33,ProductAli11,ProductAli22);
         Map<Integer,String> ProductIKEA11 =new ConcurrentHashMap<Integer, String>();
         ProductIKEA11.put(223,"Armchair");
         ProductIKEA11.put(345,"Desk");
@@ -299,7 +308,8 @@ public class Menu {
         ProductIKEA22.put(223,499.9);
         ProductIKEA22.put(345,1399.9);
         ProductIKEA22.put(1687,139.9);
-        Sys.AddContract(51321,false,null,true,ProductIKEA11,ProductIKEA22);
+        Map<Integer,Integer>  ProductIKEA33=new ConcurrentHashMap<Integer, Integer>();
+        Sys.AddContract(51321,false,null,true,ProductIKEA33,ProductIKEA11,ProductIKEA22);
 
         Map<Integer,Double> WriteAli22=new ConcurrentHashMap<Integer, Double>();
         WriteAli22.put(1213,13.0);
@@ -314,6 +324,8 @@ public class Menu {
         WriteIKEA22.put(345,12.0);
         Sys.AddWrite(51321, WriteIKEA11,WriteIKEA22);
 
+
+        //todo add details!
         Sys.Logout();
     }
 
@@ -385,6 +397,7 @@ public class Menu {
             Scanner myScanner = new Scanner(System.in);
             String name;
             int ID;
+            String Address;
             int bankNumber;
             String Bank;
             String Branch;
@@ -419,6 +432,8 @@ public class Menu {
             if (contiue) {
                 System.out.println("Please enter the Supplier's name");
                 name = myScanner.next();
+                System.out.println("Pleas enter the Supplier's address");
+                Address = myScanner.next();
                 System.out.println("Please enter the Supplier's Bank");
                 Bank = myScanner.next();
                 System.out.println("Please enter the Supplier's Branch's Bank");
@@ -449,9 +464,9 @@ public class Menu {
                 }
                 String Done;
                 if (status == 1) {
-                    Done = Sys.AddSupplier(name, ID, Bank, Branch, bankNumber, payments, Contacts_ID, Contacts_number);  //todo make that fonction not void?
+                    Done = Sys.AddSupplier(name, ID,Address, Bank, Branch, bankNumber, payments, Contacts_ID, Contacts_number);
                 } else {
-                    Done = Sys.EditSupplier(name, ID, Bank, Branch, bankNumber, payments, Contacts_ID, Contacts_number);  //todo make that fonction not void?
+                    Done = Sys.EditSupplier(name, ID,Address, Bank, Branch, bankNumber, payments, Contacts_ID, Contacts_number);
                 }
             }
         }
@@ -466,8 +481,9 @@ public class Menu {
          Scanner myScanner = new Scanner(System.in);
         int suplaier_ID;
         boolean fixeDays = false;
-        LinkedList<String> Days = new LinkedList<String>();
+        LinkedList<Integer> Days = new LinkedList<Integer>();
         boolean leading = true;
+        Map<Integer,Integer>  ItemsID_ItemsIDSupplier=new ConcurrentHashMap<Integer, Integer>();
         Map<Integer, String> ProductIDVendor_Name = new ConcurrentHashMap<Integer, String>();
         Map<Integer, Double> ProducttemsIDVendor_Price = new ConcurrentHashMap<Integer, Double>();
         boolean contiue=true;
@@ -499,8 +515,8 @@ public class Menu {
             String ans = myScanner.next();
             if (ans.equals("y")) {
                 fixeDays = true;
-                System.out.println("Please enter one day that the supply are expected to arrive.");
-                String day = myScanner.next();
+                System.out.println("Please enter one day that the supply are expected to arrive. in number");
+                int day = myScanner.nextInt();
                 Days.add(day);
                 boolean MoreDay = true;
                 while (MoreDay) {
@@ -509,9 +525,14 @@ public class Menu {
                     if (ans.equals("n"))
                         MoreDay = false;
                     else {
-                        System.out.println("Please enter the extra day.");
-                        day = myScanner.next();
-                        Days.add(day);
+                        System.out.println("Please enter the extra day. in number");
+                        day = myScanner.nextInt();
+                        if(day<8&&day>0) {
+                            Days.add(day);
+                        }
+                        else{
+                            System.out.println("the day need to be between 0-7");
+                        }
                     }
                 }
             }
@@ -523,12 +544,27 @@ public class Menu {
 
             boolean MoreProduct = true;
             while (MoreProduct) {
+                String Product_Name;
+                String category;
+                String subcategory;
+                String sub_subcategory;
+                String manufacturer;
                 System.out.println("Which product the supplier will supply to the store?\n" + "Please enter its name");
-                String Product_Name = myScanner.next();
+                Product_Name = myScanner.next();
+                System.out.println("Please enter its category");
+                category = myScanner.next();
+                System.out.println("Please enter its subcategory");
+                subcategory = myScanner.next();
+                System.out.println("Please enter its sub_subcategory");
+                sub_subcategory = myScanner.next();
+                System.out.println("Please enter its manufacturer");
+                manufacturer = myScanner.next();
+                int Id_Store=Sys.FindId_P_Store(Product_Name,category,subcategory,sub_subcategory,manufacturer);
                 System.out.println("Please enter his Catalog Number");
                 int product_Id = myScanner.nextInt();
                 System.out.println("Please enter the price");
                 double Product_Price = myScanner.nextInt();
+                ItemsID_ItemsIDSupplier.put(Id_Store,product_Id);
                 ProductIDVendor_Name.put(product_Id, Product_Name);
                 ProducttemsIDVendor_Price.put(product_Id, Product_Price);
                 System.out.println("Does the supplier provide another product? y/n");
@@ -540,10 +576,10 @@ public class Menu {
             String Done;
             switch (status) {
                 case 1:
-                    Done = Sys.AddContract(suplaier_ID, fixeDays, Days, leading, ProductIDVendor_Name, ProducttemsIDVendor_Price);
+                    Done = Sys.AddContract(suplaier_ID, fixeDays, Days, leading,ItemsID_ItemsIDSupplier, ProductIDVendor_Name, ProducttemsIDVendor_Price);
                     break;
                 case 2:
-                    Done = Sys.EditContract(suplaier_ID, fixeDays, Days, leading, ProductIDVendor_Name, ProducttemsIDVendor_Price);
+                    Done = Sys.EditContract(suplaier_ID, fixeDays, Days, leading,ItemsID_ItemsIDSupplier, ProductIDVendor_Name, ProducttemsIDVendor_Price);
                     break;
             }
         }
@@ -622,34 +658,132 @@ public class Menu {
             System.out.println("You need to connect before you take any action");
         }
         if (conect) {
-         int ID_Suplaier;
-        Map<Integer, Integer> ItemsIDVendor_NumberOfItems=new ConcurrentHashMap<Integer, Integer>();
-        Scanner myScanner = new Scanner(System.in);
-        System.out.println("Please enter the Supplier's ID you want to order from");
-        ID_Suplaier = myScanner.nextInt();
-
-            boolean MoreProduct = true;
-            System.out.println("Which product would you like to add to the Order?");
-            while ((MoreProduct)) {
-                int Product_ID;
-                int Product_Amount;
-                System.out.println("Please enter the Product's ID (According to the supplier)");
-                Product_ID = myScanner.nextInt();
-                System.out.println("How many units of the product would you like to order??");
-                Product_Amount = myScanner.nextInt();
-                ItemsIDVendor_NumberOfItems.put(Product_ID, Product_Amount);
-                System.out.println("Would you like to add another product? y/n");
-                String ans = myScanner.next();
-                if (ans.equals("n")) {
-                    MoreProduct = false;
-                }
+            int ID_Suplaier;
+            Map<Integer, Integer> ItemsIDVendor_NumberOfItems = new ConcurrentHashMap<Integer, Integer>();
+            Scanner myScanner = new Scanner(System.in);
+            int day;
+            System.out.println("Please enter the Supplier's ID you want to order from");
+            ID_Suplaier = myScanner.nextInt();
+            String exist = Sys.CheckSuplierExist(ID_Suplaier);
+            if (exist.equals("Exit")) {
+                conect = false;
+                System.out.println("the supplier is not exist in the system.");
             }
-            String Done = Sys.MakeOrder(ID_Suplaier, ItemsIDVendor_NumberOfItems);
-            System.out.println(Done);
+            if (conect) {
+                System.out.println("Please enter the day that the order is expected to arrive the store. in number!");
+                day = myScanner.nextInt();
+                conect = Sys.CheckTheDay(ID_Suplaier, day);
+                if (conect) {
+                    boolean MoreProduct = true;
+                    System.out.println("Which product would you like to add to the Order?");
+                    while ((MoreProduct)) {
+                        int Product_ID;
+                        int Product_Amount;
+                        System.out.println("Please enter the Product's ID (According to the supplier)");
+                        Product_ID = myScanner.nextInt();
+                        conect=Sys.CheckProductexist(ID_Suplaier,Product_ID);
+                        if(conect) {
+                            System.out.println("How many units of the product would you like to order??");
+                            Product_Amount = myScanner.nextInt();
+                            ItemsIDVendor_NumberOfItems.put(Product_ID, Product_Amount);
+                        }
+                        else{
+                            System.out.println("This product is not included in the agreement with the supplier.");
+                        }
+                            System.out.println("Would you like to add another product? y/n");
+                            String ans = myScanner.next();
+                            if (ans.equals("n")) {
+                                MoreProduct = false;
+                            }
+                    }
+                    String Done = Sys.MakeOrder(ID_Suplaier, day,ItemsIDVendor_NumberOfItems);
+                    System.out.println(Done);
+                }
+                else
+                    System.out.println("the supplier arrived to the store in another days.");
+            }
         }
 
+     }
+
+     private static void UpdateDetailsOrder(){
+         boolean conect = Sys.CheckConected();
+        if (!conect) {
+        System.out.println("You need to connect before you take any action");
+    }
+        if (conect) {
+        int ID_Suplaier;
+        int ID_Order;
+        int Product_ID;
+        int Product_Amount;
+        Map<Integer, Integer> ItemsIDVendor_NumberOfItems = new ConcurrentHashMap<Integer, Integer>();
+        Scanner myScanner = new Scanner(System.in);
+        int day;
+        System.out.println("Please enter the Order ID you want to change");
+        ID_Order = myScanner.nextInt();
+        String Able = Sys.CheckAbleToChangeOrder(ID_Order);
+        if (!Able.equals("Able")) {
+            conect = false;
+            System.out.println(Able);
+        }
+        if (conect) {
+            System.out.println("Please enter the Supplier's ID you want to order from");
+            ID_Suplaier = myScanner.nextInt();
+            System.out.println("Please enter the day that the order is expected to arrive the store. in number!");
+            day = myScanner.nextInt();
+            conect = Sys.CheckTheDay(ID_Suplaier, day);
+            if (conect) {
+
+                boolean LessProduct=false;
+                System.out.println("Would you like to remove product from the Order?  y/n");
+                String ans = myScanner.next();
+                if (ans.equals("y")) {
+                    LessProduct = true;
+                }
+                while (LessProduct){
+                    System.out.println("Please enter the Product's ID (According to the supplier)");
+                    Product_ID = myScanner.nextInt();
+                    Sys.RemoveProduct(ID_Order,Product_ID);
+                    System.out.println("Would you like to remove another product? y/n");
+                    ans = myScanner.next();
+                    if (ans.equals("n")) {
+                        LessProduct = false;
+                    }
+                }
+
+                boolean MoreProduct = false;
+                System.out.println("Would you like to add Product to the Order?");
+                ans = myScanner.next();
+                if (ans.equals("y")) {
+                    MoreProduct = true;
+                }
+                while ((MoreProduct)) {
+                    System.out.println("Please enter the Product's ID (According to the supplier)");
+                    Product_ID = myScanner.nextInt();
+                    conect=Sys.CheckProductexist(ID_Suplaier,Product_ID);
+                    if(conect) {
+                        System.out.println("How many units of the product would you like to order?");
+                        Product_Amount = myScanner.nextInt();
+                        ItemsIDVendor_NumberOfItems.put(Product_ID, Product_Amount);
+                    }
+                    else{
+                        System.out.println("This product is not included in the agreement with the supplier.");
+                    }
+                    System.out.println("Would you like to add another product? y/n");
+                    ans = myScanner.next();
+                    if (ans.equals("n")) {
+                        MoreProduct = false;
+                    }
+                }
+                String Done = Sys.ChangeOrder(ID_Order,ID_Suplaier, day, ItemsIDVendor_NumberOfItems);
+                System.out.println(Done);
+            }
+            else
+                System.out.println("the supplier arrived to the store in another days.");
+        }
     }
 
+}
     private static void DisplayItems() {
         boolean conect = Sys.CheckConected();
         if (!conect) {

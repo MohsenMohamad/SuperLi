@@ -19,22 +19,22 @@ public class SystemManager {
         systemcontroler=new system();
     }
 
-    public String AddSupplier(String name, int ID, String bank, String branch, int bankNumber,
+    public String AddSupplier(String name, int ID,String Address, String bank, String branch, int bankNumber,
                               String payments, Map<Integer, String> Contacts_ID,
                               Map<Integer, Integer> Contacts_number) {//  List<DALItem> Items)
         String Done="you must be logged in before doing any actions";
         if(current_Store!=null)
-         Done = current_Store.AddSuplier(name, ID,bank, branch,bankNumber, payments, Contacts_ID,Contacts_number);
+         Done = current_Store.AddSuplier(name, ID,Address,bank, branch,bankNumber, payments, Contacts_ID,Contacts_number);
 
         return Done;
     }
 
-    public String AddContract(int suplaier_id, boolean fixeDays, LinkedList<String> days,
-                              boolean leading, Map<Integer, String> productIDVendor_name,
+    public String AddContract(int suplaier_id, boolean fixeDays, LinkedList<Integer> days,
+                              boolean leading,  Map<Integer,Integer>  ItemsID_ItemsIDSupplier, Map<Integer, String> productIDVendor_name,
                               Map<Integer, Double> producttemsIDVendor_price) {
         String Done="you must be logged in before doing any actions";
         if(current_Store!=null)
-            Done=current_Store.AddContract(suplaier_id,fixeDays, days,leading, productIDVendor_name,producttemsIDVendor_price);
+            Done=current_Store.AddContract(suplaier_id,fixeDays, days,leading,ItemsID_ItemsIDSupplier, productIDVendor_name,producttemsIDVendor_price);
         return Done;
     }
 
@@ -45,19 +45,20 @@ public class SystemManager {
         return Done;
     }
 
-    public String MakeOrder(int id_suplaier, Map<Integer, Integer> itemsIDVendor_numberOfItems) {
+    public String MakeOrder(int id_suplaier,int day, Map<Integer, Integer> itemsIDVendor_numberOfItems) {
         String Done="you must be logged in before doing any actions";
         if(current_Store!=null)
-            Done= current_Store.MakeOrder(id_suplaier,itemsIDVendor_numberOfItems);
+            Done= current_Store.MakeOrder(id_suplaier,day,itemsIDVendor_numberOfItems);
         return Done;
     }
 
-    public String EditSupplier(String name, int id, String bank, String branch, int bankNumber, String payments, Map<Integer, String> contacts_id, Map<Integer, Integer> contacts_number) {
+    public String EditSupplier(String name, int id, String address, String bank, String branch, int bankNumber, String payments, Map<Integer, String> contacts_id, Map<Integer, Integer> contacts_number) {
         String Done="you must be logged in before doing any actions";
         if(current_Store!=null)
-             Done = current_Store.EditSuplier(name, id ,bank, branch,bankNumber, payments,contacts_id,contacts_number);
+             Done = current_Store.EditSuplier(name, id,address ,bank, branch,bankNumber, payments,contacts_id,contacts_number);
         return Done;
     }
+
     public String DeleteSupplier(int id) {
         String Done="you must be logged in before doing any actions";
         if(current_Store!=null) {
@@ -67,10 +68,11 @@ public class SystemManager {
         return Done;
     }
 
-    public String EditContract(int suplaier_id, boolean fixeDays, LinkedList<String> days, boolean leading, Map<Integer, String> productIDVendor_name, Map<Integer, Double> producttemsIDVendor_price) {
+    public String EditContract(int suplaier_id, boolean fixeDays, LinkedList<Integer> days, boolean leading,Map<Integer,Integer>  ItemsID_ItemsIDSupplier,
+                               Map<Integer, String> productIDVendor_name, Map<Integer, Double> producttemsIDVendor_price) {
         String Done="you must be logged in before doing any actions";
         if(current_Store!=null) {
-            Done = current_Store.EditContract(suplaier_id, fixeDays, days, leading, productIDVendor_name, producttemsIDVendor_price);
+            Done = current_Store.EditContract(suplaier_id, fixeDays, days, leading,ItemsID_ItemsIDSupplier, productIDVendor_name, producttemsIDVendor_price);
         }
         return Done;
     }
@@ -125,21 +127,21 @@ public class SystemManager {
     public String CheckSuplierExist(int id) {
         String Done="you must be logged in before doing any actions";
         if(current_Store!=null)
-            Done=current_Store.CheckSuplierExist(id);
+            Done=current_Store.CheckSuplierExit(id);
         return Done;
     }
 
     public String CheckSAgreementExist(int suplaier_id) {
         String Done="you must be logged in before doing any actions";
         if(current_Store!=null)
-            Done=current_Store.CheckSAgreementExist(suplaier_id);
+            Done=current_Store.CheckSAgreementExit(suplaier_id);
         return Done;
     }
 
     public String CheckSWortExist(int suplaier_id) {
         String Done="you must be logged in before doing any actions";
         if(current_Store!=null)
-            Done=current_Store. CheckSWortExist(suplaier_id);
+            Done=current_Store. CheckSWortExit(suplaier_id);
         return Done;
     }
 
@@ -156,8 +158,13 @@ public class SystemManager {
         return current_Store!=null;
     }
 
+<<<<<<< HEAD
     public static void sendWarning(String warning) {
         Menu.printWarning(warning);
+=======
+    public static void sendWarning(String name, int totalAmount, int minAmount) {
+        //Menu.printWarning(name,totalAmount,minAmount);
+>>>>>>> 376671d6cc557916e87e535370bc3327c7094c77
     }
 
     public void initialize() {
@@ -273,5 +280,30 @@ public class SystemManager {
             }
         }
         return report;
+    }
+
+    public boolean CheckTheDay(int id_suplaier, int day) {
+        return current_Store.CheckTheDay(id_suplaier,day);
+    }
+
+    public boolean CheckProductexist(int id_suplaier, int product_id) {
+        return current_Store.CheckProductexist(id_suplaier,product_id);
+    }
+
+    public int FindId_P_Store(String product_name, String category, String subcategory, String sub_subcategory, String manufacturer) {
+    return current_Store.FindId_P_Store(product_name,category,subcategory,sub_subcategory,manufacturer);
+        }
+
+    public String CheckAbleToChangeOrder(int id_order) {
+        return current_Store.CheckAbleToChangeOrder(id_order);
+    }
+
+    public void RemoveProduct(int id_order, int product_id) {
+        current_Store.RemoveProduct(id_order,product_id);
+    }
+
+    public String ChangeOrder(int Id_Order,int id_suplaier, int day, Map<Integer, Integer> itemsIDVendor_numberOfItems) {
+    current_Store.ChangeOrder(Id_Order,id_suplaier, day,itemsIDVendor_numberOfItems);
+   return "done";//todo check
     }
 }
