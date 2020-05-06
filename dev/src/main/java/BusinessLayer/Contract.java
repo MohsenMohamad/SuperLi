@@ -9,13 +9,13 @@ public class Contract {
 
     private int Suplaier_ID;
     private boolean FixeDays;
-    private List<String> Dayes;
+    private List<Integer> Dayes;
     private boolean leading;
     private Map<Integer, Integer> ItemsID_ItemsIDSupplier;
     private Map<Integer, String> ProductIDVendor_Name;
     private Map<Integer, Double> productIDVendor_Price;
 
-    public Contract(int suplaier_ID, boolean fixeDays,List<String> dayes, boolean leading,
+    public Contract(int suplaier_ID, boolean fixeDays,List<Integer> dayes, boolean leading,
                     Map<Integer, String> productIDSupplier_name, Map<Integer, Integer> ItemsID_ItemsIDsupplier,
                     Map<Integer, Double> producttemsIDSupplier_price) {
         Suplaier_ID = suplaier_ID;
@@ -56,7 +56,7 @@ public class Contract {
         FixeDays = fixeDays;
     }
 
-    public void setDayes(List<String> dayes) {
+    public void setDayes(List<Integer> dayes) {
         Dayes = dayes;
     }
 
@@ -88,7 +88,7 @@ public class Contract {
         return FixeDays;
     }
 
-    public List<String> getDayes() {
+    public List<Integer> getDayes() {
         return Dayes;
     }
 
@@ -102,5 +102,25 @@ public class Contract {
 
     public Map<Integer, Double> getProductIDVendor_Price() {
         return productIDVendor_Price;
+    }
+
+    public boolean CheckTheDay(int day) {
+        if(Dayes!=null){
+            for (int d:Dayes
+                 ) {
+                if(d==day)
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean CheckProductexist(int product_id) {
+        for (Map.Entry<Integer,Integer> e : ItemsID_ItemsIDSupplier.entrySet()) {
+            if (e.getValue() == product_id) {
+                return true;
+            }
+        }
+        return false;
     }
 }

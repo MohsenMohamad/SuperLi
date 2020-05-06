@@ -22,5 +22,8 @@ class  Repo {
 
         return single_instance;
     }
+
+    public void AddProdudt(int id, String product_name, String category, String subcategory, String sub_subcategory, String manufacturer) {
+    }
 }
 

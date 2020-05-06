@@ -15,7 +15,7 @@ public class Supplier {
     private Contract Contract;
     private Wrotequantities Worte;
 
-    public Supplier(String name, int ID, String bank,String branch, int bankNumber,
+    public Supplier(String name, int ID, String address, String bank, String branch, int bankNumber,
                     String payments, Map<Integer, String> Contacts_ID,
                     Map<Integer, Integer> Contacts_number) {
         Name = name;
@@ -108,5 +108,54 @@ public class Supplier {
 
     public Map<Integer, Integer> getContactsID_number() {
         return ContactsID_number;
+    }
+
+    public int GetIdProduct(Integer id) {
+        int ID_product=-1;
+        if(Contract!=null){
+            ID_product=Contract.GetIdSup(id);
+        }
+        return ID_product;
+    }
+
+    public double getPric(int idProduct,int amount) {
+        double price=1;
+        if(Contract!=null){
+            price=Contract.GetPrice(idProduct);
+        }
+        double Sale=GetSaleProduct(idProduct,amount);
+        Sale = (100 - Sale) / 100;
+        price= amount * price * Sale;
+        return price;
+    }
+
+    public int GetIdProduct(int id) {
+        int ID_product=-1;
+        if(Contract!=null){
+            ID_product=Contract.GetIdSup(id);
+        }
+        return ID_product;
+    }
+
+    public int GetSaleProduct(int id, int num) {
+        int sale=0;
+        if(this.Worte!=null){
+            sale=Worte.GetSale(id,num);
+        }
+        return sale;
+    }
+
+    public boolean CheckTheDay(int day) {
+        if(Contract!=null){
+            return Contract.CheckTheDay(day);
+        }
+        return false;
+    }
+
+    public boolean CheckProductexist(int product_id) {
+        if(Contract!=null){
+            return Contract.CheckProductexist(product_id);
+        }
+        return false;
     }
 }

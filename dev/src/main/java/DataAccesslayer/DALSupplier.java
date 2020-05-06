@@ -8,6 +8,7 @@ import java.util.Map;
 public class DALSupplier {
     public String Name;
     public int ID;
+    public String Address;
     public String Bank;
     public String Branch;
     public int BankNumber;
@@ -18,11 +19,12 @@ public class DALSupplier {
     public DALContract Contract;
     public DALWrotequantities Worte;
 
-    public DALSupplier(String name, int ID, String bank,String branch, int bankNumber,
+    public DALSupplier(String name, int ID,String address, String bank,String branch, int bankNumber,
                        String payments, Map<Integer, String> Contacts_ID,
                        Map<Integer, Integer> Contacts_number) {
         Name = name;
         this.ID = ID;
+        Address=address;
         Bank=bank;
         Branch=branch;
         BankNumber = bankNumber;
