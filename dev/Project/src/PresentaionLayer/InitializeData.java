@@ -1,6 +1,6 @@
 package PresentaionLayer;
 
-import BusinessLayer.BLObjects.*;
+import DTOs.*;
 import javafx.util.Pair;
 
 import java.text.ParseException;
@@ -21,7 +21,7 @@ public class InitializeData {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         try {
             WorkerDeal john_contract = new WorkerDeal(111111111, dateFormat.parse("30/03/2017"), 28, "a", new LinkedList<>());
-            Worker john = new Worker(111111111,"John", createJob(), createSchedule(), john_contract);
+            Worker john = new Driver(111111111,"John", createJob(), createSchedule(), john_contract,"");
 
             WorkerDeal steve_contract = new WorkerDeal(222222222, dateFormat.parse("05/11/2016"), 30, "b", new LinkedList<>());
             Worker steve = new Worker(222222222,"Steve", createJob(), createSchedule(), steve_contract);

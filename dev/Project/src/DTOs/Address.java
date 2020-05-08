@@ -1,29 +1,23 @@
-package BusinessLayer.DTOs;
+package DTOs;
 
-import BusinessLayer.BLObjects.Adress;
+import DTOs.Location;
 
-public class DTOAdress {
-    private String location;
+public class Address {
+    private Location location;
     private String contactName;
     private String phoneNumber;
 
-    public DTOAdress(String location, String contactName, String phoneNumber){
+    public Address(Location location, String contactName, String phoneNumber){
         this.location = location;
         this.contactName = contactName;
         this.phoneNumber = phoneNumber;
-    }
-
-    public DTOAdress(Adress adress){
-        this.location = adress.getLocation().getLocation();
-        this.contactName = adress.getContactName();
-        this.phoneNumber = adress.getPhoneNumber();
     }
 
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public String getLocation() {
+    public Location getLocation() {
         return location;
     }
 
@@ -35,7 +29,7 @@ public class DTOAdress {
         this.contactName = contactName;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 

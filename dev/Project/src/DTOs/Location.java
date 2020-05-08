@@ -1,5 +1,7 @@
-package BusinessLayer.BLObjects;
+package DTOs;
 
+
+// replace this class with a string field in the address class
 
 public class Location{
     private String location;

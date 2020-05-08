@@ -1,4 +1,4 @@
-package BusinessLayer.BLObjects;
+package DTOs;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

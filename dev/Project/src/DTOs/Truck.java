@@ -1,14 +1,15 @@
-package BusinessLayer.DTOs;
+package DTOs;
 
-public class DTOTruck {
+
+public class Truck{
     private String serialNumber;
     private String model;
     private int weight;
     private int maxAllowedWeight;
-	private String type;
 
-    public DTOTruck(String serialNumber, String model, int weight, int maxAllowedWeight){
-        this.setType(type);
+
+    public Truck(String serialNumber, String model, int weight, int maxAllowedWeight){
+        this.serialNumber=serialNumber;
         this.model = model;
         this.weight = weight;
         this.maxAllowedWeight = maxAllowedWeight;
@@ -45,12 +46,4 @@ public class DTOTruck {
     public void setWeight(int weight) {
         this.weight = weight;
     }
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
 }

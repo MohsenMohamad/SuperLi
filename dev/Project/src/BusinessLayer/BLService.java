@@ -1,23 +1,21 @@
-package BusinessLayer.BLObjects;
+package BusinessLayer;
 
-import BusinessLayer.BLObjects.*;
-import BusinessLayer.DTOs.*;
+import DAL.DAO;
+import DTOs.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.concurrent.ConcurrentHashMap;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class BLService {
-    private Data data;
+    private DAO dao;
 
     public BLService() {
         this.data = new Data();
     }
 
-    public boolean addDriver(DTODriver driver) {
+    public boolean addDriver(Driver driver) {
         return this.data.addDriver(new Driver(driver.getName(), driver.getId(), driver.getLicense()));
     }
 
@@ -28,7 +26,7 @@ public class BLService {
     public boolean addAdress(DTOAdress adress) {
         Location location = new Location(adress.getLocation());
 
-        return this.data.addAdress(new Adress(location, adress.getContactName(), adress.getPhoneNumber()));
+        return this.data.addAdress(new Address(location, adress.getContactName(), adress.getPhoneNumber()));
     }
 
     public boolean addTruck(DTOTruck truck) {
@@ -42,11 +40,11 @@ public class BLService {
     public DTODelivery arrangeDelivery(String source, String destinationsAndProducts) {
         DTODelivery delivery;
         Delivery tmpDelivery = new Delivery();
-        LinkedList<Adress> destinations = new LinkedList<Adress>();
-        ConcurrentHashMap<Adress, LinkedList<Product>> DAP = new ConcurrentHashMap<Adress, LinkedList<Product>>();
+        LinkedList<Address> destinations = new LinkedList<Address>();
+        ConcurrentHashMap<Address, LinkedList<Product>> DAP = new ConcurrentHashMap<Address, LinkedList<Product>>();
         int totalWeight = 0;
 
-        Adress s = this.data.getAdress(source);
+        Address s = this.data.getAdress(source);
 
         if (s == null)
             return null;
@@ -55,7 +53,7 @@ public class BLService {
 
 
         while (destinationsAndProducts.compareTo("") != 0) {
-            Adress destination = this.data.getAdress(destinationsAndProducts.substring(0, destinationsAndProducts.indexOf(",")));
+            Address destination = this.data.getAdress(destinationsAndProducts.substring(0, destinationsAndProducts.indexOf(",")));
 
             if (destination == null) {
                 return null;
@@ -132,12 +130,14 @@ public class BLService {
     public String getAdresses() {
         String adresses = "";
 
-        for(Adress a : this.data.getAdresses()) {
-            adresses += "Adress's location : " + a.getLocation().getLocation() + "\n" +
+        for(Address a : this.data.getAddresses()) {
+            adresses += "Address's location : " + a.getLocation().getLocation() + "\n" +
                     "Contact name : " + a.getContactName() + "\n" +
                     "Phone number : " + a.getPhoneNumber() + "\n";
         }
 
         return adresses;
     }
+
+
 }

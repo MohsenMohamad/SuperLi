@@ -1,10 +1,12 @@
 package InterfaceLayer;
 
-import BusinessLayer.BLObjects.BLService;
-import BusinessLayer.DTOs.DTOAdress;
-import BusinessLayer.DTOs.DTODriver;
-import BusinessLayer.DTOs.DTOProduct;
-import BusinessLayer.DTOs.DTOTruck;
+import BusinessLayer.BLService;
+import DTOs.*;
+import javafx.util.Pair;
+
+import java.time.DayOfWeek;
+import java.util.List;
+import java.util.Map;
 
 public class ILService{
     private BLService blService;
@@ -13,8 +15,9 @@ public class ILService{
         this.blService = new BLService();
     }
 
-    public void addDriver(String name, String id, String license){
-        DTODriver driver = new DTODriver(name, id, license);
+    public void addDriver(int id, String name, List<WorkPolicy.WorkingType> type, Map<Pair<DayOfWeek, Shift.ShiftTime>, Boolean> schedule, WorkerDeal contract, String license){
+        blService.addDriver()
+
 
         if(this.blService.addDriver(driver)){
             System.out.println("Driver was added successfuly.\n" +
@@ -36,7 +39,7 @@ public class ILService{
         DTOAdress adress = new DTOAdress(location, contactName, phoneNumber);
 
         if(this.blService.addAdress(adress)){
-            System.out.println("Adress was added successfuly.\n" +
+            System.out.println("Address was added successfuly.\n" +
                     "   Location : " + location + "\n" +
                     "   Contact name : " + contactName + "\n" +
                     "   Phone number : " + phoneNumber + "\n");
@@ -64,7 +67,7 @@ public class ILService{
                     "   Catalog number : " + CN + "\n" +
                     "   Weight : " + weight + "\n" +
                     "   Amount : " + amount + "\n" +
-                    "   Adress : " + adress + "\n");
+                    "   Address : " + adress + "\n");
         }
     }
 

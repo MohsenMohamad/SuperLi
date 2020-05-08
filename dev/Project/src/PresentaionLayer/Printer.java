@@ -1,6 +1,6 @@
 package PresentaionLayer;
 
-import BusinessLayer.BLObjects.*;
+import DTOs.*;
 import javafx.util.Pair;
 
 import java.time.DayOfWeek;

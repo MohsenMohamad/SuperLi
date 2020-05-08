@@ -1,7 +1,7 @@
-package BusinessLayer.BLObjects;
+package DTOs;
 
-import BusinessLayer.BLObjects.Shift.ShiftTime;
-import BusinessLayer.BLObjects.WorkPolicy.WorkingType;
+import DTOs.Shift.ShiftTime;
+import DTOs.WorkPolicy.WorkingType;
 
 import java.util.*;
 

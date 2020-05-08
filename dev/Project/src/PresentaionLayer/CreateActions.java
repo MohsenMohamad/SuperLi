@@ -1,6 +1,7 @@
 package PresentaionLayer;
 
 import BusinessLayer.BLObjects.*;
+import DTOs.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -97,7 +98,7 @@ public class CreateActions {
         } catch (ParseException pe) {
             pe.printStackTrace();
         }
-        Worker worker = new Worker(worker_id, worker_name, worker_jobs, new InitializeData().createSchedule(), deal);
+        Worker worker = new Driver(worker_id, worker_name, worker_jobs, new InitializeData().createSchedule(), deal,"");
         Workers.getInstance().addWorker(worker);
 
     }

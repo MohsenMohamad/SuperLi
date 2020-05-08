@@ -1,25 +1,26 @@
-package BusinessLayer.BLObjects;
+package DTOs;
 
 import java.util.LinkedList;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Data {
-    private LinkedList<Adress> adresses;
+    /*
+    private LinkedList<Address> addresses;
     private LinkedList<Driver> drivers;
     private LinkedList<Truck> trucks;
     private ConcurrentHashMap<String, LinkedList<Product>> adressesAndProducts;
     private LinkedList<Delivery> deliveries;
 
     public Data() {
-        this.adresses = new LinkedList<Adress>();
+        this.addresses = new LinkedList<Address>();
         this.drivers = new LinkedList<Driver>();
         this.trucks = new LinkedList<Truck>();
         this.adressesAndProducts = new ConcurrentHashMap<String, LinkedList<Product>>();
         this.deliveries = new LinkedList<>();
     }
 
-    public LinkedList<Adress> getAdresses() {
-        return adresses;
+    public LinkedList<Address> getAddresses() {
+        return addresses;
     }
 
     public LinkedList<Driver> getDrivers() {
@@ -30,8 +31,8 @@ public class Data {
         return trucks;
     }
 
-    public void setAdresses(LinkedList<Adress> adresses) {
-        this.adresses = adresses;
+    public void setAddresses(LinkedList<Address> addresses) {
+        this.addresses = addresses;
     }
 
     public void setDrivers(LinkedList<Driver> drivers) {
@@ -42,8 +43,8 @@ public class Data {
         this.trucks = trucks;
     }
 
-    public boolean addAdress(Adress adress){
-        this.adresses.add(adress);
+    public boolean addAdress(Address address){
+        this.addresses.add(address);
         return true;
     }
 
@@ -59,7 +60,7 @@ public class Data {
     }
 
     public boolean addProoduct(Product product, String adress){
-        for(Adress a : this.adresses){
+        for(Address a : this.addresses){
             if((a.getLocation().getLocation().compareTo(adress) == 0)){
                 boolean flag = false;
 
@@ -80,7 +81,7 @@ public class Data {
     public boolean addProduct(Product product, String adress) {
         boolean flag = false;
 
-        for(Adress a : this.adresses){
+        for(Address a : this.addresses){
             if(a.getLocation().getLocation().compareTo(adress) == 0)
                 flag = true;
         }
@@ -108,8 +109,8 @@ public class Data {
         return true;
     }
 
-    public Adress getAdress(String adress) {
-        for(Adress a : this.adresses){
+    public Address getAdress(String adress) {
+        for(Address a : this.addresses){
             if(a.getLocation().getLocation().compareTo(adress) == 0){
                 return a;
             }
@@ -136,5 +137,7 @@ public class Data {
     public void addDelivery(Delivery delivery) {
         this.deliveries.add(delivery);
     }
+
+     */
     
 }

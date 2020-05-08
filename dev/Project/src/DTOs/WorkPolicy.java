@@ -1,4 +1,4 @@
-package BusinessLayer.BLObjects;
+package DTOs;
 
 import javafx.util.Pair;
 

@@ -1,18 +1,18 @@
 
-package BusinessLayer.BLObjects;
+package DTOs;
 
 import java.util.Date;
 import java.util.LinkedList;
 
 public class Delivery{
     private Date date;
-    private Adress source;
-    private LinkedList<Adress> destinations;
+    private Address source;
+    private LinkedList<Address> destinations;
     private String launchTime;
     private String truckSerialNumber;
     private String driverName;
 
-    public Delivery(Date date, Adress source, LinkedList<Adress> destinations, String launchTime, String truckSerialNumber, String driverName){
+    public Delivery(Date date, Address source, LinkedList<Address> destinations, String launchTime, String truckSerialNumber, String driverName){
         this.date = date;
         this.source = source;
         this.destinations = destinations;
@@ -27,7 +27,7 @@ public class Delivery{
         this.date = date;
     }
 
-    public void setDestinations(LinkedList<Adress> destinations) {
+    public void setDestinations(LinkedList<Address> destinations) {
         this.destinations = destinations;
     }
 
@@ -39,7 +39,7 @@ public class Delivery{
         this.launchTime = launchTime;
     }
 
-    public void setSource(Adress source) {
+    public void setSource(Address source) {
         this.source = source;
     }
 
@@ -47,7 +47,7 @@ public class Delivery{
         this.truckSerialNumber = truckSerialNumber;
     }
 
-    public Adress getSource() {
+    public Address getSource() {
         return source;
     }
 
@@ -67,7 +67,7 @@ public class Delivery{
         return truckSerialNumber;
     }
 
-    public LinkedList<Adress> getDestinations() {
+    public LinkedList<Address> getDestinations() {
         return destinations;
     }
 

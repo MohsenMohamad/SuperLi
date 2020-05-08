@@ -1,16 +1,18 @@
 package PresentaionLayer;
 
 
-import BusinessLayer.BLObjects.History;
-import BusinessLayer.BLObjects.Shift;
-import BusinessLayer.BLObjects.WorkPolicy.WorkingType;
-import BusinessLayer.BLObjects.Worker;
-import BusinessLayer.BLObjects.Workers;
+import DTOs.History;
+import DTOs.Shift;
+import DTOs.WorkPolicy.WorkingType;
+import DTOs.Worker;
+import DTOs.Workers;
+import InterfaceLayer.ILService;
 
 import java.util.*;
 
 public class Main {
 
+    static ILService
     static Scanner keyboard = new Scanner(System.in);
     static InitializeData init_data = new InitializeData();
 

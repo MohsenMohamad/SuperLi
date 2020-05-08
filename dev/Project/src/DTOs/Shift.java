@@ -1,6 +1,5 @@
-package BusinessLayer.BLObjects;
+package DTOs;
 
-import BusinessLayer.BLObjects.WorkPolicy.WorkingType;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
@@ -21,13 +20,13 @@ public class Shift {
     private Date shift_date;
     private Worker boss;
     private ShiftTime shift_time;
-    private Map<WorkingType, List<Worker>> work_team;   // should be a multimap
+    private Map<WorkPolicy.WorkingType, List<Worker>> work_team;   // should be a multimap
 
-    public Map<WorkingType, List<Worker>> getWorkingTeam() {
+    public Map<WorkPolicy.WorkingType, List<Worker>> getWorkingTeam() {
         return work_team;
     }
 
-    public Shift(Date shift_date, ShiftTime shift_time, Worker boss, Map<WorkingType, List<Worker>> work_team) {
+    public Shift(Date shift_date, ShiftTime shift_time, Worker boss, Map<WorkPolicy.WorkingType, List<Worker>> work_team) {
         this.shift_date = shift_date;
         this.boss = boss;
         this.shift_time = shift_time;
@@ -36,7 +35,7 @@ public class Shift {
     }
 
 
-    public boolean addToWorkingTeam(Worker worker, WorkingType workingType) {
+    public boolean addToWorkingTeam(Worker worker, WorkPolicy.WorkingType workingType) {
 
         if (!worker.isAvailable(shift_date, shift_time) || !worker.getType().contains(workingType))
             return false;
@@ -58,7 +57,7 @@ public class Shift {
         shift_string = shift_string + "shift type : " + dateFormat.format(shift_date) + " , " + shift_time + '\n';
         shift_string = shift_string + "shift boss : " + boss.getName() + '\n';
         shift_string = shift_string + "Working team :- " + '\n' + "{\n";
-        for (WorkingType workingType : work_team.keySet()) {
+        for (WorkPolicy.WorkingType workingType : work_team.keySet()) {
             shift_string = shift_string + workingType + " staff : " + '\n';
             for (Worker worker : work_team.get(workingType)) {
                 shift_string = shift_string + worker.toString() + '\n';

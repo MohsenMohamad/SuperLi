@@ -1,24 +1,23 @@
-package BusinessLayer.BLObjects;
+package DTOs;
 
 import javafx.util.Pair;
 
 import java.time.DayOfWeek;
 import java.util.*;
 
-import BusinessLayer.BLObjects.Shift.ShiftTime;
-import BusinessLayer.BLObjects.WorkPolicy.WorkingType;
+import DTOs.Shift.ShiftTime;
 
-public class Worker {
+public abstract class Worker {
 
     private int id = 0;
     private String name;
-    private List<WorkingType> type;   // may become a list
+    private List<WorkPolicy.WorkingType> type;   // may become a list
     private Map<Pair<DayOfWeek, ShiftTime>, Boolean> schedule;
     private WorkerDeal contract;
     private List<Shift> worker_shifts;
 
-    public Worker(int id,String name, List<WorkingType> type, Map<Pair<DayOfWeek, ShiftTime>, Boolean> schedule, WorkerDeal contract) {
-
+    public Worker(int id, String name, List<WorkPolicy.WorkingType> type, Map<Pair<DayOfWeek, ShiftTime>, Boolean> schedule, WorkerDeal contract)
+    {
         this.name = name;
         this.id =id;
         this.type = type;
@@ -93,7 +92,7 @@ public class Worker {
         return id;
     }
 
-    public List<WorkingType> getType() {
+    public List<WorkPolicy.WorkingType> getType() {
         return type;
     }
 
