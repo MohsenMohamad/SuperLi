@@ -14,7 +14,7 @@ public class WorkPolicy {
     public enum WorkingType {
         Cashier,
         Delivery,
-        Cleaning,
+        driver,
     }
     private List<Pair<WorkingType,WorkingType>> policy; // if the map contains these two then the worker can get this job
 

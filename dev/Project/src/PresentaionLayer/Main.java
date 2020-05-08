@@ -1,18 +1,19 @@
 package PresentaionLayer;
 
 
+import BusinessLayer.BLService;
 import DTOs.History;
 import DTOs.Shift;
 import DTOs.WorkPolicy.WorkingType;
 import DTOs.Worker;
 import DTOs.Workers;
-import InterfaceLayer.ILService;
+
 
 import java.util.*;
 
 public class Main {
 
-    static ILService
+    private BLService blService = new BLService();
     static Scanner keyboard = new Scanner(System.in);
     static InitializeData init_data = new InitializeData();
 

@@ -1,6 +1,6 @@
 package PresentaionLayer;
 
-import BusinessLayer.BLObjects.*;
+import BusinessLayer.BLService;
 import DTOs.*;
 
 import java.text.ParseException;
@@ -9,6 +9,7 @@ import java.util.*;
 
 public class CreateActions {
 
+    private BLService blService = new BLService();
     static Scanner keyboard = new Scanner(System.in);
 
     public void createShift() {
@@ -61,7 +62,7 @@ public class CreateActions {
     public void registerWorker() {
 
         System.out.println("Worker id: ");
-        int worker_id = keyboard.nextInt();
+        long worker_id = keyboard.nextLong();
         if(Workers.getInstance().getWorker(worker_id)!=null)
         {
             System.out.println("Error : There is a user with the same id in the data base!");
@@ -76,7 +77,7 @@ public class CreateActions {
         List<WorkPolicy.WorkingType> worker_jobs = new LinkedList<>();
         while (!stop) {
             System.out.println("Choose one of the working types :");
-            int workingType_id = keyboard.nextInt();
+            long workingType_id = keyboard.nextLong();
             worker_jobs.add(jobs.get(workingType_id - 1));
             System.out.println("choose another ? y/n");
             if (keyboard.next().equals("n"))
@@ -98,7 +99,9 @@ public class CreateActions {
         } catch (ParseException pe) {
             pe.printStackTrace();
         }
-        Worker worker = new Driver(worker_id, worker_name, worker_jobs, new InitializeData().createSchedule(), deal,"");
+
+        Worker driver = new Driver(worker_id, worker_name, worker_jobs, new InitializeData().createSchedule(), deal,"a");
+        blService.addDriver(driver);
         Workers.getInstance().addWorker(worker);
 
     }

@@ -21,24 +21,24 @@ public class InitializeData {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         try {
             WorkerDeal john_contract = new WorkerDeal(111111111, dateFormat.parse("30/03/2017"), 28, "a", new LinkedList<>());
-            Worker john = new Driver(111111111,"John", createJob(), createSchedule(), john_contract,"");
+            Worker john = new Driver(111111111,"John", createJob(), createSchedule(), john_contract,"a");
 
             WorkerDeal steve_contract = new WorkerDeal(222222222, dateFormat.parse("05/11/2016"), 30, "b", new LinkedList<>());
-            Worker steve = new Worker(222222222,"Steve", createJob(), createSchedule(), steve_contract);
+            Worker steve = new Driver(222222222,"Steve", createJob(), createSchedule(), steve_contract,"b");
 
 
             WorkerDeal james_contract = new WorkerDeal(333333333, dateFormat.parse("12/06/2018"), 1000, "c", new LinkedList<>());
-            Worker james = new Worker(333333333,"James", createJob(), createSchedule(), james_contract);
+            Worker james = new Driver(333333333,"James", createJob(), createSchedule(), james_contract,"c");
 
             WorkerDeal moshe_contract = new WorkerDeal(444444444, dateFormat.parse("22/11/2015"), 1000, "c", new LinkedList<>());
-            Worker moshe = new Worker(444444444,"Moshe", createJob(), createSchedule(), moshe_contract);
+            Worker moshe = new Driver(444444444,"Moshe", createJob(), createSchedule(), moshe_contract,"d");
 
 
             WorkerDeal asd_contract = new WorkerDeal(555555555, dateFormat.parse("01/01/2012"), 1000, "c", new LinkedList<>());
-            Worker asd = new Worker(555555555,"Asd", createJob(), createSchedule(), asd_contract);
+            Worker asd = new Driver(555555555,"Asd", createJob(), createSchedule(), asd_contract,"e");
 
             WorkerDeal iris_contract = new WorkerDeal(666666666, dateFormat.parse("17/02/2010"), 1000, "c", new LinkedList<>());
-            Worker iris = new Worker(666666666,"Iris", createJob(), createSchedule(), iris_contract);
+            Worker iris = new Driver(666666666,"Iris", createJob(), createSchedule(), iris_contract,"f");
 
 
             Workers workers = Workers.getInstance();

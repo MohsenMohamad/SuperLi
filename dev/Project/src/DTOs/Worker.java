@@ -9,14 +9,14 @@ import DTOs.Shift.ShiftTime;
 
 public abstract class Worker {
 
-    private int id = 0;
+    private long id;
     private String name;
     private List<WorkPolicy.WorkingType> type;   // may become a list
     private Map<Pair<DayOfWeek, ShiftTime>, Boolean> schedule;
     private WorkerDeal contract;
     private List<Shift> worker_shifts;
 
-    public Worker(int id, String name, List<WorkPolicy.WorkingType> type, Map<Pair<DayOfWeek, ShiftTime>, Boolean> schedule, WorkerDeal contract)
+    public Worker(long id, String name, List<WorkPolicy.WorkingType> type, Map<Pair<DayOfWeek, ShiftTime>, Boolean> schedule, WorkerDeal contract)
     {
         this.name = name;
         this.id =id;
@@ -88,7 +88,7 @@ public abstract class Worker {
         return name;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -109,7 +109,7 @@ public abstract class Worker {
         this.name = name;
     }
 
-    public void setID(int id)
+    public void setID(long id)
     {
         this.id = id;
     }

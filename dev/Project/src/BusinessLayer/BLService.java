@@ -1,6 +1,7 @@
 package BusinessLayer;
 
 import DAL.DAO;
+import DAL.DaoAPI;
 import DTOs.*;
 
 import java.text.SimpleDateFormat;
@@ -12,19 +13,19 @@ public class BLService {
     private DAO dao;
 
     public BLService() {
-        this.data = new Data();
+        this.dao = new DAO();
     }
 
     public boolean addDriver(Driver driver) {
-        return this.data.addDriver(new Driver(driver.getName(), driver.getId(), driver.getLicense()));
+        return this.dao.addDriver(new Driver(driver.getName(), driver.getId(), driver.getLicense()));
     }
 
 //    public boolean addLocation(DTOLocation location){
 //        return this.data.addLocation(new Location(location.getLocation()));
 //    }
 
-    public boolean addAdress(DTOAdress adress) {
-        Location location = new Location(adress.getLocation());
+    public boolean addAddress(Address address) {
+        Location location = new Location(address.getLocation().getLocation());
 
         return this.data.addAdress(new Address(location, adress.getContactName(), adress.getPhoneNumber()));
     }

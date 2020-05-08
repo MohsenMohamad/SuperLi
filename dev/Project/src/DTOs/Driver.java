@@ -13,7 +13,7 @@ public class Driver extends Worker {
     private String license;
     private ConcurrentHashMap<Address, LinkedList<Product>> destinationsAndProducts;
 
-    public Driver(int id, String name, List<WorkPolicy.WorkingType> type, Map<Pair<DayOfWeek, Shift.ShiftTime>, Boolean> schedule, WorkerDeal contract, String license) {
+    public Driver(long id, String name, List<WorkPolicy.WorkingType> type, Map<Pair<DayOfWeek, Shift.ShiftTime>, Boolean> schedule, WorkerDeal contract, String license) {
         super(id, name, type, schedule, contract);
         this.destinationsAndProducts = new ConcurrentHashMap<Address, LinkedList<Product>>();
         this.license = license;

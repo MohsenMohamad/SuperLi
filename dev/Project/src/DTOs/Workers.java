@@ -10,7 +10,7 @@ import java.util.*;
 public class Workers {
 
     private static Workers workers_instance = null;
-    private Map<Integer, Worker> workers_map;
+    private Map<Long, Worker> workers_map;
 
     private Workers() {
         workers_map = new HashMap<>();
@@ -54,14 +54,14 @@ public class Workers {
         return available_workers;
     }
 
-    public Worker getWorker(int worker_id)
+    public Worker getWorker(long worker_id)
     {
         if(!workers_map.containsKey(worker_id))
             return null;
         return workers_map.get(worker_id);
     }
 
-    public Map<Integer,Worker> getAllWorkers() {
+    public Map<Long,Worker> getAllWorkers() {
         return workers_map;
     }
 
@@ -85,5 +85,10 @@ public class Workers {
         }
         workers_string = workers_string.substring(0,workers_string.length()-1);
         return workers_string;
+    }
+
+    public boolean removeWorker(long id)
+    {
+        return (workers_map.remove(id)!=null);
     }
 }
