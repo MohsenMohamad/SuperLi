@@ -1,6 +1,5 @@
 package DTOs;
 
-import DTOs.Location;
 
 public class Address {
     private Location location;

@@ -6,14 +6,14 @@ import java.util.List;
 
 public class WorkerDeal {
 
-    private long worker_id;
+    private int worker_id;
     private Date start_date;
     private String bank_address;
     private double salary;
     private List<String> work_conditions;    // ask what is a work condition ?
 
 
-    public WorkerDeal(long worker_id , Date start_date, double salary, String bank_address, List<String> work_conditions) {
+    public WorkerDeal(int worker_id , Date start_date, double salary, String bank_address, List<String> work_conditions) {
         this.start_date = start_date;
         this.salary = salary;
         this.work_conditions = work_conditions;
@@ -48,7 +48,7 @@ public class WorkerDeal {
         return work_conditions;
     }
 
-    public long getWorker_id() {
+    public int getWorker_id() {
         return worker_id;
     }
 

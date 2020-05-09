@@ -108,7 +108,7 @@ public class InitializeData {
         }
         rand = Math.random();
         if(rand < 0.6){
-            jobs.add(WorkPolicy.WorkingType.Cleaning);
+            jobs.add(WorkPolicy.WorkingType.driver);
         }
         rand = Math.random();
         if(rand < 0.6){

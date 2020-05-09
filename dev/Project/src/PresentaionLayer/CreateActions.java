@@ -62,7 +62,7 @@ public class CreateActions {
     public void registerWorker() {
 
         System.out.println("Worker id: ");
-        long worker_id = keyboard.nextLong();
+        int worker_id = keyboard.nextInt();
         if(Workers.getInstance().getWorker(worker_id)!=null)
         {
             System.out.println("Error : There is a user with the same id in the data base!");
@@ -77,7 +77,7 @@ public class CreateActions {
         List<WorkPolicy.WorkingType> worker_jobs = new LinkedList<>();
         while (!stop) {
             System.out.println("Choose one of the working types :");
-            long workingType_id = keyboard.nextLong();
+            int workingType_id = keyboard.nextInt();
             worker_jobs.add(jobs.get(workingType_id - 1));
             System.out.println("choose another ? y/n");
             if (keyboard.next().equals("n"))
@@ -100,8 +100,8 @@ public class CreateActions {
             pe.printStackTrace();
         }
 
-        Worker driver = new Driver(worker_id, worker_name, worker_jobs, new InitializeData().createSchedule(), deal,"a");
-        blService.addDriver(driver);
+        Worker worker = new Worker(worker_id, worker_name, worker_jobs, new InitializeData().createSchedule(), deal);
+    //    blService.addDriver(driver);
         Workers.getInstance().addWorker(worker);
 
     }

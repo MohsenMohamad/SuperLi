@@ -1,5 +1,6 @@
 package PresentaionLayer;
 
+import BusinessLayer.BLService;
 import DTOs.*;
 import javafx.util.Pair;
 
@@ -8,6 +9,7 @@ import java.util.*;
 
 public class Printer {
 
+    static BLService blService = new BLService();
     public static void printAllWorkingTypes()
     {
         int number =1;
@@ -58,6 +60,9 @@ public class Printer {
 
     public static void printWorkersView()
     {
+
+    //    List<Worker>
+
         System.out.println(Workers.getInstance().toString() + "\n");
         System.out.println("1) Register a worker");
         System.out.println("2) select a worker");

@@ -10,15 +10,15 @@ public class Delivery{
     private LinkedList<Address> destinations;
     private String launchTime;
     private String truckSerialNumber;
-    private String driverName;
+    private int driverID;
 
-    public Delivery(Date date, Address source, LinkedList<Address> destinations, String launchTime, String truckSerialNumber, String driverName){
+    public Delivery(Date date, Address source, LinkedList<Address> destinations, String launchTime, String truckSerialNumber, int driverID){
         this.date = date;
         this.source = source;
         this.destinations = destinations;
         this.launchTime = launchTime;
         this.truckSerialNumber = truckSerialNumber;
-        this.driverName = driverName;
+        this.driverID = driverID;
     }
 
     public Delivery(){}
@@ -31,8 +31,8 @@ public class Delivery{
         this.destinations = destinations;
     }
 
-    public void setDriverName(String driverName) {
-        this.driverName = driverName;
+    public void setDriverID(int driverID) {
+        this.driverID = driverID;
     }
 
     public void setLaunchTime(String launchTime) {
@@ -55,8 +55,8 @@ public class Delivery{
         return date;
     }
 
-    public String getDriverName() {
-        return driverName;
+    public int getDriverID() {
+        return driverID;
     }
 
     public String getLaunchTime() {
@@ -71,7 +71,4 @@ public class Delivery{
         return destinations;
     }
 
-    public void setDriver(Driver driver) {
-        this.driverName = driver.getName();
-    }
 }

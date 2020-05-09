@@ -1,7 +1,6 @@
 package BusinessLayer;
 
-import DAL.DAO;
-import DAL.DaoAPI;
+import DAL.DAL;
 import DTOs.*;
 
 import java.text.SimpleDateFormat;
@@ -10,14 +9,13 @@ import java.util.LinkedList;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class BLService {
-    private DAO dao;
+    private DAL dal;
 
     public BLService() {
-        this.dao = new DAO();
+        this.dal = new DAL();
     }
-
+/*
     public boolean addDriver(Driver driver) {
-        return this.dao.addDriver(new Driver(driver.getName(), driver.getId(), driver.getLicense()));
     }
 
 //    public boolean addLocation(DTOLocation location){
@@ -25,27 +23,23 @@ public class BLService {
 //    }
 
     public boolean addAddress(Address address) {
-        Location location = new Location(address.getLocation().getLocation());
 
-        return this.data.addAdress(new Address(location, adress.getContactName(), adress.getPhoneNumber()));
     }
 
-    public boolean addTruck(DTOTruck truck) {
-        return this.data.addTruck(new Truck(truck.getSerialNumber(), truck.getModel(), truck.getWeight(), truck.getMaxAllowedWeight()));
+    public boolean addTruck(Truck truck) {
     }
 
-    public boolean addProduct(DTOProduct product) {
-        return this.data.addProduct(new Product(product.getName(), product.getCN(), product.getWeight(), product.getAmount()), product.getAdress());
+    public boolean addProduct(Product product) {
     }
 
-    public DTODelivery arrangeDelivery(String source, String destinationsAndProducts) {
-        DTODelivery delivery;
+    public Delivery arrangeDelivery(String source, String destinationsAndProducts) {
+        Delivery delivery;
         Delivery tmpDelivery = new Delivery();
         LinkedList<Address> destinations = new LinkedList<Address>();
         ConcurrentHashMap<Address, LinkedList<Product>> DAP = new ConcurrentHashMap<Address, LinkedList<Product>>();
         int totalWeight = 0;
 
-        Address s = this.data.getAdress(source);
+    //    Address s = this.dao.getAddress(source);
 
         if (s == null)
             return null;
@@ -139,6 +133,8 @@ public class BLService {
 
         return adresses;
     }
+
+ */
 
 
 }
