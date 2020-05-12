@@ -2,11 +2,11 @@ package DTOs;
 
 
 public class Address {
-    private Location location;
+    private String location;
     private String contactName;
     private String phoneNumber;
 
-    public Address(Location location, String contactName, String phoneNumber){
+    public Address(String location, String contactName, String phoneNumber){
         this.location = location;
         this.contactName = contactName;
         this.phoneNumber = phoneNumber;
@@ -16,7 +16,7 @@ public class Address {
         return phoneNumber;
     }
 
-    public Location getLocation() {
+    public String getLocation() {
         return location;
     }
 
@@ -28,7 +28,7 @@ public class Address {
         this.contactName = contactName;
     }
 
-    public void setLocation(Location location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 

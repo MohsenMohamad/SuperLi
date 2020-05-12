@@ -1,21 +1,18 @@
 package BusinessLayer;
 
 import DAL.DAL;
-import DTOs.*;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class BLService {
     private DAL dal;
+    private Data data;
 
     public BLService() {
         this.dal = new DAL();
+        this.data = new Data();
     }
 /*
     public boolean addDriver(Driver driver) {
+
     }
 
 //    public boolean addLocation(DTOLocation location){

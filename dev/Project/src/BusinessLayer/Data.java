@@ -1,15 +1,19 @@
-package DTOs;
+package BusinessLayer;
+
+import DTOs.*;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Data {
-    /*
+
     private LinkedList<Address> addresses;
     private LinkedList<Driver> drivers;
     private LinkedList<Truck> trucks;
     private ConcurrentHashMap<String, LinkedList<Product>> adressesAndProducts;
     private LinkedList<Delivery> deliveries;
+    private List<Shift> shifts;
 
     public Data() {
         this.addresses = new LinkedList<Address>();
@@ -111,7 +115,7 @@ public class Data {
 
     public Address getAdress(String adress) {
         for(Address a : this.addresses){
-            if(a.getLocation().getLocation().compareTo(adress) == 0){
+            if(a.getLocation().compareTo(adress) == 0){
                 return a;
             }
         }
@@ -138,6 +142,6 @@ public class Data {
         this.deliveries.add(delivery);
     }
 
-     */
+
     
 }

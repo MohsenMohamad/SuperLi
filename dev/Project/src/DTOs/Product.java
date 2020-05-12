@@ -3,9 +3,9 @@ package DTOs;
 
 
 public class Product{
-    String name;
-    String CN;
-    int weight;
+    private String name;
+    private String CN;
+    private int weight;
     private int amount;
 
     public Product(String name, String CN, int weight, int amount){

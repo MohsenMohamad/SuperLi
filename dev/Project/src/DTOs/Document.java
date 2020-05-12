@@ -1,10 +1,14 @@
 package DTOs;
 
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 public class Document{
     private int TruckWeight;
-    private LinkedList<String> logs;
+    private List<String> logs;
+    private Map<String, List<Product>> deliveryGoods;
 
     public Document(){
     }
