@@ -9,10 +9,35 @@ import java.util.*;
 
 public class CreateActions {
 
-    private BLService blService = new BLService();
+    private static BLService blService = new BLService();
     static Scanner keyboard = new Scanner(System.in);
 
+    public static void AddTruck()
+    {
+        System.out.println("Enter the truck's serial number:");
+        String serialNumber = keyboard.nextLine();
+        System.out.println("Enter the truck's model:");
+        String model = keyboard.nextLine();
+        System.out.println("Enter the truck's weight:");
+        int weight = getChoice(0,Integer.MAX_VALUE);
+        System.out.println("Enter the truck's max allowed weight:");
+        int maxAllowedWeight = getChoice(0,Integer.MAX_VALUE);
+
+        String result = blService.addTruck(serialNumber , model , weight , maxAllowedWeight);
+
+        System.out.println(result);
+
+    }
+
+    public static void editTruck(Truck truck)
+    {
+
+        Printer.printEditTruckView();
+
+    }
+/*
     public void createShift() {
+
 
         for (; ; ) {
             System.out.println("enter the date using this format dd/mm/yyyy or type EXIT to cancel ...");
@@ -36,7 +61,7 @@ public class CreateActions {
                     shiftTime = Shift.ShiftTime.Evening;
                 }
 
-                System.out.println(Workers.getInstance().AvilableWorkerstoString(date,shiftTime));
+                System.out.println(Workers.getInstance().AvilableWorkerstoString(date, shiftTime));
                 System.out.println("enter the id of the worker who you wish to appoint as a boss");
                 int boss_id = keyboard.nextInt();
                 Worker boss = Workers.getInstance().getWorker(boss_id);
@@ -63,8 +88,7 @@ public class CreateActions {
 
         System.out.println("Worker id: ");
         int worker_id = keyboard.nextInt();
-        if(Workers.getInstance().getWorker(worker_id)!=null)
-        {
+        if (Workers.getInstance().getWorker(worker_id) != null) {
             System.out.println("Error : There is a user with the same id in the data base!");
             return;
         }
@@ -101,7 +125,7 @@ public class CreateActions {
         }
 
         Worker worker = new Worker(worker_id, worker_name, worker_jobs, new InitializeData().createSchedule(), deal);
-    //    blService.addDriver(driver);
+        //    blService.addDriver(driver);
         Workers.getInstance().addWorker(worker);
 
     }
@@ -150,9 +174,7 @@ public class CreateActions {
 
                         else
                             worker.getType().remove(workingType);
-                    }
-
-                    else
+                    } else
                         System.out.println("Error : number out of bounds!");
 
                     break;
@@ -176,6 +198,10 @@ public class CreateActions {
 
     }
 
+
+
+*/
+
     private static int getChoice(int lower_bound, int upper_bound) {
         for (; ; ) {
             int keyboard_input = keyboard.nextInt();
@@ -186,3 +212,5 @@ public class CreateActions {
         }
     }
 }
+
+

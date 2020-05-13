@@ -4,6 +4,8 @@ import DAL.DAL;
 import DTOs.*;
 
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 public class BLService {
     private final DAL dal;
@@ -12,6 +14,51 @@ public class BLService {
     public BLService() {
         this.dal = new DAL();
     }
+
+// ---------------------------------------------  Workers -------------------------------------------//
+
+    public Map<Integer, Worker> getAllWorkers() {
+        return null;
+    }
+// ---------------------------------------------  Trucks -------------------------------------------//
+    public List<Truck> getAllTrucks()
+    {
+        return null;
+    }
+
+    public String addTruck(String serialNumber, String model, int weight, int maxAllowedWeight){
+
+        String result;
+
+        // added successfully
+
+        result = "Truck has been added successfully!";
+
+        return result;
+
+    }
+
+    public Truck getTruck(String serial_number)
+    {
+
+       return null;
+    }
+
+    public String removeTruck(String serialNumber)
+    {
+        String result;
+
+        // removed successfully
+
+        result = "Truck has been removed successfully!";
+
+        return result;
+
+    }
+
+
+
+
 
 /*
         public boolean removeWorker(int id)
@@ -89,11 +136,6 @@ public class BLService {
 
     public boolean addDriver(Driver driver){
         this.drivers.add(driver);
-        return true;
-    }
-
-    public boolean addTruck(Truck truck){
-        this.trucks.add(truck);
         return true;
     }
 
@@ -333,10 +375,6 @@ public class BLService {
         if(!workers_map.containsKey(worker_id))
             return null;
         return workers_map.get(worker_id);
-    }
-
-    public Map<Integer,Worker> getAllWorkers() {
-        return workers_map;
     }
 
     @Override

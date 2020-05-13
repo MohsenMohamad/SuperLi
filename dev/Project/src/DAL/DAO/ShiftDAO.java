@@ -2,12 +2,13 @@ package DAL.DAO;
 
 import DTOs.Shift;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class ShiftDAO
 {
 
-    List<Shift> shifts = History.getInstance().getShifts();
+    List<Shift> shifts = new LinkedList<>();
 
     public List<Shift> getAll()
     {

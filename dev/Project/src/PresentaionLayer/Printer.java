@@ -29,6 +29,27 @@ public class Printer {
         }
     }
 
+    public static void printAllTrucks(List<Truck> trucks_list)
+    {
+        String trucks = "";
+
+        for(Truck t : trucks_list) {
+            trucks += "Truck serial number : " + t.getSerialNumber() + "\n" +
+                    "Model : " + t.getModel() + "\n" +
+                    "Weight : " + t.getWeight() + "\n" +
+                    "Max allowed weight : " + t.getMaxAllowedWeight() + "\n";
+        }
+
+        System.out.println(trucks);
+    }
+
+    public static void printTrucksMenuOptions()
+    {
+        System.out.println("1) Add a truck");
+        System.out.println("2) Select a truck");
+        System.out.println("3) Return");
+    }
+/*
     public static void printSchedule(int worker_id) {
         Map<Pair<DayOfWeek, Shift.ShiftTime>, Boolean> worker_schedule = Workers.getInstance().getAllWorkers().get(worker_id).getSchedule();
         List<Pair<DayOfWeek, Shift.ShiftTime>> schedules_date = new LinkedList<>(worker_schedule.keySet());
@@ -52,18 +73,34 @@ public class Printer {
         }
     }
 
+ */
+
     public static void printMainMenu() {
-        System.out.println("1) view workers");
-        System.out.println("2) view shifts");
-        System.out.println("3) exit");
+        System.out.println("1) View Workers");
+        System.out.println("2) View Shifts");
+        System.out.println("3) View Addresses");
+        System.out.println("4) View Trucks");
+        System.out.println("5) View Deliveries");
+        System.out.println("6) exit");
     }
 
+    public static void printTruckView(Truck truck)
+    {
+        String truck_data="";
+        truck_data += "Truck serial number : " + truck.getSerialNumber() + "\n" +
+                "Model : " + truck.getModel() + "\n" +
+                "Weight : " + truck.getWeight() + "\n" +
+                "Max allowed weight : " + truck.getMaxAllowedWeight() + "\n";
+
+        System.out.println(truck_data);
+
+        System.out.println("1) Remove Truck");
+        System.out.println("2) Return");
+    }
+/*
     public static void printWorkersView()
     {
-
-    //    List<Worker>
-
-        System.out.println(Workers.getInstance().toString() + "\n");
+        System.out.println(blService.getAllWorkers().toString() + "\n");
         System.out.println("1) Register a worker");
         System.out.println("2) select a worker");
         System.out.println("3) return\n");
@@ -103,7 +140,10 @@ public class Printer {
         System.out.println("2) return");
     }
 
+ */
+
     public static void border() {
         System.out.println("--------------------------------");
     }
+
 }

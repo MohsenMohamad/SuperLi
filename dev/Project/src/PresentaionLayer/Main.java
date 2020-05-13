@@ -2,16 +2,15 @@ package PresentaionLayer;
 
 
 import BusinessLayer.BLService;
-import DTOs.Shift;
-import DTOs.WorkPolicy.WorkingType;
-import DTOs.Worker;
+import DTOs.*;
 
 
+import java.math.BigInteger;
 import java.util.*;
 
 public class Main {
 
-    private BLService blService = new BLService();
+    private static final BLService blService = new BLService();
     static Scanner keyboard = new Scanner(System.in);
     static InitializeData init_data = new InitializeData();
 
@@ -19,29 +18,106 @@ public class Main {
 
         boolean terminate = false;
 
-        init_data.createWorkers();
-        init_data.createShifts();
+//        init_data.createWorkers();
+//        init_data.createShifts();
 
 
         while (!terminate) {
             Printer.printMainMenu();
-            int choice = getChoice(1, 3);
+            int choice = getChoice(1, 6);
 
             switch (choice) {
                 case 1:
                     workersView();
                     break;
                 case 2:
-                    shiftsView();
+                    //    shiftsView();
+                    break;
+                case 3:
+                    //        addressesView();
+                    break;
+                case 4:
+                    trucksView();
+                    break;
+                case 5:
+                    deliveriesView();
+                    break;
+                case 6:
+                    terminate = true;
+                    break;
+            }
+
+//            Printer.border();
+        }
+
+    }
+
+    private static void deliveriesView()
+    {
+
+
+
+    }
+
+    private static void trucksView() {
+
+        List<Truck> trucks = blService.getAllTrucks();
+        Printer.printAllTrucks(trucks);
+
+        boolean terminate = false;
+        Printer.printTrucksMenuOptions();
+
+
+        while(!terminate) {
+
+            int choice = getChoice(1, 3);
+            switch (choice) {
+                case 1:
+                    CreateActions.AddTruck();
+                    break;
+                case 2:
+
+                    System.out.println("Enter the truck's serial number:");
+                    String serial_number = keyboard.nextLine();
+                    Truck truck = blService.getTruck(serial_number);
+
+
                     break;
                 case 3:
                     terminate = true;
                     break;
             }
-
-            Printer.border();
         }
 
+    }
+
+    private static void truckView(Truck truck) {
+
+        boolean go_back = false;
+        while (!go_back) {
+
+            Printer.printTruckView(truck);
+
+            int choice = getChoice(1, 3);
+
+            switch (choice) {
+                case 1:
+                    System.out.println("Are you sure you want to remove this truck ? y/n");
+                    boolean confirmation = getConfirmation();
+                    if(confirmation)
+                    {
+                        String result = blService.removeTruck(truck.getSerialNumber());
+                        System.out.println(result);
+                    }
+                    else
+                        System.out.println("The deletion was canceled");
+                    break;
+                case 2:
+                    go_back = true;
+                    break;
+            }
+            Printer.border();
+        }
     }
 
     private static void workersView() {
@@ -50,24 +126,24 @@ public class Main {
 
         while (!go_back) {
 
-            Printer.printWorkersView();
+//            Printer.printWorkersView();
             int choice = getChoice(1, 3);
 
             switch (choice) {
                 case 1:
-                    new CreateActions().registerWorker();
+//                    new CreateActions().registerWorker();
                     break;
                 case 2:
-                    if (Workers.getInstance().getAllWorkers().isEmpty()) {
+                    if (blService.getAllWorkers().isEmpty()) {
                         System.out.println("Error : there are no workers!");
                         break;
                     }
                     System.out.println("enter the worker id :");
                     int id = keyboard.nextInt();
-                    Printer.border();
-                    if (!Workers.getInstance().getAllWorkers().containsKey(id)) {
-                        System.out.println("Error : invalid id");
-                    } else workerView(id);
+//                    Printer.border();
+//                    if (!Workers.getInstance().getAllWorkers().containsKey(id)) {
+                    System.out.println("Error : invalid id");
+//                    } else workerView(id);
                     break;
 
                 case 3:
@@ -81,7 +157,7 @@ public class Main {
 
 
     }
-
+/*
     private static void workerView(int worker_id) {
         Worker w = Workers.getInstance().getWorker(worker_id);
 
@@ -190,13 +266,45 @@ public class Main {
 
     }
 
+ */
+
     private static int getChoice(int lower_bound, int upper_bound) {
         for (; ; ) {
-            int keyboard_input = keyboard.nextInt();
-            if (keyboard_input < lower_bound || keyboard_input > upper_bound) {
-                System.out.println("Error : number out of bounds!");
-            } else return keyboard_input;
+            String keyboard_input = keyboard.nextLine();
+            int choice_number = -1;
+            boolean tooBig = false;
+            try {
+                BigInteger big_int = new BigInteger(keyboard_input);
+                if (big_int.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) > 0) {
+                    //    System.out.println("Error : value is too large");
+                    tooBig = true;
+                }
+                choice_number = big_int.intValue();
+
+                if (tooBig || choice_number < lower_bound || choice_number > upper_bound) {
+                    System.out.println("Error : number out of bounds!");
+                } else return choice_number;
+            } catch (NumberFormatException numberFormatException) {
+                System.out.println(keyboard_input);
+                System.out.println("Error : Enter a numeric input!");
+            }
+
         }
+    }
+
+    private static boolean getConfirmation()
+    {
+        for(;;)
+        {
+            String keyboard_input = keyboard.nextLine();
+            if(keyboard_input.equals("y")|| keyboard_input.equals("Y"))
+                return true;
+            else if(keyboard_input.equals("n")|| keyboard_input.equals("N"))
+                return false;
+            else
+                System.out.println("Error : Invalid input ! type n to cancel or y to confirm");
+        }
+
     }
 
 

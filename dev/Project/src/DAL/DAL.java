@@ -18,7 +18,8 @@ public class DAL {
         return conn;
     }
 
-    public static void createTables() {
+    public static void createTables()
+    {
 
     }
 
