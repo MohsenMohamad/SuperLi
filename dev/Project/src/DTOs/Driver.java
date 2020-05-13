@@ -36,9 +36,4 @@ public class Driver extends Worker {
         this.license = license;
     }
 
-    public boolean isAvailable(Date date, Shift.ShiftTime shiftTime,String license) {
-        return (this.isAvailable(date , shiftTime) && this.license==license);
-    }
-
-
 }

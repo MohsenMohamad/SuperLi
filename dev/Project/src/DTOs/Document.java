@@ -17,7 +17,7 @@ public class Document{
         this.logs = logs;
     }
 
-    public LinkedList<String> getLogs() {
+    public List<String> getLogs() {
         return logs;
     }
 
@@ -29,7 +29,4 @@ public class Document{
         TruckWeight = truckWeight;
     }
 
-    public void log(String log){
-        this.logs.add(log);
-    }
 }

@@ -1,7 +1,5 @@
 package DAL.DAO;
 
-import DAL.DAL;
-import DTOs.History;
 import DTOs.Shift;
 
 import java.util.List;

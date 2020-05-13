@@ -35,19 +35,6 @@ public class Shift {
     }
 
 
-    public boolean addToWorkingTeam(Worker worker, WorkPolicy.WorkingType workingType) {
-
-        if (!worker.isAvailable(shift_date, shift_time) || !worker.getType().contains(workingType))
-            return false;
-
-        worker.work(this);
-        if (!work_team.containsKey(workingType))
-            work_team.put(workingType, new LinkedList<>());
-
-        work_team.get(workingType).add(worker);
-        return true;
-    }
-
     @Override
     public String toString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");

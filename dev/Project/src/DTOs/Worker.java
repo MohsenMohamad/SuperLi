@@ -66,19 +66,6 @@ public abstract class Worker {
         return worker_shifts;
     }
 
-/*    public List<Pair<Day , ShiftTime>> availableHours()
-    {
-        List<Pair<Day,ShiftTime>> available_hours = new LinkedList<>();
-        for(Pair<Day , ShiftTime> p : schedule.keySet())
-        {
-            if(schedule.get(p))
-                available_hours.add(p);
-        }
-        return available_hours;
-    }
-
- */
-
     @Override
     public String toString() {
         return new String(id + " , " + name + " : " + type.toString());

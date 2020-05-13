@@ -11,6 +11,7 @@ public class Delivery{
     private String launchTime;
     private String truckSerialNumber;
     private int driverID;
+    private Document document;
 
     public Delivery(Date date, Address source, LinkedList<Address> destinations, String launchTime, String truckSerialNumber, int driverID){
         this.date = date;
@@ -19,6 +20,7 @@ public class Delivery{
         this.launchTime = launchTime;
         this.truckSerialNumber = truckSerialNumber;
         this.driverID = driverID;
+        this.document = new Document();
     }
 
     public Delivery(){}
@@ -69,6 +71,16 @@ public class Delivery{
 
     public LinkedList<Address> getDestinations() {
         return destinations;
+    }
+
+    public void setDocument(Document document)
+    {
+        this.document = document;
+    }
+
+    public Document getDocument()
+    {
+        return document;
     }
 
 }
