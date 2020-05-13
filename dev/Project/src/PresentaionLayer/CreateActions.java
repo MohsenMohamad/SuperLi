@@ -24,12 +24,11 @@ public class CreateActions {
         System.out.println("Worker name: ");
         String worker_name = keyboard.nextLine();
         List<WorkPolicy.WorkingType> jobs = Arrays.asList(WorkPolicy.WorkingType.values());
-        boolean stop = false;
         System.out.println("Working types : ");
         Printer.printAllWorkingTypes();
         WorkPolicy.WorkingType worker_job;
         System.out.println("Choose one of the working types :");
-        int workingType_id = getChoice(1, 3);
+        int workingType_id = getChoice(1, 2);
         worker_job = jobs.get(workingType_id - 1);
         System.out.println("Enter constraints : ");
         keyboard.nextLine();
@@ -46,7 +45,7 @@ public class CreateActions {
             pe.printStackTrace();
         }
 
-        Worker worker;
+        Worker worker = null;
         switch (worker_job)
         {
             case Driver:
@@ -55,8 +54,11 @@ public class CreateActions {
                 worker = new Driver(worker_id, worker_name, worker_job, new InitializeData().createSchedule(),deal,license);
                 break;
             case StockKeeper:
+                worker = new StockKeeper(worker_id, worker_name, worker_job, new InitializeData().createSchedule(),deal);
                 break;
         }
+
+        blService.addWorker(worker);
 
     }
 
@@ -76,13 +78,13 @@ public class CreateActions {
 
     }
 
-/*
+
     public void createShift() {
 
 
-        for (; ; ) {
+        for ( ; ; ) {
             System.out.println("enter the date using this format dd/mm/yyyy or type EXIT to cancel ...");
-            String date_string = keyboard.next();
+            String date_string = keyboard.nextLine();
             if (date_string.equals("EXIT") || date_string.equals("exit"))
                 return;
 
@@ -94,14 +96,27 @@ public class CreateActions {
                 System.out.println("Your shift date will be : " + new SimpleDateFormat("EEEE").format(date) + " " + date_string);
                 System.out.println("Type M for Morning , Type E for Evening");
                 Shift.ShiftTime shiftTime = null;
-                String choice = keyboard.next();
 
-                if (choice.equals("M") || choice.equals("m")) {
-                    shiftTime = Shift.ShiftTime.Morning;
-                } else if (choice.equals("E") || choice.equals("e")) {
-                    shiftTime = Shift.ShiftTime.Evening;
+                boolean chosen_shift = false;
+
+                while(!chosen_shift)
+                {
+                    String choice = keyboard.nextLine();
+
+                    if (choice.equals("M") || choice.equals("m")) {
+                        shiftTime = Shift.ShiftTime.Morning;
+                        chosen_shift = true;
+                    } else if (choice.equals("E") || choice.equals("e")) {
+                        shiftTime = Shift.ShiftTime.Evening;
+                        chosen_shift = true;
+                    }
+                    else
+                        System.out.println("Error : invalid input!");
+
                 }
 
+                Printer.printAvailableWorkers(date , shiftTime);
+/*
                 System.out.println(Workers.getInstance().AvilableWorkerstoString(date, shiftTime));
                 System.out.println("enter the id of the worker who you wish to appoint as a boss");
                 int boss_id = keyboard.nextInt();
@@ -115,7 +130,7 @@ public class CreateActions {
                 else
                     System.out.println("Error : the shift already exists");
                 return;
-
+*/
             } catch (ParseException pe) {
                 System.out.println("Error : invalid input");
             }
@@ -123,19 +138,17 @@ public class CreateActions {
         }
 
 
+
+
     }
 
     public void editWorker(int worker_id) {
-        Worker worker = Workers.getInstance().getWorker(worker_id);
+        Worker worker = blService.getWorker(worker_id);
         WorkPolicy.WorkingType[] current_types = WorkPolicy.WorkingType.values();
         boolean go_back = false;
         while (!go_back) {
-            System.out.println("1) Edit worker name");
-            System.out.println("2) Edit worker id");
-            System.out.println("3) Edit worker jobs");
-            System.out.println("4) Edit worker bank address");
-            System.out.println("5) Edit worker salary");
-            System.out.println("6) Return");
+
+            Printer.printEditWorkerMenu();
 
             int choice = getChoice(1, 6);
             switch (choice) {
@@ -195,7 +208,7 @@ public class CreateActions {
 
 
 
-*/
+
 
     private static int getChoice(int lower_bound, int upper_bound) {
         for (; ; ) {

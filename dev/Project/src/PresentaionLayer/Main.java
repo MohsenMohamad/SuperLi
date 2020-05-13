@@ -31,10 +31,10 @@ public class Main {
                     workersView();
                     break;
                 case 2:
-                    //    shiftsView();
+//                    shiftsView();
                     break;
                 case 3:
-                    //        addressesView();
+//                    addressesView();
                     break;
                 case 4:
                     trucksView();
@@ -47,26 +47,24 @@ public class Main {
                     break;
             }
 
-//            Printer.border();
+            Printer.border();
         }
 
     }
 
+
     private static void deliveriesView()
     {
-
-
+        Printer.printAllDeliveries();
 
     }
 
     private static void trucksView() {
 
-        List<Truck> trucks = blService.getAllTrucks();
-        Printer.printAllTrucks(trucks);
+        Printer.printAllTrucks();
 
         boolean terminate = false;
         Printer.printTrucksMenuOptions();
-
 
         while(!terminate) {
 
@@ -76,11 +74,9 @@ public class Main {
                     CreateActions.AddTruck();
                     break;
                 case 2:
-
                     System.out.println("Enter the truck's serial number:");
                     String serial_number = keyboard.nextLine();
                     Truck truck = blService.getTruck(serial_number);
-
 
                     break;
                 case 3:
@@ -139,11 +135,11 @@ public class Main {
                         break;
                     }
                     System.out.println("enter the worker id :");
-                    int id = keyboard.nextInt();
-//                    Printer.border();
-//                    if (!Workers.getInstance().getAllWorkers().containsKey(id)) {
+                    int id = getChoice(100000000,999999999);
+                    Printer.border();
+                    if (!blService.getAllWorkers().containsKey(id)) {
                     System.out.println("Error : invalid id");
-//                    } else workerView(id);
+                    } else workerView(id);
                     break;
 
                 case 3:
@@ -157,31 +153,43 @@ public class Main {
 
 
     }
-/*
+
     private static void workerView(int worker_id) {
-        Worker w = Workers.getInstance().getWorker(worker_id);
+
+       // always gets here if he is available
 
         boolean go_back = false;
         while (!go_back) {
 
             Printer.PrintWorkerView(worker_id);
 
-            int choice = getChoice(1, 5);
+            int choice = getChoice(1, 6);
 
             switch (choice) {
                 case 1:
                     Printer.printSchedule(worker_id);
                     break;
                 case 2:
-                    System.out.println(w.getContract().toString());
+                    Printer.printContract(worker_id);
                     break;
                 case 3:
-                    Printer.printWorkingShifts(w);
+                    Printer.printWorkingShifts(worker_id);
                     break;
                 case 4:
-                    new CreateActions().editWorker(worker_id);
+                    CreateActions.editWorker(worker_id);
                     break;
                 case 5:
+                    System.out.println("Are you sure you want to remove this worker ? y/n");
+                    boolean confirmation = getConfirmation();
+                    if(confirmation)
+                    {
+                        String result = blService.removeWorker(worker_id);
+                        System.out.println(result);
+                    }
+                    else
+                        System.out.println("The deletion was canceled");
+                    break;
+                case 6:
                     go_back = true;
                     break;
             }
@@ -189,7 +197,7 @@ public class Main {
         }
     }
 
-
+/*
     private static void shiftsView() {
 
         boolean go_back = false;
@@ -211,7 +219,7 @@ public class Main {
                     } else shiftView(id);
                     break;
                 case 2:
-                    new CreateActions().createShift();
+                    CreateActions.createShift();
                     break;
                 case 3:
                     go_back = true;
@@ -221,6 +229,8 @@ public class Main {
 
     }
 
+ */
+/*
     private static void shiftView(int shift_id) {
         Shift shift = History.getInstance().getShifts().get(shift_id);
 

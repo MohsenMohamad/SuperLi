@@ -3,6 +3,7 @@ package BusinessLayer;
 import DAL.DAL;
 import DTOs.*;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -20,22 +21,30 @@ public class BLService {
     public Map<Integer, Worker> getAllWorkers() {
         return null;
     }
-    public String removeWorker(int id)
-    {
-        return null;
-    }
-    public Worker getWorker(int worker_id)
-    {
+
+    public String addWorker(Worker worker) {
         return null;
     }
 
-// ---------------------------------------------  Trucks -------------------------------------------//
-    public List<Truck> getAllTrucks()
-    {
+    public String removeWorker(int id) {
         return null;
     }
 
-    public String addTruck(String serialNumber, String model, int weight, int maxAllowedWeight){
+    public Worker getWorker(int worker_id) {
+        return null;
+    }
+
+    public Map<Integer, Worker> getAvailableWorkers(Date date, Shift.ShiftTime shiftTime) {
+        return null;
+    }
+
+
+    // ---------------------------------------------  Trucks -------------------------------------------//
+    public List<Truck> getAllTrucks() {
+        return null;
+    }
+
+    public String addTruck(String serialNumber, String model, int weight, int maxAllowedWeight) {
 
         String result;
 
@@ -47,14 +56,11 @@ public class BLService {
 
     }
 
-    public Truck getTruck(String serial_number)
-    {
-
-       return null;
+    public Truck getTruck(String serial_number) {
+        return null;
     }
 
-    public String removeTruck(String serialNumber)
-    {
+    public String removeTruck(String serialNumber) {
         String result;
 
         // removed successfully
@@ -65,27 +71,25 @@ public class BLService {
 
     }
 
-// ---------------------------------------------  Trucks -------------------------------------------//
+// ---------------------------------------------  Shifts -------------------------------------------//
 
-    public List<Shift> getAllShifts()
-    {
+    public List<Shift> getAllShifts() {
         return null;
     }
 
-    public Shift getShift(int shift_id)
-    {
+    public Shift getShift(int shift_id) {
         return null;
     }
 
-    public String removeShift(int shift_id)
-    {
+    public String removeShift(int shift_id) {
         return null;
     }
 
+// ---------------------------------------------  Deliveries -------------------------------------------//
 
-
-
-
+    public List<Delivery> getAllDeliveries() {
+        return null;
+    }
 
 
 /*
@@ -361,14 +365,6 @@ public class BLService {
 
     public void addDelivery(Delivery delivery) {
         this.deliveries.add(delivery);
-    }
-
-    public boolean addWorker(Worker worker) {
-        if (workers_map.containsKey(worker.getId()))
-            return false;
-
-        workers_map.put(worker.getId(),worker);
-        return true;
     }
 
     public List<Worker> getAvailableWorkers(Date date, ShiftTime time, WorkingType job) {

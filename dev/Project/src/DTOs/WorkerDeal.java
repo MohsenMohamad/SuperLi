@@ -48,6 +48,11 @@ public class WorkerDeal {
         return work_conditions;
     }
 
+    public String getBankAddress()
+    {
+        return bank_address;
+    }
+
     public int getWorker_id() {
         return worker_id;
     }
