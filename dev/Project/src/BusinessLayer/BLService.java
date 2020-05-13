@@ -20,6 +20,15 @@ public class BLService {
     public Map<Integer, Worker> getAllWorkers() {
         return null;
     }
+    public String removeWorker(int id)
+    {
+        return null;
+    }
+    public Worker getWorker(int worker_id)
+    {
+        return null;
+    }
+
 // ---------------------------------------------  Trucks -------------------------------------------//
     public List<Truck> getAllTrucks()
     {
@@ -56,15 +65,30 @@ public class BLService {
 
     }
 
+// ---------------------------------------------  Trucks -------------------------------------------//
+
+    public List<Shift> getAllShifts()
+    {
+        return null;
+    }
+
+    public Shift getShift(int shift_id)
+    {
+        return null;
+    }
+
+    public String removeShift(int shift_id)
+    {
+        return null;
+    }
+
+
+
 
 
 
 
 /*
-        public boolean removeWorker(int id)
-    {
-        return (workers_map.remove(id)!=null);
-    }
 
         public void addLog(String log){
         this.logs.add(log);
@@ -368,13 +392,6 @@ public class BLService {
         }
 
         return available_workers;
-    }
-
-    public Worker getWorker(int worker_id)
-    {
-        if(!workers_map.containsKey(worker_id))
-            return null;
-        return workers_map.get(worker_id);
     }
 
     @Override

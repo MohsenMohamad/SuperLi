@@ -15,6 +15,39 @@ public class InitializeData {
     {
 
     }
+
+
+    public Map<Pair<DayOfWeek, Shift.ShiftTime>, Boolean> createSchedule() {
+
+        Map<Pair<DayOfWeek, Shift.ShiftTime>, Boolean> schedule = new HashMap<>();
+
+
+        List<Pair<DayOfWeek, Shift.ShiftTime>> shifts = new LinkedList<>();
+        shifts.add(new Pair<>(DayOfWeek.SUNDAY, Shift.ShiftTime.Morning));
+        shifts.add(new Pair<>(DayOfWeek.SUNDAY, Shift.ShiftTime.Evening));
+        shifts.add(new Pair<>(DayOfWeek.MONDAY, Shift.ShiftTime.Morning));
+        shifts.add(new Pair<>(DayOfWeek.MONDAY, Shift.ShiftTime.Evening));
+        shifts.add(new Pair<>(DayOfWeek.TUESDAY, Shift.ShiftTime.Morning));
+        shifts.add(new Pair<>(DayOfWeek.TUESDAY, Shift.ShiftTime.Evening));
+        shifts.add(new Pair<>(DayOfWeek.WEDNESDAY, Shift.ShiftTime.Morning));
+        shifts.add(new Pair<>(DayOfWeek.WEDNESDAY, Shift.ShiftTime.Evening));
+        shifts.add(new Pair<>(DayOfWeek.THURSDAY, Shift.ShiftTime.Morning));
+        shifts.add(new Pair<>(DayOfWeek.THURSDAY, Shift.ShiftTime.Evening));
+        shifts.add(new Pair<>(DayOfWeek.FRIDAY, Shift.ShiftTime.Morning));
+        shifts.add(new Pair<>(DayOfWeek.FRIDAY, Shift.ShiftTime.Evening));
+        shifts.add(new Pair<>(DayOfWeek.SATURDAY, Shift.ShiftTime.Morning));
+        shifts.add(new Pair<>(DayOfWeek.SATURDAY, Shift.ShiftTime.Evening));
+
+        for (Pair<DayOfWeek, Shift.ShiftTime> pair : shifts) {
+            schedule.put(pair, true);
+        }
+        for(int i = 0; i < 4; i++) {
+            int randome = (int) (Math.random()*shifts.size());
+            Pair rand = shifts.get(randome);
+            schedule.replace(rand, false);
+        }
+        return schedule;
+    }
 /*
     public void createWorkers() {
 
@@ -66,38 +99,6 @@ public class InitializeData {
             pe.printStackTrace();
         }
 
-    }
-
-    public Map<Pair<DayOfWeek, Shift.ShiftTime>, Boolean> createSchedule() {
-
-        Map<Pair<DayOfWeek, Shift.ShiftTime>, Boolean> schedule = new HashMap<>();
-
-
-        List<Pair<DayOfWeek, Shift.ShiftTime>> shifts = new LinkedList<>();
-        shifts.add(new Pair<>(DayOfWeek.SUNDAY, Shift.ShiftTime.Morning));
-        shifts.add(new Pair<>(DayOfWeek.SUNDAY, Shift.ShiftTime.Evening));
-        shifts.add(new Pair<>(DayOfWeek.MONDAY, Shift.ShiftTime.Morning));
-        shifts.add(new Pair<>(DayOfWeek.MONDAY, Shift.ShiftTime.Evening));
-        shifts.add(new Pair<>(DayOfWeek.TUESDAY, Shift.ShiftTime.Morning));
-        shifts.add(new Pair<>(DayOfWeek.TUESDAY, Shift.ShiftTime.Evening));
-        shifts.add(new Pair<>(DayOfWeek.WEDNESDAY, Shift.ShiftTime.Morning));
-        shifts.add(new Pair<>(DayOfWeek.WEDNESDAY, Shift.ShiftTime.Evening));
-        shifts.add(new Pair<>(DayOfWeek.THURSDAY, Shift.ShiftTime.Morning));
-        shifts.add(new Pair<>(DayOfWeek.THURSDAY, Shift.ShiftTime.Evening));
-        shifts.add(new Pair<>(DayOfWeek.FRIDAY, Shift.ShiftTime.Morning));
-        shifts.add(new Pair<>(DayOfWeek.FRIDAY, Shift.ShiftTime.Evening));
-        shifts.add(new Pair<>(DayOfWeek.SATURDAY, Shift.ShiftTime.Morning));
-        shifts.add(new Pair<>(DayOfWeek.SATURDAY, Shift.ShiftTime.Evening));
-
-        for (Pair<DayOfWeek, Shift.ShiftTime> pair : shifts) {
-            schedule.put(pair, true);
-        }
-        for(int i = 0; i < 4; i++) {
-            int randome = (int) (Math.random()*shifts.size());
-            Pair rand = shifts.get(randome);
-            schedule.replace(rand, false);
-        }
-        return schedule;
     }
 
     public List<WorkPolicy.WorkingType> createJob() {

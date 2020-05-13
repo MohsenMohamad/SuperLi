@@ -1,7 +1,7 @@
 package DTOs;
 
 import javafx.util.Pair;
-
+import DTOs.WorkPolicy.WorkingType;
 import java.time.DayOfWeek;
 import java.util.*;
 
@@ -11,16 +11,16 @@ public abstract class Worker {
 
     private int id;
     private String name;
-    private List<WorkPolicy.WorkingType> type;   // may become a list
+    private WorkingType working_type;
     private Map<Pair<DayOfWeek, ShiftTime>, Boolean> schedule;
     private WorkerDeal contract;
     private List<Shift> worker_shifts;
 
-    public Worker(int id, String name, List<WorkPolicy.WorkingType> type, Map<Pair<DayOfWeek, ShiftTime>, Boolean> schedule, WorkerDeal contract)
+    public Worker(int id, String name, WorkingType working_type, Map<Pair<DayOfWeek, ShiftTime>, Boolean> schedule, WorkerDeal contract)
     {
         this.name = name;
         this.id =id;
-        this.type = type;
+        this.working_type = working_type;
         this.schedule = schedule;
         this.contract = contract;
         this.worker_shifts = new LinkedList<>();
@@ -68,7 +68,7 @@ public abstract class Worker {
 
     @Override
     public String toString() {
-        return new String(id + " , " + name + " : " + type.toString());
+        return new String(id + " , " + name + " : " + working_type.toString());
     }
 
     public String getName() {
@@ -79,8 +79,8 @@ public abstract class Worker {
         return id;
     }
 
-    public List<WorkPolicy.WorkingType> getType() {
-        return type;
+    public WorkingType getType() {
+        return working_type;
     }
 
     public Map<Pair<DayOfWeek, ShiftTime>, Boolean> getSchedule() {

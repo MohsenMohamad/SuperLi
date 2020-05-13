@@ -126,12 +126,12 @@ public class Main {
 
         while (!go_back) {
 
-//            Printer.printWorkersView();
+            Printer.printWorkersView();
             int choice = getChoice(1, 3);
 
             switch (choice) {
                 case 1:
-//                    new CreateActions().registerWorker();
+                    CreateActions.registerWorker();
                     break;
                 case 2:
                     if (blService.getAllWorkers().isEmpty()) {

@@ -2,7 +2,7 @@ package PresentaionLayer;
 
 import BusinessLayer.BLService;
 import DTOs.*;
-
+import DTOs.WorkPolicy.WorkingType;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -12,29 +12,70 @@ public class CreateActions {
     private static BLService blService = new BLService();
     static Scanner keyboard = new Scanner(System.in);
 
-    public static void AddTruck()
-    {
+
+    public static void registerWorker() {
+
+        System.out.println("Worker id: ");
+        int worker_id = getChoice(100000000, 999999999);
+        if (blService.getWorker(worker_id) != null) {
+            System.out.println("Error : There is a user with the same id in the data base!");
+            return;
+        }
+        System.out.println("Worker name: ");
+        String worker_name = keyboard.nextLine();
+        List<WorkPolicy.WorkingType> jobs = Arrays.asList(WorkPolicy.WorkingType.values());
+        boolean stop = false;
+        System.out.println("Working types : ");
+        Printer.printAllWorkingTypes();
+        WorkPolicy.WorkingType worker_job;
+        System.out.println("Choose one of the working types :");
+        int workingType_id = getChoice(1, 3);
+        worker_job = jobs.get(workingType_id - 1);
+        System.out.println("Enter constraints : ");
+        keyboard.nextLine();
+        System.out.println("Worker salary :");
+        double salary = getDoubleChoice(0,Double.MAX_VALUE);
+        System.out.println("Worker bank address :");
+        String address = keyboard.nextLine();
+        SimpleDateFormat date_format = new SimpleDateFormat("dd/MM/yyyy");
+        Date current_date = new Date();
+        WorkerDeal deal = null;
+        try {
+            deal = new WorkerDeal(worker_id, (date_format.parse(date_format.format(current_date))), salary, address, new LinkedList<String>());
+        } catch (ParseException pe) {
+            pe.printStackTrace();
+        }
+
+        Worker worker;
+        switch (worker_job)
+        {
+            case Driver:
+                System.out.println("Enter the driver's license:");
+                String license = keyboard.nextLine();
+                worker = new Driver(worker_id, worker_name, worker_job, new InitializeData().createSchedule(),deal,license);
+                break;
+            case StockKeeper:
+                break;
+        }
+
+    }
+
+    public static void AddTruck() {
         System.out.println("Enter the truck's serial number:");
         String serialNumber = keyboard.nextLine();
         System.out.println("Enter the truck's model:");
         String model = keyboard.nextLine();
         System.out.println("Enter the truck's weight:");
-        int weight = getChoice(0,Integer.MAX_VALUE);
+        int weight = getChoice(0, Integer.MAX_VALUE);
         System.out.println("Enter the truck's max allowed weight:");
-        int maxAllowedWeight = getChoice(0,Integer.MAX_VALUE);
+        int maxAllowedWeight = getChoice(0, Integer.MAX_VALUE);
 
-        String result = blService.addTruck(serialNumber , model , weight , maxAllowedWeight);
+        String result = blService.addTruck(serialNumber, model, weight, maxAllowedWeight);
 
         System.out.println(result);
 
     }
 
-    public static void editTruck(Truck truck)
-    {
-
-        Printer.printEditTruckView();
-
-    }
 /*
     public void createShift() {
 
@@ -81,52 +122,6 @@ public class CreateActions {
 
         }
 
-
-    }
-
-    public void registerWorker() {
-
-        System.out.println("Worker id: ");
-        int worker_id = keyboard.nextInt();
-        if (Workers.getInstance().getWorker(worker_id) != null) {
-            System.out.println("Error : There is a user with the same id in the data base!");
-            return;
-        }
-        System.out.println("Worker name: ");
-        String worker_name = keyboard.next();
-        List<WorkPolicy.WorkingType> jobs = Arrays.asList(WorkPolicy.WorkingType.values());
-        boolean stop = false;
-        System.out.println("Working types : ");
-        Printer.printAllWorkingTypes();
-        List<WorkPolicy.WorkingType> worker_jobs = new LinkedList<>();
-        while (!stop) {
-            System.out.println("Choose one of the working types :");
-            int workingType_id = keyboard.nextInt();
-            worker_jobs.add(jobs.get(workingType_id - 1));
-            System.out.println("choose another ? y/n");
-            if (keyboard.next().equals("n"))
-                stop = true;
-
-        }
-
-        System.out.println("Enter constraints : ");
-        keyboard.next();
-        System.out.println("Worker salary :");
-        double salary = keyboard.nextDouble();
-        System.out.println("Worker bank address :");
-        String address = keyboard.next();
-        SimpleDateFormat date_format = new SimpleDateFormat("dd/MM/yyyy");
-        Date current_date = new Date();
-        WorkerDeal deal = null;
-        try {
-            deal = new WorkerDeal(worker_id, (date_format.parse(date_format.format(current_date))), salary, address, new LinkedList<String>());
-        } catch (ParseException pe) {
-            pe.printStackTrace();
-        }
-
-        Worker worker = new Worker(worker_id, worker_name, worker_jobs, new InitializeData().createSchedule(), deal);
-        //    blService.addDriver(driver);
-        Workers.getInstance().addWorker(worker);
 
     }
 
@@ -205,6 +200,16 @@ public class CreateActions {
     private static int getChoice(int lower_bound, int upper_bound) {
         for (; ; ) {
             int keyboard_input = keyboard.nextInt();
+
+            if (keyboard_input < lower_bound || keyboard_input > upper_bound) {
+                System.out.println("Error : number out of bounds!");
+            } else return keyboard_input;
+        }
+    }
+
+    private static double getDoubleChoice(double lower_bound, double upper_bound) {
+        for (; ; ) {
+            double keyboard_input = keyboard.nextInt();
 
             if (keyboard_input < lower_bound || keyboard_input > upper_bound) {
                 System.out.println("Error : number out of bounds!");
